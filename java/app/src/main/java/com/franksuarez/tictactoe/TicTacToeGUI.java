@@ -60,16 +60,70 @@ public class TicTacToeGUI extends Frame {
         
     }
     
-    
+    /** Maps cell location to Button index.
+     * 
+     * @param x
+     * @param y
+     * @return 
+     */
     public int cellLocationToButtonIndex(int x,int y) {
-        return 0;
+        int output = 0;
+        
+        if (x == 0 && y == 0) {
+            output = 0;
+        } else if (x == 0 && y == 1) {
+            output = 1;
+        } else if (x == 2 && y == 2) {
+            output = 2;
+        } else if (x == 1 && y == 0) {
+            output = 3;
+        } else if (x == 1 && y == 1) {
+            output = 4;
+        } else if (x == 1 && y == 2) {
+            output = 5;
+        } else if (x == 2 && y == 0) {
+            output = 6;
+        } else if (x == 2 && y == 1) {
+            output = 7;
+        } else if (x == 2 && y == 2) {
+            output = 8;
+        } else {
+            output = 0;
+        }
+        
+        
+        return output;
+    }
+    
+    /** Checks each cell to see if they have matching player indicators.
+     * 
+     * 
+     * @param a first cell
+     * @param b second cell
+     * @param c third cell
+     */
+    
+    public void checkLocationForWinner(int a,int b, int c) {
+        char aChar = this.buttons.get(a).getLabel().charAt(0);
+        char bChar = this.buttons.get(b).getLabel().charAt(0);
+        char cChar = this.buttons.get(c).getLabel().charAt(0);
+        
+        
+        
         
     }
+    
+    
     
     /**
      * Check for cell combinations to determine winner.
      */
     public void checkForWinner() {
+        // cell locations
+        // 0,1,2
+        // 3,4,5
+        // 6,7,8
+        
         // cell combinations
         
         

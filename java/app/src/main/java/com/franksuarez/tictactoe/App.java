@@ -4,11 +4,13 @@
 package com.franksuarez.tictactoe;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        
+        TicTacToeGUI t = new TicTacToeGUI();
+        t.start();
+        
+        
     }
 }

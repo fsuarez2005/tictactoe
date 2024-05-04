@@ -32,13 +32,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- */
-
-
-
-/**
+/** 
  *
  * @author franksuarez
  */
@@ -97,23 +91,53 @@ public class TicTacToeGUI extends Frame {
     
     /** Checks each cell to see if they have matching player indicators.
      * 
-     * 
      * @param a first cell
      * @param b second cell
      * @param c third cell
+     * @param player
+     * @return 
      */
     
-    public void checkLocationForWinner(int a,int b, int c) {
+    public boolean checkLocationForWinner(int a,int b, int c, char player) {
         char aChar = this.buttons.get(a).getLabel().charAt(0);
         char bChar = this.buttons.get(b).getLabel().charAt(0);
         char cChar = this.buttons.get(c).getLabel().charAt(0);
         
+        // winner is false if any conndition is false
+        boolean winner = true;
         
         
+        if (aChar != player || bChar != player || cChar != player) {
+            winner = false;
+        }
+        
+        return winner;
         
     }
     
     
+    
+    
+    
+    public char checkLocationForWinnerEachPlayer(int a, int b, int c) {
+        char output = ' ';
+
+        // player1
+        boolean player1winner = checkLocationForWinner(a, b, c, player1);
+        
+        // player2
+        boolean player2winner = checkLocationForWinner(a, b, c, player2);
+        
+        if (player1winner) {
+            output = player1;
+        } else if (player2winner) {
+            output = player2;
+        }
+        
+        
+        
+        return output;
+    }
     
     /**
      * Check for cell combinations to determine winner.
@@ -126,7 +150,31 @@ public class TicTacToeGUI extends Frame {
         
         // cell combinations
         
+        // horizontal
+        // 0,1,2
+        // 3,4,5
+        // 6,7,8
         
+        // vertical
+        // 0,3,6
+        // 1,4,7
+        // 2,5,8
+        
+        // diagonal
+        // 0,4,8
+        // 2,4,6
+        
+        
+        checkLocationForWinnerEachPlayer(0, 1, 2);
+        checkLocationForWinnerEachPlayer(3, 4, 5);
+        checkLocationForWinnerEachPlayer(6, 7, 8);
+        
+        checkLocationForWinnerEachPlayer(0, 3, 6);
+        checkLocationForWinnerEachPlayer(1, 4, 7);
+        checkLocationForWinnerEachPlayer(2, 5, 8);
+        
+        checkLocationForWinnerEachPlayer(0, 4, 8);
+        checkLocationForWinnerEachPlayer(2, 4, 6);
     }
     
     

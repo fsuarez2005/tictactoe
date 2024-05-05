@@ -16,50 +16,32 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author franksuarez
  */
 public class TicTacToeGUITest {
-    
+
     public TicTacToeGUITest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
 
-    
     @Test
     public void testWinnerArray() {
         System.out.println("testWinnerArray");
         TicTacToeGUI t = new TicTacToeGUI();
-        System.out.printf("int[0][0] = %d\n",t.winnerArray[0][1]);
-        
-    }
-    
-    
-    /**
-     * Test of cellLocationToButtonIndex method, of class TicTacToeGUI.
-     */
-    @Test
-    public void testCellLocationToButtonIndex() {
-        System.out.println("cellLocationToButtonIndex");
-        int x = 0;
-        int y = 0;
-        TicTacToeGUI instance = new TicTacToeGUI();
-        int expResult = 0;
-        int result = instance.cellLocationToButtonIndex(x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.printf("int[0][0] = %d\n", t.winnerArray[0][1]);
+
     }
 
     /**
@@ -75,23 +57,6 @@ public class TicTacToeGUITest {
         TicTacToeGUI instance = new TicTacToeGUI();
         boolean expResult = false;
         boolean result = instance.checkLocationForWinner(a, b, c, player);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of checkLocationForWinnerEachPlayer method, of class TicTacToeGUI.
-     */
-    @Test
-    public void testCheckLocationForWinnerEachPlayer() {
-        System.out.println("checkLocationForWinnerEachPlayer");
-        int a = 0;
-        int b = 0;
-        int c = 0;
-        TicTacToeGUI instance = new TicTacToeGUI();
-        char expResult = ' ';
-        char result = instance.checkLocationForWinnerEachPlayer(a, b, c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -119,18 +84,6 @@ public class TicTacToeGUITest {
         System.out.println("switchPlayer");
         TicTacToeGUI instance = new TicTacToeGUI();
         instance.switchPlayer();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addClosingListener method, of class TicTacToeGUI.
-     */
-    @Test
-    public void testAddClosingListener() {
-        System.out.println("addClosingListener");
-        TicTacToeGUI instance = new TicTacToeGUI();
-        instance.addClosingListener();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -172,18 +125,6 @@ public class TicTacToeGUITest {
     }
 
     /**
-     * Test of setupButtonOnclickCallback method, of class TicTacToeGUI.
-     */
-    @Test
-    public void testSetupButtonOnclickCallback() {
-        System.out.println("setupButtonOnclickCallback");
-        TicTacToeGUI instance = new TicTacToeGUI();
-        instance.setupButtonOnclickCallback();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of start method, of class TicTacToeGUI.
      */
     @Test
@@ -194,5 +135,5 @@ public class TicTacToeGUITest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }

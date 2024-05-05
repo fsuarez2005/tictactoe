@@ -10,7 +10,7 @@
  * - [ ] Add AI player.
  * - [ ] Add menu.
  * - [ ] Convert hard-coded strings to resources.
- * - [ ] Prevent user from using used cell.
+ * - [x] Prevent user from using used cell.
  *
  * PROBLEMS:
  * - [x] Delay when clicking button (switched to ActionListener)
@@ -32,7 +32,7 @@ import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/** Tic-Tac-Toe AWT Frame
  *
  * @author franksuarez
  */

@@ -19,9 +19,12 @@
 package com.franksuarez.tictactoe;
 
 import java.awt.Button;
+import java.awt.Dialog;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -65,6 +68,21 @@ public class TicTacToeGUI extends Frame implements WindowListener, ActionListene
 
     }
 
+    
+    public void testDialog() {
+        Dialog d = new Dialog(this,"hello",true);
+        d.setLayout(new FlowLayout());
+        d.setSize(300,300);
+        
+        
+        
+        Label label1 = new Label("this is a test");
+        
+        d.add(label1);
+        d.setVisible(true);
+        
+    }
+    
 
     /**
      * Gets first char of String else returns elseChar.

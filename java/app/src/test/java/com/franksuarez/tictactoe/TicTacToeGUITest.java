@@ -4,6 +4,8 @@
  */
 package com.franksuarez.tictactoe;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -132,6 +134,122 @@ public class TicTacToeGUITest {
         System.out.println("start");
         TicTacToeGUI instance = new TicTacToeGUI();
         instance.start();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of testDialog method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testTestDialog() {
+        System.out.println("testDialog");
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.testDialog();
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of windowOpened method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testWindowOpened() {
+        System.out.println("windowOpened");
+        WindowEvent e = null;
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.windowOpened(e);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of windowClosing method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testWindowClosing() {
+        System.out.println("windowClosing");
+        WindowEvent e = null;
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.windowClosing(e);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of windowClosed method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testWindowClosed() {
+        System.out.println("windowClosed");
+        WindowEvent e = null;
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.windowClosed(e);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of windowIconified method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testWindowIconified() {
+        System.out.println("windowIconified");
+        WindowEvent e = null;
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.windowIconified(e);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of windowDeiconified method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testWindowDeiconified() {
+        System.out.println("windowDeiconified");
+        WindowEvent e = null;
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.windowDeiconified(e);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of windowActivated method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testWindowActivated() {
+        System.out.println("windowActivated");
+        WindowEvent e = null;
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.windowActivated(e);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of windowDeactivated method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testWindowDeactivated() {
+        System.out.println("windowDeactivated");
+        WindowEvent e = null;
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.windowDeactivated(e);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of actionPerformed method, of class TicTacToeGUI.
+     */
+    @Test
+    public void testActionPerformed() {
+        System.out.println("actionPerformed");
+        ActionEvent e = null;
+        TicTacToeGUI instance = new TicTacToeGUI();
+        instance.actionPerformed(e);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

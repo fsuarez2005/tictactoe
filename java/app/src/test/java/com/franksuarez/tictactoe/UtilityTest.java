@@ -42,13 +42,32 @@ public class UtilityTest {
     @Test
     public void testTriangularNumber() {
         System.out.println("triangularNumber");
-        int k = 0;
-        int expResult = 0;
-        int result = Utility.triangularNumber(k);
-        assertEquals(expResult, result);
+        double k = 0.0;
+        double expResult = 0.0;
+        double result = Utility.triangularNumber(k);
+        assertEquals(expResult, result, 0);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of hopcroftUllmanPairing method, of class Utility.
+     */
+    @Test
+    public void testHopcroftUllmanPairing() {
+        System.out.println("hopcroftUllmanPairing");
+        double i = 5;
+        double j = 5;
+        double expResult = 41;
+        double result = Utility.hopcroftUllmanPairing(i, j);
+        System.out.printf("result = %f\n",result);
+        
+        
+        assertEquals(expResult, result, 0);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+
 
     /**
      * Test of cantorFunction method, of class Utility.
@@ -56,33 +75,26 @@ public class UtilityTest {
     @Test
     public void testCantorFunction() {
         System.out.println("cantorFunction");
-        int k1 = 2;
-        int k2 = 5;
-        int expResult = 33;
-        int result = Utility.cantorFunction(k1, k2);
-        System.out.printf("result = %d\n",result);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        double k1 = 4.0;
+        double k2 = 3.0;
+        double expResult = 31.0;
+        double result = Utility.cantorFunction(k1, k2);
+        System.out.printf("result = %f\n",result);
+        assertEquals(expResult, result, 0);
+        
     }
+
 
     /**
-     * Test of InvertCantorFunction method, of class Utility.
+     * Test of inverseHopcroftUllmanPairing method, of class Utility.
      */
     @Test
-    public void testInvertCantorFunction() {
-        System.out.println("InvertCantorFunction");
-        int z = 33;
-        Utility.Coordinates expResult = new Utility.Coordinates(2,5);
-        Utility.Coordinates result = Utility.InvertCantorFunction(z);
-        
-        System.out.printf("expected = %s\n",expResult.toString());
-        System.out.printf("result = %s\n",result.toString());
-
-        //assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+    public void testInverseHopcroftUllmanPairing() {
+        System.out.println("inverseHopcroftUllmanPairing");
+        double h = 32.0;
+        Utility.Coordinates expResult = new Utility.Coordinates(4.0,5.0);
+        Utility.Coordinates result = Utility.inverseHopcroftUllmanPairing(h);
+        assert(result.equals(expResult));
     }
-
     
 }

@@ -25,9 +25,9 @@ public class GameBoard {
      * 
      * @see https://en.wikipedia.org/wiki/Pairing_function
      */
-    private int locationHash(int x,int y) {
+    private double locationHash(int x,int y) {
         // use Cantor pairing function
-        return Utility.cantorFunction(x, y);
+        return Utility.hopcroftUllmanPairing(x, y);
     }
     
     

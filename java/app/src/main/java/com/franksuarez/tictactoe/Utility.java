@@ -70,24 +70,60 @@ public class Utility {
     }
 
     // https://www.cantorsparadise.com/cantor-pairing-function-e213a8a89c2b
-    public static int triangularNumber(int k) {
+    public static double triangularNumber(double k) {
         return (k * (k + 1)) / 2;
     }
 
-    // https://www.cantorsparadise.com/cantor-pairing-function-e213a8a89c2b
-    public static int cantorFunction(int k1, int k2) {
-        int sum = k1 + k2;
-        int triangularNumberOfSum = triangularNumber(sum);
-        return (triangularNumberOfSum + k2);
+    
+    // https://mathworld.wolfram.com/PairingFunction.html
+    public static double hopcroftUllmanPairing(double i, double j) {
+        return triangularNumber(i + j - 2) + i;
     }
+    
+    public static Coordinates inverseHopcroftUllmanPairing(double h) {
+        
+        double c = Math.floor(Math.sqrt(2.0 * h) - (1.0/2.0));
+        //System.out.printf("c = %f\n",c);
+        
+        double i = h - triangularNumber(c);
+        System.out.printf("i = %f\n",i);
+        double j = c - i + 2.0;
+        System.out.printf("j = %f\n",j);
+        
+        
+        return new Coordinates(i,j);
+        
+    }
+    
+    /**
+     * 
+     * Works.
+     * 
+     * @param k1
+     * @param k2
+     * @return 
+     */
+    // https://www.cantorsparadise.com/cantor-pairing-function-e213a8a89c2b
+    public static double cantorFunction(double k1, double k2) {
+        return ((1.0/2.0)*(k1+k2)*(k1+k2+1)+k2);
+    }
+    
 
-    public static Coordinates InvertCantorFunction(int z) {
+    
+    /**
+     * 
+     * Broken.
+     * @param z
+     * @return 
+     */
+    /*
+    public static Coordinates invertCantorFunctionOld(double z) {
         double w = Math.floor(
-                (Math.sqrt(8 * z + 1) - 1)
-                / 2
+                (Math.sqrt(8.0 * z + 1.0) - 1.0)
+                / 2.0
         );
 
-        double t = (w * (w + 1)) / 2;
+        double t = (w * (w + 1.0)) / 2.0;
 
         double y = t - z;
         double x = y - w;
@@ -95,13 +131,13 @@ public class Utility {
         return new Coordinates(x, y);
 
     }
+    
+    
+    public static Coordinates inverseCantorFunction(double z) {
+        
+        Coordinates hu = inverseHopcroftUllmanPairing(z);
+        return new Coordinates(hu.x - 1,hu.y - 1);
+    }
+    */
 
-    // temp
-    // z_cantor();
-    // t_cantor = (w*(w+1))/2
-    // w_cantor(x,y) = x + y;
-    // z_cantor = t + y
-    // w = floor(  (sqrt(8*z+1) - 1)/2  )
-    // y = (w*(w+1))/2 - z
-    // x = y - w
 }

@@ -13,8 +13,7 @@
  * - [ ] Prevent user from using used cell.
  *
  * PROBLEMS:
- *
- * - [ ] Delay when clicking button
+ * - [x] Delay when clicking button (switched to ActionListener)
  *
  */
 package com.franksuarez.tictactoe;
@@ -23,10 +22,13 @@ import java.awt.Button;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ import java.util.List;
  *
  * @author franksuarez
  */
-public class TicTacToeGUI extends Frame {
+public class TicTacToeGUI extends Frame implements WindowListener, ActionListener {
 
     private int frameHeight = 300;
     private int frameWidth = 300;
@@ -63,64 +65,27 @@ public class TicTacToeGUI extends Frame {
 
     }
 
-    /**
-     * Maps cell location to Button index.
-     *
-     * @param x
-     * @param y
-     * @return
-     */
-    public int cellLocationToButtonIndex(int x, int y) {
-        int output = 0;
-
-        if (x == 0 && y == 0) {
-            output = 0;
-        } else if (x == 0 && y == 1) {
-            output = 1;
-        } else if (x == 2 && y == 2) {
-            output = 2;
-        } else if (x == 1 && y == 0) {
-            output = 3;
-        } else if (x == 1 && y == 1) {
-            output = 4;
-        } else if (x == 1 && y == 2) {
-            output = 5;
-        } else if (x == 2 && y == 0) {
-            output = 6;
-        } else if (x == 2 && y == 1) {
-            output = 7;
-        } else if (x == 2 && y == 2) {
-            output = 8;
-        } else {
-            output = 0;
-        }
-
-        return output;
-    }
 
     /**
      * Gets first char of String else returns elseChar.
+     *
      * @param src
      * @param elseChar
-     * @return 
+     * @return
      */
-    private char getFirstOrElse(String src,char elseChar) {
+    private char getFirstOrElse(String src, char elseChar) {
         if (src.length() > 0) {
             return src.charAt(0);
         } else {
             return elseChar;
         }
     }
-    
-    
-    
-    /**
-     * Checks each cell to see if they have matching player indicators.
+
+    /** Checks each cell to see if they have matching player indicators.
      *
-     * Problem:
-     * * If Button label is empty, there is no first char so an
-     *   index exception will occur.
-     * 
+     * Problem: * If Button label is empty, there is no first char so an index
+     * exception will occur.
+     *
      * @param a first cell
      * @param b second cell
      * @param c third cell
@@ -128,40 +93,21 @@ public class TicTacToeGUI extends Frame {
      * @return
      */
     public boolean checkLocationForWinner(int a, int b, int c, char player) {
-        char aChar = getFirstOrElse(this.buttons.get(a).getLabel(),' ');
-        char bChar = getFirstOrElse(this.buttons.get(b).getLabel(),' ');
-        char cChar = getFirstOrElse(this.buttons.get(c).getLabel(),' ');
-        
+        char aChar = getFirstOrElse(this.buttons.get(a).getLabel(), ' ');
+        char bChar = getFirstOrElse(this.buttons.get(b).getLabel(), ' ');
+        char cChar = getFirstOrElse(this.buttons.get(c).getLabel(), ' ');
+
         return (aChar == player && bChar == player && cChar == player);
 
     }
 
-    public char checkLocationForWinnerEachPlayer(int a, int b, int c) {
-        char output = ' ';
-
-        // player1
-        boolean player1winner = checkLocationForWinner(a, b, c, player1);
-
-        // player2
-        boolean player2winner = checkLocationForWinner(a, b, c, player2);
-
-        if (player1winner) {
-            output = player1;
-        } else if (player2winner) {
-            output = player2;
-        }
-
-        return output;
-    }
-
-    /**
-     * Check for cell combinations to determine winner.
-     * @return 
+    /** Check for cell combinations to determine winner.
+     *
+     * @return
      */
     public char checkForWinner() {
         char winner = ' ';
-        
-        
+
         for (int[] i : winnerArray) {
             boolean player1won = checkLocationForWinner(i[0], i[1], i[2], player1);
             boolean player2won = checkLocationForWinner(i[0], i[1], i[2], player2);
@@ -178,7 +124,9 @@ public class TicTacToeGUI extends Frame {
 
     }
 
-
+    /** Switches between player 1 and player 2
+     * 
+     */
     public void switchPlayer() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
@@ -189,24 +137,9 @@ public class TicTacToeGUI extends Frame {
     }
 
     
-    
-    /** Adds Window Listener so it can detect if the user is trying to close
-     * the window.
-     * 
-     */
-    public void addClosingListener() {
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-                System.exit(0);
-            }
-
-        });
-    }
-
-    /** Creates Buttons so they can be referenced later.
-     * 
+    /**
+     * Creates Buttons so they can be referenced later.
+     *
      */
     public void initializeButtonList() {
 
@@ -219,7 +152,8 @@ public class TicTacToeGUI extends Frame {
 
         for (int n = 0; n < 9; n++) {
             Button b = new Button();
-
+            b.addActionListener(this);
+            b.setActionCommand("button");
             b.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
 
             this.buttons.add(b);
@@ -227,8 +161,9 @@ public class TicTacToeGUI extends Frame {
 
     }
 
-    /** Adds widgets to Frame.
-     * 
+    /**
+     * Adds widgets to Frame.
+     *
      */
     public void addComponents() {
 
@@ -241,55 +176,94 @@ public class TicTacToeGUI extends Frame {
 
     }
 
-    /** Configures Window.
-     * 
+    /**
+     * Configures Window.
+     *
      */
     public void configureWindow() {
         setSize(frameWidth, frameHeight);
         setTitle(frameTitle);
+        addWindowListener(this);
         setLayout(new GridLayout(3, 3));
     }
 
-    /**
-     * Sets up the onClick behavior for the Buttons.
-     */
-    public void setupButtonOnclickCallback() {
-        for (int n = 0; n < 9; n++) {
-
-            this.buttons.get(n).addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    super.mouseClicked(e);
-
-                    Button b = (Button) e.getComponent();
-                    b.setLabel(String.valueOf(currentPlayer));
-                    b.setEnabled(false);
-
-                    char winner = checkForWinner();
-                    if (winner != ' ') {
-                        System.out.printf("%c has won!\n",winner);
-                    }
-                    
-                    
-                    switchPlayer();
-                }
-            });
-        }
-    }
 
     /**
      * Starts the App.
      */
     public void start() {
-        addClosingListener();
         configureWindow();
 
         initializeButtonList();
         addComponents();
 
-        setupButtonOnclickCallback();
-
         setVisible(true);
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        System.out.println("[EVENT] windowOpened");
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.out.println("[EVENT] windowClosing");
+        System.exit(0);
+
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        System.out.println("[EVENT] windowClosed");
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        System.out.println("[EVENT] windowIconified");
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        System.out.println("[EVENT] windowDeiconified");
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        System.out.println("[EVENT] windowActivated");
+
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        System.out.println("[EVENT] windowDeactivated");
+
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("[EVEN] actionPerformed");
+        String actionCommand = e.getActionCommand();
+        System.out.printf("actionCommand = %s\n", actionCommand);
+        if (actionCommand.equals("button")) {
+            Button btn = (Button) e.getSource();
+            System.out.printf("Button = %s\n", btn.toString());
+            btn.setLabel(String.valueOf(currentPlayer));
+            btn.setEnabled(false);
+            
+            char winner = checkForWinner();
+            if (winner != ' ') {
+                System.out.printf("%c has won!\n", winner);
+            }
+            
+            switchPlayer();
+        }
     }
 
 }

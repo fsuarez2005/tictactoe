@@ -14,7 +14,6 @@ public class GameBoard {
     private int width = 3;
     private int height = 3;
     
-    
     // Maps 2D location to index
     private HashMap<Integer,Integer> locationIndexMap;
     private HashMap<Integer,Integer> indexLocationMap;

@@ -43,7 +43,7 @@ public class TicTacToeGUI extends Frame {
     private char player2 = 'o';
     private int fontSize = 72;
 
-    private int[][] winnerArray = new int[][]{
+    public int[][] winnerArray = new int[][]{
         {0, 1, 2},
         {3, 4, 5},
         {6, 7, 8},
@@ -99,8 +99,28 @@ public class TicTacToeGUI extends Frame {
     }
 
     /**
+     * Gets first char of String else returns elseChar.
+     * @param src
+     * @param elseChar
+     * @return 
+     */
+    private char getFirstOrElse(String src,char elseChar) {
+        if (src.length() > 0) {
+            return src.charAt(0);
+        } else {
+            return elseChar;
+        }
+    }
+    
+    
+    
+    /**
      * Checks each cell to see if they have matching player indicators.
      *
+     * Problem:
+     * * If Button label is empty, there is no first char so an
+     *   index exception will occur.
+     * 
      * @param a first cell
      * @param b second cell
      * @param c third cell
@@ -108,10 +128,10 @@ public class TicTacToeGUI extends Frame {
      * @return
      */
     public boolean checkLocationForWinner(int a, int b, int c, char player) {
-        char aChar = this.buttons.get(a).getLabel().charAt(0);
-        char bChar = this.buttons.get(b).getLabel().charAt(0);
-        char cChar = this.buttons.get(c).getLabel().charAt(0);
-
+        char aChar = getFirstOrElse(this.buttons.get(a).getLabel(),' ');
+        char bChar = getFirstOrElse(this.buttons.get(b).getLabel(),' ');
+        char cChar = getFirstOrElse(this.buttons.get(c).getLabel(),' ');
+        
         return (aChar == player && bChar == player && cChar == player);
 
     }
@@ -136,6 +156,7 @@ public class TicTacToeGUI extends Frame {
 
     /**
      * Check for cell combinations to determine winner.
+     * @return 
      */
     public char checkForWinner() {
         char winner = ' ';
@@ -244,6 +265,12 @@ public class TicTacToeGUI extends Frame {
                     b.setLabel(String.valueOf(currentPlayer));
                     b.setEnabled(false);
 
+                    char winner = checkForWinner();
+                    if (winner != ' ') {
+                        System.out.printf("%c has won!\n",winner);
+                    }
+                    
+                    
                     switchPlayer();
                 }
             });

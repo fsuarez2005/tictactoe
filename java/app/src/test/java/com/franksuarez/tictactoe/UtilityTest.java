@@ -36,6 +36,9 @@ public class UtilityTest {
     public void tearDown() {
     }
 
+    
+    
+    
     /**
      * Test of triangularNumber method, of class Utility.
      */

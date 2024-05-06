@@ -7,7 +7,7 @@
  */
 
 
-package com.franksuarez.tictactoe;
+package com.franksuarez.tictactoe.misc;
 
 import java.util.Objects;
 

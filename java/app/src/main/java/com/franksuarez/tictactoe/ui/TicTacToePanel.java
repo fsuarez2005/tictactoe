@@ -16,20 +16,20 @@
  * - [x] Delay when clicking button (switched to ActionListener)
  *
  */
-package com.franksuarez.tictactoe;
+package com.franksuarez.tictactoe.ui;
 
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ import java.util.List;
  *
  * @author franksuarez
  */
-public class TicTacToeGUI extends Frame implements WindowListener, ActionListener {
+public class TicTacToePanel extends Panel implements WindowListener, ActionListener {
 
     private int frameHeight = 300;
     private int frameWidth = 300;
@@ -64,25 +64,14 @@ public class TicTacToeGUI extends Frame implements WindowListener, ActionListene
 
     private char currentPlayer = player1;
 
-    public TicTacToeGUI() {
-
+    public TicTacToePanel() {
+        setMinimumSize(new Dimension(1000,100));
+        setBackground(Color.GREEN);
     }
 
     
-    public void testDialog() {
-        Dialog d = new Dialog(this,"hello",true);
-        d.setLayout(new FlowLayout());
-        d.setSize(300,300);
-        
-        
-        
-        Label label1 = new Label("this is a test");
-        
-        d.add(label1);
-        d.setVisible(true);
-        
-    }
     
+
 
     /**
      * Gets first char of String else returns elseChar.
@@ -99,7 +88,8 @@ public class TicTacToeGUI extends Frame implements WindowListener, ActionListene
         }
     }
 
-    /** Checks each cell to see if they have matching player indicators.
+    /**
+     * Checks each cell to see if they have matching player indicators.
      *
      * Problem: * If Button label is empty, there is no first char so an index
      * exception will occur.
@@ -119,7 +109,8 @@ public class TicTacToeGUI extends Frame implements WindowListener, ActionListene
 
     }
 
-    /** Check for cell combinations to determine winner.
+    /**
+     * Check for cell combinations to determine winner.
      *
      * @return
      */
@@ -142,8 +133,9 @@ public class TicTacToeGUI extends Frame implements WindowListener, ActionListene
 
     }
 
-    /** Switches between player 1 and player 2
-     * 
+    /**
+     * Switches between player 1 and player 2
+     *
      */
     public void switchPlayer() {
         if (currentPlayer == player1) {
@@ -154,7 +146,6 @@ public class TicTacToeGUI extends Frame implements WindowListener, ActionListene
 
     }
 
-    
     /**
      * Creates Buttons so they can be referenced later.
      *
@@ -200,22 +191,25 @@ public class TicTacToeGUI extends Frame implements WindowListener, ActionListene
      */
     public void configureWindow() {
         setSize(frameWidth, frameHeight);
-        setTitle(frameTitle);
-        addWindowListener(this);
+        
+        
+        //setTitle(frameTitle);
+        //addWindowListener(this);
+        
+        
         setLayout(new GridLayout(3, 3));
     }
-
 
     /**
      * Starts the App.
      */
     public void start() {
-        configureWindow();
+        //configureWindow();
 
-        initializeButtonList();
-        addComponents();
+        //initializeButtonList();
+        //addComponents();
 
-        setVisible(true);
+        //setVisible(true);
     }
 
     @Override
@@ -274,12 +268,12 @@ public class TicTacToeGUI extends Frame implements WindowListener, ActionListene
             System.out.printf("Button = %s\n", btn.toString());
             btn.setLabel(String.valueOf(currentPlayer));
             btn.setEnabled(false);
-            
+
             char winner = checkForWinner();
             if (winner != ' ') {
                 System.out.printf("%c has won!\n", winner);
             }
-            
+
             switchPlayer();
         }
     }

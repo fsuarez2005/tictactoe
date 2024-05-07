@@ -3,14 +3,18 @@
  */
 package com.franksuarez.tictactoe;
 
+import com.franksuarez.tictactoe.ui.TicTacToeApp;
+import com.franksuarez.tictactoe.ui.TicTacToePanel;
+
 public class App {
 
 
     public static void main(String[] args) {
         
-        TicTacToeGUI t = new TicTacToeGUI();
+        //TicTacToePanel t = new TicTacToePanel();
+        //t.start();
+        
+        TicTacToeApp t = new TicTacToeApp();
         t.start();
-        
-        
     }
 }

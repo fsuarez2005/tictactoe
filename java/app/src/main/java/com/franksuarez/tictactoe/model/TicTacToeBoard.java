@@ -8,6 +8,6 @@ package com.franksuarez.tictactoe.model;
  *
  * @author franksuarez
  */
-public class TicTacToeBoard extends GameBoard {
+public class TicTacToeBoard extends GameBoard<Character> {
     
 }

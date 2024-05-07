@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package com.franksuarez.tictactoe;
+package com.franksuarez.tictactoe.misc;
 
-import com.franksuarez.tictactoe.misc.Utility;
+import com.franksuarez.tictactoe.misc.Utility.Cons;
+import java.lang.reflect.TypeVariable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,19 +38,16 @@ public class UtilityTest {
     public void tearDown() {
     }
 
-    
-    
-    
     /**
      * Test of triangularNumber method, of class Utility.
      */
     @Test
     public void testTriangularNumber() {
         System.out.println("triangularNumber");
-        double k = 0.0;
-        double expResult = 0.0;
-        double result = Utility.triangularNumber(k);
-        assertEquals(expResult, result, 0);
+        int k = 0;
+        int expResult = 0;
+        int result = Utility.triangularNumber(k);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -60,34 +58,14 @@ public class UtilityTest {
     @Test
     public void testHopcroftUllmanPairing() {
         System.out.println("hopcroftUllmanPairing");
-        double i = 5;
-        double j = 5;
-        double expResult = 41;
-        double result = Utility.hopcroftUllmanPairing(i, j);
-        System.out.printf("result = %f\n",result);
-        
-        
-        assertEquals(expResult, result, 0);
+        int i = 0;
+        int j = 0;
+        int expResult = 0;
+        int result = Utility.hopcroftUllmanPairing(i, j);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        fail("The test case is a prototype.");
     }
-
-
-    /**
-     * Test of cantorFunction method, of class Utility.
-     */
-    @Test
-    public void testCantorFunction() {
-        System.out.println("cantorFunction");
-        double k1 = 4.0;
-        double k2 = 3.0;
-        double expResult = 31.0;
-        double result = Utility.cantorFunction(k1, k2);
-        System.out.printf("result = %f\n",result);
-        assertEquals(expResult, result, 0);
-        
-    }
-
 
     /**
      * Test of inverseHopcroftUllmanPairing method, of class Utility.
@@ -95,10 +73,28 @@ public class UtilityTest {
     @Test
     public void testInverseHopcroftUllmanPairing() {
         System.out.println("inverseHopcroftUllmanPairing");
-        double h = 32.0;
-        Utility.Coordinates expResult = new Utility.Coordinates(4.0,5.0);
+        double h = 0.0;
+        Utility.Coordinates expResult = null;
         Utility.Coordinates result = Utility.inverseHopcroftUllmanPairing(h);
-        assert(result.equals(expResult));
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of cantorFunction method, of class Utility.
+     */
+    @Test
+    public void testCantorFunction() {
+        System.out.println("cantorFunction");
+        double k1 = 0.0;
+        double k2 = 0.0;
+        double expResult = 0.0;
+        double result = Utility.cantorFunction(k1, k2);
+        assertEquals(expResult, result, 0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+    
     
 }

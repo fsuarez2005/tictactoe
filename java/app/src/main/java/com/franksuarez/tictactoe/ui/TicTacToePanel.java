@@ -2,7 +2,7 @@
  * In Java AWT.
  *
  *
- * TODO:
+ * TASKS:
  *
  * - [x] Create basic window.
  * - [x] Decide between AWT, Swing, JavaFX ...
@@ -64,14 +64,11 @@ public class TicTacToePanel extends Panel implements WindowListener, ActionListe
 
     private char currentPlayer = player1;
 
+    
     public TicTacToePanel() {
         setMinimumSize(new Dimension(1000,100));
         setBackground(Color.GREEN);
     }
-
-    
-    
-
 
     /**
      * Gets first char of String else returns elseChar.

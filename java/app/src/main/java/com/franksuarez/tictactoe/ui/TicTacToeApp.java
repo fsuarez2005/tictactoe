@@ -9,6 +9,7 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.LayoutManager;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -19,16 +20,29 @@ import java.awt.event.WindowListener;
  * @author franksuarez
  */
 public class TicTacToeApp extends Frame implements WindowListener, ActionListener {
-
+    private String windowTitle = "Tic-Tac-Toe";
+    private int windowHeight = 500;
+    private int windowWidth = 500;
+    
+    private Panel informationalPanel = new Panel();
+    private TicTacToePanel ttt = new TicTacToePanel();
     
     public void start() {
-        setSize(500,500);
-        setTitle("Test");
+        
+        addWindowListener(this);
+        
+        setSize(windowHeight,windowWidth);
+        setTitle(windowTitle);
         
         
         setLayout(new GridLayout(2,1));
-        add(new Label("Hello"));
-        add(new TicTacToePanel());
+        
+        add(informationalPanel);
+        
+        ttt.start();
+        
+        
+        add(ttt);
         
         setVisible(true);
         
@@ -43,7 +57,10 @@ public class TicTacToeApp extends Frame implements WindowListener, ActionListene
 
     @Override
     public void windowClosing(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        this.dispose();
+        System.exit(0);
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

@@ -186,12 +186,9 @@ public class TicTacToePanel extends Panel implements WindowListener, ActionListe
      * Configures Window.
      *
      */
-    public void configureWindow() {
+    public void configure() {
         setSize(frameWidth, frameHeight);
-        
-        
-        //setTitle(frameTitle);
-        //addWindowListener(this);
+
         
         
         setLayout(new GridLayout(3, 3));
@@ -201,10 +198,10 @@ public class TicTacToePanel extends Panel implements WindowListener, ActionListe
      * Starts the App.
      */
     public void start() {
-        //configureWindow();
+        configure();
 
-        //initializeButtonList();
-        //addComponents();
+        initializeButtonList();
+        addComponents();
 
         //setVisible(true);
     }

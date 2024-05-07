@@ -7,7 +7,6 @@
  */
 package com.franksuarez.tictactoe.misc;
 
-import java.lang.reflect.TypeVariable;
 import java.util.Objects;
 
 /**
@@ -38,6 +37,7 @@ public class Utility {
             this._x = _x;
         }
 
+        @Override
         public boolean equals(Object o) {
             // self check
             if (this == o) {
@@ -57,6 +57,15 @@ public class Utility {
             return Objects.equals(_x, coord._x)
                     && Objects.equals(_y, coord._y);
 
+        }
+
+        // TODO: verify Coordinates.hashCode works
+        @Override
+        public int hashCode() {
+            int hash = 3;
+            hash = 83 * hash + Objects.hashCode(this._x);
+            hash = 83 * hash + Objects.hashCode(this._y);
+            return hash;
         }
 
     }

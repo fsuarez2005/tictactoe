@@ -3,6 +3,7 @@
  *
  * TASKS:
  * - [ ] Fix Cantor Pairing Functions (Need to find a good source.)
+ * - [ ] Move to their own classes.
  *
  */
 package com.franksuarez.tictactoe.misc;

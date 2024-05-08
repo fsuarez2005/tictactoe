@@ -4,45 +4,87 @@
  */
 package com.franksuarez.tictactoe.ui;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.LayoutManager;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import javax.swing.BoxLayout;
+
+
 
 /**
  *
  * @author franksuarez
  */
 public class TicTacToeApp extends Frame implements WindowListener, ActionListener {
-    private String windowTitle = "Tic-Tac-Toe";
-    private int windowHeight = 500;
-    private int windowWidth = 500;
+    private String title = "Tic-Tac-Toe";
+    private int height = 1000;
+    private int width = 1000;
     
-    private Panel informationalPanel = new Panel();
+    //private InformationalPanel informationalPanel = new InformationalPanel();
     private TicTacToePanel ttt = new TicTacToePanel();
     
-    public void start() {
-        
+    private void configure() {
         addWindowListener(this);
         
-        setSize(windowHeight,windowWidth);
-        setTitle(windowTitle);
+        setSize(height,width);
+        setTitle(title);
+        
+        setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+    }
+    
+    private void initComponents() {
         
         
-        setLayout(new GridLayout(2,1));
-        
-        add(informationalPanel);
-        
-        ttt.start();
         
         
-        add(ttt);
+        
+        //informationalPanel.add(new Label("hello"));
+        //add(informationalPanel);
+        
+        
+        
+        Panel textPanel = new Panel();
+        textPanel.setBackground(Color.RED);
+        textPanel.setMaximumSize(new Dimension(100,100));
+        
+        
+        Label textLabel = new Label("hello");
+        
+        textPanel.add(textLabel);
+        add(textPanel);
+        
+        
+        
+        Panel bluePanel = new Panel();
+        bluePanel.setBackground(Color.BLUE);
+        Dimension size = new Dimension(100,100);
+        bluePanel.setMaximumSize(size);
+        
+        
+        add(bluePanel);
+        
+        
+        
+        
+        
+        //ttt.start();
+        //add(ttt);
+        
+    }
+    
+    public void start() {
+        configure();
+        initComponents();
         
         setVisible(true);
-        
     }
     
     

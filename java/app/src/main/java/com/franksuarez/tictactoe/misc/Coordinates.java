@@ -4,11 +4,11 @@
  */
 package com.franksuarez.tictactoe.misc;
 
+import exceptions.InvalidCoordinateValue;
 import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/**
+/** 
  *
  * @author franksuarez
  * @param <T>
@@ -16,14 +16,18 @@ import java.util.function.Predicate;
 public class Coordinates<T extends Number> {
     private T x;
     private T y;
+    
+    // returns true if valid value for coordinate
     private Predicate<T> xGuard;
+    
+    // returns true if valid value for coordinate
     private Predicate<T> yGuard;
 
     public Coordinates() {
         initializeGuards();
     }
 
-    public Coordinates(T x, T y) {
+    public Coordinates(T x, T y) throws InvalidCoordinateValue {
         super();
 
         setX(x);
@@ -33,11 +37,13 @@ public class Coordinates<T extends Number> {
     public T getY() {
         return y;
     }
-
-    public void setY(T y) {
+    
+    public void setY(T y) throws InvalidCoordinateValue {
         // only set if passes y guard
         if (yGuard.test(y)) {
             this.y = y;
+        } else {
+            throw new InvalidCoordinateValue("Invalid Y value");
         }
     }
 
@@ -45,9 +51,11 @@ public class Coordinates<T extends Number> {
         return this.x;
     }
 
-    public void setX(T x) {
+    public void setX(T x) throws InvalidCoordinateValue {
         if (xGuard.test(x)) {
             this.x = x;
+        } else {
+            throw new InvalidCoordinateValue("Invalid X value");
         }
     }
 

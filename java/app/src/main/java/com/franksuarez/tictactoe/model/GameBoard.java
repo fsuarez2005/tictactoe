@@ -7,10 +7,8 @@
  */
 package com.franksuarez.tictactoe.model;
 
-import com.franksuarez.tictactoe.misc.Utility;
-import java.util.ArrayList;
+import com.franksuarez.tictactoe.misc.PairingFunction;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,19 +43,19 @@ public class GameBoard<T> {
 
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
-                int key = Utility.hopcroftUllmanPairing(h, w);
+                int key = PairingFunction.hopcroftUllmanPairing(h, w);
                 this.cells.put(key, new Cell<T>());
             }
         }
     }
 
     public T token(int h, int w) {
-        int key = Utility.hopcroftUllmanPairing(h, w);
+        int key = PairingFunction.hopcroftUllmanPairing(h, w);
         return this.cells.get(key).token();
     }
 
     public void token(int h, int w, T token) {
-        int key = Utility.hopcroftUllmanPairing(h, w);
+        int key = PairingFunction.hopcroftUllmanPairing(h, w);
         this.cells.get(key).token(token);
     }
     

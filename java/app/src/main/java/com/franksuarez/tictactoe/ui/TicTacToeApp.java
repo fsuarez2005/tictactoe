@@ -4,11 +4,8 @@
  */
 package com.franksuarez.tictactoe.ui;
 
-import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.LayoutManager;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

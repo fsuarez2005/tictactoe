@@ -4,6 +4,8 @@
  */
 package com.franksuarez.tictactoe.misc;
 
+import exceptions.InvalidCoordinateValue;
+
 
 /**
  *
@@ -37,14 +39,14 @@ public class PairingFunction {
         return triangularNumber((int) (i + j - 2)) + 1;
     }
 
-    public static Coordinates<Integer> inverseHopcroftUllmanPairing(int h) {
+    public static Coordinates<Integer> inverseHopcroftUllmanPairing(int h) throws InvalidCoordinateValue {
         double c = Math.floor(Math.sqrt(2.0 * h) - (1.0 / 2.0));
         double i = h - triangularNumber((int) c);
         double j = c - i + 2.0;
         
         
         
-        return new Coordinates<Integer>((int) i, (int) j);
+        return new Coordinates<>((int) i, (int) j);
         
     }
 

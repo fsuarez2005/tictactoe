@@ -3,6 +3,7 @@
  */
 package com.franksuarez.tictactoe;
 
+import com.franksuarez.tictactoe.form.TicTacToeFrame;
 import com.franksuarez.tictactoe.ui.TicTacToeApp;
 
 public class App {
@@ -11,5 +12,8 @@ public class App {
     public static void main(String[] args) {
         TicTacToeApp t = new TicTacToeApp();
         t.start();
+        
+        //TicTacToeFrame t = new TicTacToeFrame();
+        //t.setVisible(true);
     }
 }

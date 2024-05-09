@@ -44,10 +44,22 @@ public class PairingFunction {
         double i = h - triangularNumber((int) c);
         double j = c - i + 2.0;
         
-        
-        
         return new Coordinates<>((int) i, (int) j);
-        
+    }
+    
+    
+    /**
+     *
+     * Works.
+     * 
+     * https://www.cantorsparadise.com/cantor-pairing-function-e213a8a89c2b
+     * 
+     * @param k1
+     * @param k2
+     * @return
+     */
+    public static double cantorFunction(double k1, double k2) {
+        return ((1.0 / 2.0) * (k1 + k2) * (k1 + k2 + 1) + k2);
     }
 
 

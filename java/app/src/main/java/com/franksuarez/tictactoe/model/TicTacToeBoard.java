@@ -12,6 +12,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
     private char player1 = 'x';
     private char player2 = 'o';
     private int fontSize = 72;
+    private char currentPlayer = player1;
 
     public int[][] winnerArray = new int[][]{
         {0, 1, 2},
@@ -23,12 +24,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
         {0, 4, 8},
         {2, 4, 6}
     };
-
-
-    private char currentPlayer = player1;
-
-
-
+    
     /**
      * Gets first char of String else returns elseChar.
      *

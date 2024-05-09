@@ -15,6 +15,8 @@ public class TicTacToeFrame extends java.awt.Frame {
      */
     public TicTacToeFrame() {
         initComponents();
+        
+        add(new TicTacToePanel());
     }
 
     /**

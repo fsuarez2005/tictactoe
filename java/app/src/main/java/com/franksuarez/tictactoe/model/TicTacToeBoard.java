@@ -28,6 +28,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
     /**
      * Gets first char of String else returns elseChar.
      *
+     * Utility function
      * @param src
      * @param elseChar
      * @return
@@ -96,7 +97,9 @@ public class TicTacToeBoard extends GameBoard<Character> {
     }
 
 
-
+    public TicTacToeBoard() {
+        
+    }
 
    
 

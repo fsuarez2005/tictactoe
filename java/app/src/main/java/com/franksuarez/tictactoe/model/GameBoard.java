@@ -10,6 +10,7 @@ package com.franksuarez.tictactoe.model;
 import com.franksuarez.tictactoe.misc.PairingFunction;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiFunction;
 
 /**
  * Generic Game board.
@@ -24,47 +25,89 @@ public class GameBoard<T> {
     // maps Hopcroft Ullman Pairing value to Cell
     private Map<Integer, Cell<T>> cells;
     
+    // need to experiment with other pairing functions
+    private BiFunction<Integer,Integer,Integer> pairingFunction;
+    
+    public void listCells() {
+        System.out.println("Cell List:");
+        for (var c: this.cells.keySet()) {
+            System.out.printf("%d: %s\n", c,this.cells.get(c));
+        }
+    }
+    
+    
     public GameBoard(int height, int width) {
+        this();
         this.height = height;
         this.width = width;
     }
 
     public GameBoard() {
-        
+        this.pairingFunction = (t, u) -> PairingFunction.szudzikPairingFunction(t, u);
     }
+    
     /**
      * Initialize cells for board.
      *
      * TODO: create Map instance for this.cells.
      *
+     * @param defaultValue
      */
-    public void initialize() {
+    public void initialize(T defaultValue) {
+        System.out.println("initialize()");
         this.cells = new HashMap<>();
 
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
-                int key = PairingFunction.hopcroftUllmanPairing(h, w);
-                this.cells.put(key, new Cell<T>());
+                int key = this.pairingFunction.apply(h, w);
+                if (this.cells.containsKey(key)) {
+                    throw new RuntimeException("Duplicate key!!");
+                }
+                
+                this.cells.put(key, new Cell<T>(defaultValue));
             }
         }
     }
 
-    public T token(int h, int w) {
-        int key = PairingFunction.hopcroftUllmanPairing(h, w);
-        return this.cells.get(key).token();
+    
+    /**
+     * 
+     * @param h
+     * @param w
+     * @return 
+     */
+    public T getToken(int h, int w) throws NullPointerException {
+        int key = this.pairingFunction.apply(h, w);
+        
+        var currentCell = this.cells.get(key);
+        if (currentCell == null) {
+            listCells();
+            throw new NullPointerException();
+        }
+        
+        var token = currentCell.getToken();
+        
+        return token;
     }
 
-    public void token(int h, int w, T token) {
-        int key = PairingFunction.hopcroftUllmanPairing(h, w);
-        this.cells.get(key).token(token);
+    public void setToken(int h, int w, T token) throws NullPointerException {
+        int key = this.pairingFunction.apply(h,w);
+        
+        var currentCell = this.cells.get(key);
+        if (currentCell == null) {
+            listCells();
+            throw new NullPointerException();
+        }
+        
+        currentCell.setToken(token);
     }
     
     public class Cell<U> {
         
-        private U _token;
+        private U token;
         
-        public Cell(U _token) {
-            this._token = _token;
+        public Cell(U token) {
+            this.token = token;
         }
         
         // _token is not initialized
@@ -72,27 +115,21 @@ public class GameBoard<T> {
         public Cell() {
         }
         
-        public U token() {
-            return _token;
+        public U getToken() {
+            return token;
         }
         
-        public void token(U _token) {
-            this._token = _token;
+        public void setToken(U _token) {
+            this.token = _token;
         }
     }
 
     
     /** Returns token values of multiple locations, usually in a straight line.
      * 
-     * 
-     * 
      * TODO: GameBoard.getLine
-     * 
-     * 
-     * 
-     * 
      */
-    public void getLine() {}
+    //public void getLine() {}
     
     
     

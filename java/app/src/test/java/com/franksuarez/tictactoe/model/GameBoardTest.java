@@ -39,6 +39,8 @@ public class GameBoardTest {
 
     @Test
     public void testInitialize() {
+        System.out.printf("[TEST] %s\n", Thread.currentThread().getStackTrace()[1].getMethodName());
+        
         this.board.listCells();
     }
     
@@ -47,7 +49,8 @@ public class GameBoardTest {
      */
     @Test
     public void testGetToken() {
-        System.out.println("getToken");
+        System.out.printf("[TEST] %s\n", Thread.currentThread().getStackTrace()[1].getMethodName());
+        
         int h = 0;
         int w = 0;
         

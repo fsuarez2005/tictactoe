@@ -4,6 +4,13 @@
  */
 package com.franksuarez.tictactoe.model;
 
+import com.franksuarez.tictactoe.misc.Coordinates;
+import exceptions.InvalidCoordinateValue;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author franksuarez
@@ -14,6 +21,26 @@ public class TicTacToeBoard extends GameBoard<Character> {
     private int fontSize = 72;
     private char currentPlayer = player1;
 
+    public List<WinningMove> winners;
+    
+    class WinningMove {
+        public Coordinates<Integer> xy1;
+        public Coordinates<Integer> xy2;
+        public Coordinates<Integer> xy3;
+        
+        public WinningMove(Integer x1, Integer y1, Integer x2, Integer y2, Integer x3, Integer y3) {
+            try {
+                this.xy1 = new Coordinates<>(x1,y1);
+                this.xy2 = new Coordinates<>(x2,y2);
+                this.xy3 = new Coordinates<>(x3,y3);
+            } catch (InvalidCoordinateValue ex) {
+                Logger.getLogger(TicTacToeBoard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    
+    
     public int[][] winnerArray = new int[][]{
         {0, 1, 2},
         {3, 4, 5},
@@ -24,6 +51,16 @@ public class TicTacToeBoard extends GameBoard<Character> {
         {0, 4, 8},
         {2, 4, 6}
     };
+    
+    public void initializeWinningMoves() {
+        this.winners = new ArrayList<>();
+        
+        this.winners.add(new WinningMove(0,0,0,0,0,0));
+        
+    }
+    
+    
+    
     
     /**
      * Gets first char of String else returns elseChar.
@@ -54,7 +91,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
      * @return
      */
     public boolean checkLocationForWinner(int a, int b, int c, char player) {
-
+        
         return false;
 
     }
@@ -98,7 +135,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
 
 
     public TicTacToeBoard() {
-        
+        super(3,3);
     }
 
    

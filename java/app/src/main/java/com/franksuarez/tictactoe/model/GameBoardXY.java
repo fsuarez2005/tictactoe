@@ -14,78 +14,59 @@ import java.util.function.BiFunction;
 
 /**
  * Generic Game board.
- * 
- * --------------------------------------------
- *        |        |       |       |       |
- *    2   |        |       |       |       | 
- *        |        |       |       |       | 
- * --------------------------------------------
- *        |        |       |       |       |
- *    1   |        |       |       |       | 
- *        |        |       |       |       | 
- * --------------------------------------------
- *        |        |       |       |       |
- *    0   |        |       |       |       | 
- *        |        |       |       |       | 
- * --------------------------------------------
- *  Y     |        |       |       |       |
- *      X |    0   |   1   |   2   |   3   |
- *        |        |       |       |       |
- * 
- * 
- * 
+ *
  * @author franksuarez
  * @param <T> Game token type
  */
-public class GameBoard<T> {
-    private int height;     // Y-axis
-    private int width;      // X-axis
+public class GameBoardXY<T> {
+    private int height;
+    private int width;
     
+    // maps Hopcroft Ullman Pairing value to Cell
+    private Map<Integer, Cell<T>> cells;
     
-    private Map<Integer, Cell<T>> cells; // maps Hopcroft Ullman Pairing value to Cell
+    // need to experiment with other pairing functions
+    private BiFunction<Integer,Integer,Integer> pairingFunction;
     
-    
-    private BiFunction<Integer,Integer,Integer> pairingFunction; // need to experiment with other pairing functions
-    
-    public GameBoard(int height, int width) {
+    public GameBoardXY(int height, int width) {
         this();
         this.height = height;
         this.width = width;
     }
-    public GameBoard() {
+    public GameBoardXY() {
         this.pairingFunction = (t, u) -> PairingFunction.szudzikPairingFunction(t, u);
     }
 
-    public final int getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public final void setHeight(int height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public final int getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public final void setWidth(int width) {
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public final BiFunction<Integer, Integer, Integer> getPairingFunction() {
+    public BiFunction<Integer, Integer, Integer> getPairingFunction() {
         return pairingFunction;
     }
 
-    public final void setPairingFunction(BiFunction<Integer, Integer, Integer> pairingFunction) {
+    public void setPairingFunction(BiFunction<Integer, Integer, Integer> pairingFunction) {
         this.pairingFunction = pairingFunction;
     }
     
-    
-    public final int calculateKey(int x, int y) {
-        return this.pairingFunction.apply(x, y);
+    public int calculateKey(int h, int w) {
+        return this.pairingFunction.apply(h, w);
     }
     
-    public final void listCells() {
+    
+    public void listCells() {
         System.out.println("Cell List:");
         for (var c: this.cells.keySet()) {
             System.out.printf("%d: %s\n", c,this.cells.get(c));
@@ -95,11 +76,11 @@ public class GameBoard<T> {
     
     /** Initialize cells for board.
      *
-     * 
+     * TODO: create Map instance for this.cells.
      *
      * @param defaultValue
      */
-    public final void initialize(T defaultValue) {
+    public void initialize(T defaultValue) {
         System.out.println("initialize()");
         this.cells = new HashMap<>();
 
@@ -117,12 +98,12 @@ public class GameBoard<T> {
 
     /**
      * 
-     * @param x
-     * @param y
+     * @param h
+     * @param w
      * @return 
      */
-    public final T getToken(int x, int y) throws NullPointerException {
-        int key = calculateKey(x, y);
+    public T getToken(int h, int w) throws NullPointerException {
+        int key = calculateKey(h, w);
         
         var currentCell = this.cells.get(key);
         if (currentCell == null) {
@@ -134,9 +115,9 @@ public class GameBoard<T> {
         
         return token;
     }
-    
-    public final void setToken(int x, int y, T token) throws NullPointerException {
-        int key = calculateKey(x, y);
+
+    public void setToken(int h, int w, T token) throws NullPointerException {
+        int key = calculateKey(h,w);
         
         var currentCell = this.cells.get(key);
         if (currentCell == null) {
@@ -149,23 +130,23 @@ public class GameBoard<T> {
     
     /**
      *
-     * @param x
-     * @param y
+     * @param h
+     * @param w
      * @return
      */
-    public final Cell<T> getCell(int x, int y) {
-        int key = calculateKey(x, y);
+    public Cell<T> getCell(int h, int w) {
+        int key = calculateKey(h,w);
         return this.cells.get(key);
     }
     
     /**
      *
-     * @param x
-     * @param y
+     * @param h
+     * @param w
      * @param c
      */
-    public final void setCell(int x, int y, Cell<T> c) {
-        int key = calculateKey(x,y);
+    public void setCell(int h, int w, Cell<T> c) {
+        int key = calculateKey(h,w);
         this.cells.put(key,c);
     }
     
@@ -173,16 +154,16 @@ public class GameBoard<T> {
      *
      * @param <U>
      */
-    public final class Cell<U> {
+    public class Cell<U> {
         private U token;
         
         public Cell(U token) {
             this.token = token;
         }
         
+        // _token is not initialized
+        // _token could have a default value or null
         public Cell() {
-            // token is not initialized
-            // token could have a default value or null
         }
         
         public U getToken() {
@@ -193,16 +174,10 @@ public class GameBoard<T> {
             this.token = token;
         }
         
-        @Override
         public String toString() {
             return token.toString();
         }
     }
-    
-    
-    
-    
-    
     
     /** Returns token values of multiple locations, usually in a straight line.
      * 

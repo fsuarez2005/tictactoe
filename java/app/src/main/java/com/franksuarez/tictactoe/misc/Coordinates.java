@@ -38,7 +38,7 @@ public class Coordinates<T extends Number> {
         return y;
     }
     
-    public void setY(T y) throws InvalidCoordinateValue {
+    public final void setY(T y) throws InvalidCoordinateValue {
         // only set if passes y guard
         if (yGuard.test(y)) {
             this.y = y;
@@ -51,7 +51,7 @@ public class Coordinates<T extends Number> {
         return this.x;
     }
 
-    public void setX(T x) throws InvalidCoordinateValue {
+    public final void setX(T x) throws InvalidCoordinateValue {
         if (xGuard.test(x)) {
             this.x = x;
         } else {
@@ -63,7 +63,7 @@ public class Coordinates<T extends Number> {
         this.xGuard = (x) -> {
             return true;
         };
-        this.yGuard = (y) -> {
+        this.yGuard = (x) -> {
             return true;
         };
     }

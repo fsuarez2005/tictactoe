@@ -28,13 +28,17 @@ public class GameBoard<T> {
     // need to experiment with other pairing functions
     private BiFunction<Integer,Integer,Integer> pairingFunction;
     
+    public int calculateKey(int h, int w) {
+        return this.pairingFunction.apply(h, w);
+    }
+    
+    
     public void listCells() {
         System.out.println("Cell List:");
         for (var c: this.cells.keySet()) {
             System.out.printf("%d: %s\n", c,this.cells.get(c));
         }
     }
-    
     
     public GameBoard(int height, int width) {
         this();
@@ -46,8 +50,7 @@ public class GameBoard<T> {
         this.pairingFunction = (t, u) -> PairingFunction.szudzikPairingFunction(t, u);
     }
     
-    /**
-     * Initialize cells for board.
+    /** Initialize cells for board.
      *
      * TODO: create Map instance for this.cells.
      *
@@ -59,7 +62,7 @@ public class GameBoard<T> {
 
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
-                int key = this.pairingFunction.apply(h, w);
+                int key = calculateKey(h, w);
                 if (this.cells.containsKey(key)) {
                     throw new RuntimeException("Duplicate key!!");
                 }
@@ -69,7 +72,6 @@ public class GameBoard<T> {
         }
     }
 
-    
     /**
      * 
      * @param h
@@ -77,7 +79,7 @@ public class GameBoard<T> {
      * @return 
      */
     public T getToken(int h, int w) throws NullPointerException {
-        int key = this.pairingFunction.apply(h, w);
+        int key = calculateKey(h, w);
         
         var currentCell = this.cells.get(key);
         if (currentCell == null) {
@@ -91,7 +93,7 @@ public class GameBoard<T> {
     }
 
     public void setToken(int h, int w, T token) throws NullPointerException {
-        int key = this.pairingFunction.apply(h,w);
+        int key = calculateKey(h,w);
         
         var currentCell = this.cells.get(key);
         if (currentCell == null) {
@@ -102,8 +104,33 @@ public class GameBoard<T> {
         currentCell.setToken(token);
     }
     
+    /**
+     *
+     * @param h
+     * @param w
+     * @return
+     */
+    public Cell<T> getCell(int h, int w) {
+        int key = calculateKey(h,w);
+        return this.cells.get(key);
+    }
+    
+    /**
+     *
+     * @param h
+     * @param w
+     * @param c
+     */
+    public void setCell(int h, int w, Cell<T> c) {
+        int key = calculateKey(h,w);
+        this.cells.put(key,c);
+    }
+    
+    /**
+     *
+     * @param <U>
+     */
     public class Cell<U> {
-        
         private U token;
         
         public Cell(U token) {
@@ -119,17 +146,23 @@ public class GameBoard<T> {
             return token;
         }
         
-        public void setToken(U _token) {
-            this.token = _token;
+        public void setToken(U token) {
+            this.token = token;
+        }
+        
+        public String toString() {
+            return token.toString();
         }
     }
-
     
     /** Returns token values of multiple locations, usually in a straight line.
      * 
      * TODO: GameBoard.getLine
      */
     //public void getLine() {}
+    
+    
+    
     
     
     

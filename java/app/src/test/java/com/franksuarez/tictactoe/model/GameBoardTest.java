@@ -20,43 +20,28 @@ public class GameBoardTest {
     private int height = 3;
     private int width = 3;
     
-    
-    
-    public GameBoardTest() {
-        
-        
-    
-    
-    }
+    public GameBoardTest() {}
     
     @BeforeAll
-    public static void setUpClass() {
-    }
+    public static void setUpClass() {}
     
     @AfterAll
-    public static void tearDownClass() {
-    }
+    public static void tearDownClass() {}
     
     @BeforeEach
     public void setUp() {
         this.board = new GameBoard<>(3,3);
         this.board.initialize(' ');
-        this.board.listCells();
-        
     }
     
     @AfterEach
-    public void tearDown() {
-    }
+    public void tearDown() {}
 
-    
     @Test
     public void testInitialize() {
-        
+        this.board.listCells();
     }
     
-    
-
     /**
      * Test of getToken method, of class GameBoard.
      */

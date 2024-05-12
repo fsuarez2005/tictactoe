@@ -13,7 +13,7 @@
 package com.franksuarez.tictactoe.misc;
 
 import com.google.errorprone.annotations.DoNotCall;
-import exceptions.InvalidCoordinateValue;
+import com.franksuarez.tictactoe.exceptions.InvalidCoordinateValue;
 import static java.lang.Integer.max;
 
 

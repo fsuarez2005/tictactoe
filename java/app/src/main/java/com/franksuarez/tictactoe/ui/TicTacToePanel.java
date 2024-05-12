@@ -66,7 +66,7 @@ public class TicTacToePanel extends Panel implements ActionListener {
         setBackground(Color.GREEN);
     }
 
-    /**
+    /** TODO: move to Utility
      * Gets first char of String else returns elseChar.
      *
      * @param src
@@ -81,7 +81,7 @@ public class TicTacToePanel extends Panel implements ActionListener {
         }
     }
 
-    /**
+    /** TODO: move to TicTacToeBoard
      * Checks each cell to see if they have matching player indicators.
      *
      * Problem: * If Button label is empty, there is no first char so an index
@@ -102,7 +102,7 @@ public class TicTacToePanel extends Panel implements ActionListener {
 
     }
 
-    /**
+    /** TODO: move to TicTacToeBoard
      * Check for cell combinations to determine winner.
      *
      * @return
@@ -126,7 +126,7 @@ public class TicTacToePanel extends Panel implements ActionListener {
 
     }
 
-    /**
+    /** TODO: move to TicTacToeBoard
      * Switches between player 1 and player 2
      *
      */

@@ -4,8 +4,8 @@
  */
 package com.franksuarez.tictactoe.model;
 
+import com.franksuarez.tictactoe.exceptions.InvalidCoordinateValue;
 import com.franksuarez.tictactoe.misc.Coordinates;
-import exceptions.InvalidCoordinateValue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,7 +27,13 @@ public class TicTacToeBoard extends GameBoard<Character> {
         public Coordinates<Integer> xy1;
         public Coordinates<Integer> xy2;
         public Coordinates<Integer> xy3;
-        
+
+        public WinningMove(Coordinates<Integer> xy1, Coordinates<Integer> xy2, Coordinates<Integer> xy3) {
+            this.xy1 = xy1;
+            this.xy2 = xy2;
+            this.xy3 = xy3;
+        }
+        /*
         public WinningMove(Integer x1, Integer y1, Integer x2, Integer y2, Integer x3, Integer y3) {
             try {
                 this.xy1 = new Coordinates<>(x1,y1);
@@ -36,11 +42,11 @@ public class TicTacToeBoard extends GameBoard<Character> {
             } catch (InvalidCoordinateValue ex) {
                 Logger.getLogger(TicTacToeBoard.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }*/
     }
 
     
-    
+    /*
     public int[][] winnerArray = new int[][]{
         {0, 1, 2},
         {3, 4, 5},
@@ -50,17 +56,20 @@ public class TicTacToeBoard extends GameBoard<Character> {
         {2, 5, 8},
         {0, 4, 8},
         {2, 4, 6}
-    };
+    };*/
     
     public void initializeWinningMoves() {
         this.winners = new ArrayList<>();
         
-        this.winners.add(new WinningMove(0,0,0,0,0,0));
+        
+        try {
+            this.winners.add(new WinningMove(new Coordinates<>(0,0),new Coordinates<>(0,1),new Coordinates<>(0,2)));
+            
+        } catch (InvalidCoordinateValue ex) {
+            Logger.getLogger(TicTacToeBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
-    
-    
-    
     
     /**
      * Gets first char of String else returns elseChar.
@@ -78,7 +87,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
         }
     }
 
-    /**
+    /** TODO: checkLocationForWinner stub
      * Checks each cell to see if they have matching player indicators.
      *
      * Problem: * If Button label is empty, there is no first char so an index
@@ -96,7 +105,18 @@ public class TicTacToeBoard extends GameBoard<Character> {
 
     }
 
-    /**
+    
+    /** Checks the board to see if WinningMove is exists
+     * 
+     * @param w
+     * @return 
+     */
+    public boolean doesWinningMoveExist(WinningMove w) {
+        return false;
+    }
+    
+    
+    /** TODO: rewrite with winner List
      * Check for cell combinations to determine winner.
      *
      * @return
@@ -104,7 +124,10 @@ public class TicTacToeBoard extends GameBoard<Character> {
     public char checkForWinner() {
         char winner = ' ';
 
-        for (int[] i : winnerArray) {
+        
+        
+        
+        /*for (int[] i : winnerArray) {
             boolean player1won = checkLocationForWinner(i[0], i[1], i[2], player1);
             boolean player2won = checkLocationForWinner(i[0], i[1], i[2], player2);
             if (player1won) {
@@ -115,7 +138,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
                 break;
             }
 
-        }
+        }*/
         return winner;
 
     }

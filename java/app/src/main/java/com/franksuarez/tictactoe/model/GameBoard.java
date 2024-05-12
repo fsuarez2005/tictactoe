@@ -7,6 +7,7 @@
  */
 package com.franksuarez.tictactoe.model;
 
+import com.franksuarez.tictactoe.misc.Coordinates;
 import com.franksuarez.tictactoe.misc.PairingFunction;
 import java.util.HashMap;
 import java.util.Map;
@@ -157,6 +158,12 @@ public class GameBoard<T> {
         int key = calculateKey(x, y);
         return this.cells.get(key);
     }
+    
+    // TODO: getCell(Coordinates)
+    public Cell<T> getCell(Coordinates<Integer> coords) {
+        return null;
+    }
+    
     
     /**
      *

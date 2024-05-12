@@ -34,13 +34,15 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.franksuarez.tictactoe.App'
+    mainClass = 'com.franksuarez.tictactoe.ui.TicTacToeApp'
 }
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+apply plugin: 'java'
 
 compileJava {
     options.encoding = 'UTF-8'

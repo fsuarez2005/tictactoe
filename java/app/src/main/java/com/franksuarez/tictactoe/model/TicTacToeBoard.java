@@ -21,7 +21,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
     private int fontSize = 72;
     private char currentPlayer = player1;
 
-    public List<WinningMove> winners;
+    public List<WinningMove> winners = new ArrayList<>();
     
     class WinningMove {
         public Coordinates<Integer> xy1;
@@ -33,34 +33,63 @@ public class TicTacToeBoard extends GameBoard<Character> {
             this.xy2 = xy2;
             this.xy3 = xy3;
         }
-        /*
-        public WinningMove(Integer x1, Integer y1, Integer x2, Integer y2, Integer x3, Integer y3) {
+        
+        public String toString() {
+            return String.format("(%d,%d),(%d,%d),(%d,%d)",
+                    xy1.getX(),
+                    xy1.getY(),
+                    xy2.getX(),
+                    xy2.getY(),
+                    xy3.getX(),
+                    xy3.getY()
+            );
+        }
+        
+        
+    }
+
+    public int[][][] winnerData = new int[][][]{
+        {{0,0},{0,0},{0,0}},
+        {{1,0},{1,1},{1,2}},
+        {{2,0},{2,1},{2,2}},
+        
+        {{0,0},{1,0},{2,0}},
+        {{0,1},{1,1},{2,1}},
+        {{0,2},{1,2},{2,2}},
+        
+        {{0,0},{1,1},{2,2}},
+        {{2,0},{1,1},{0,2}}
+    };
+    
+    
+    public void importWinnerArray(int[][][] winnerArray) {
+        // winnerArray is an array of triple of coordinate pairs
+        
+        
+        for (int[][] triple: winnerArray) {
+            
             try {
-                this.xy1 = new Coordinates<>(x1,y1);
-                this.xy2 = new Coordinates<>(x2,y2);
-                this.xy3 = new Coordinates<>(x3,y3);
+                // triple has three coordinate pairs
+                // triple[0][0] -> x
+                // triple[0][1] -> y
+                
+                WinningMove move = new WinningMove(
+                        new Coordinates<Integer>(triple[0][0],triple[0][1]),
+                        new Coordinates<Integer>(triple[1][0],triple[1][1]),
+                        new Coordinates<Integer>(triple[2][0],triple[2][1])
+                );
+                
+                this.winners.add(move);
+                
             } catch (InvalidCoordinateValue ex) {
                 Logger.getLogger(TicTacToeBoard.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }*/
+        }
     }
-
     
-    /*
-    public int[][] winnerArray = new int[][]{
-        {0, 1, 2},
-        {3, 4, 5},
-        {6, 7, 8},
-        {0, 3, 6},
-        {1, 4, 7},
-        {2, 5, 8},
-        {0, 4, 8},
-        {2, 4, 6}
-    };*/
     
     public void initializeWinningMoves() {
         this.winners = new ArrayList<>();
-        
         
         try {
             this.winners.add(new WinningMove(new Coordinates<>(0,0),new Coordinates<>(0,1),new Coordinates<>(0,2)));

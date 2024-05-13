@@ -5,6 +5,8 @@
 package com.franksuarez.tictactoe.misc;
 
 import com.franksuarez.tictactoe.exceptions.InvalidCoordinateValue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,6 +40,14 @@ public class CoordinatesTest {
     public void tearDown() {
     }
 
+    @Test
+    public void testConstructor1() {
+
+        
+        
+    }
+    
+    
     /**
      * Test of getY method, of class Coordinates.
      */
@@ -123,18 +133,31 @@ public class CoordinatesTest {
     }
 
     /**
-     * Test of with method, of class Coordinates.
+     * Test of szudzikPairingFunction method, of class Coordinates.
      */
     @Test
-    public void testWith() {
-        System.out.println("with");
-        Object x = null;
-        Object y = null;
-        Coordinates expResult = null;
-        Coordinates result = Coordinates.with(x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testSzudzikPairingFunction() {
+        double sourceX = 3.0;
+        double sourceY = 2.0;
+        int expected = 14;
+        int results = -1;
+        
+        try {
+            Coordinates c = new Coordinates<Double>(sourceX,sourceY);
+            
+            results = c.szudzikPairingFunction();
+            
+            
+            
+        } catch (InvalidCoordinateValue ex) {
+            Logger.getLogger(CoordinatesTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        assertEquals(expected, results);
+        
+        
+        
     }
+
     
 }

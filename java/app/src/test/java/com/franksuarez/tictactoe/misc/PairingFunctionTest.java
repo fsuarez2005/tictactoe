@@ -4,6 +4,9 @@
  */
 package com.franksuarez.tictactoe.misc;
 
+import com.franksuarez.tictactoe.exceptions.InvalidCoordinateValue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -108,6 +111,32 @@ public class PairingFunctionTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of inverseSzudzikPairingFunction method, of class PairingFunction.
+     */
+    @Test
+    public void testInverseSzudzikPairingFunction() {
+        System.out.println("inverseSzudzikPairingFunction");
+        int z = 14;
+        Coordinates<Integer> expected = null;
+        
+        try {
+            expected = new Coordinates<>(3,2);
+        } catch (InvalidCoordinateValue ex) {
+            Logger.getLogger(PairingFunctionTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Coordinates<Integer> result = PairingFunction.inverseSzudzikPairingFunction(z);
+
+        if (expected != null) {
+            assert(expected.equals(result));
+            
+        } else {
+            fail("null");
+        }
+
+        
     }
     
 }

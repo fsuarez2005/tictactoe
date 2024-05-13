@@ -9,33 +9,35 @@ import java.awt.Button;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author franksuarez
  */
 public class TicTacToeModelPanel extends Panel {
-
-    private TicTacToeBoard board;
-    private List<Button> buttons;
+    private TicTacToeBoard board = new TicTacToeBoard();
+    
+    private Map<Integer,Button> buttons = new HashMap<>();
 
     public void configure() {
         setLayout(new GridLayout(3, 3));
-
     }
-
+    
+    // TODO: create identifier for each button so we can refer to it
     public void populate() {
-
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-
-                Button b = new Button("X");
+                
+                Button b = new Button(String.format("(%d,%d)",x,y));
                 b.setActionCommand("button");
 
                 b.addActionListener((ActionEvent e) -> {
                     System.out.printf("[ACTION]: %s\n", e.toString());
-
+                    Button src = (Button) e.getSource();
+                    
+                    src.setEnabled(false);
                     //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
                 });
 
@@ -45,13 +47,12 @@ public class TicTacToeModelPanel extends Panel {
     }
 
     public void initializeGame() {
-        this.board = new TicTacToeBoard();
+
     }
 
     public TicTacToeModelPanel() {
         super();
         configure();
         populate();
-
     }
 }

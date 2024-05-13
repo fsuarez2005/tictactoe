@@ -15,19 +15,15 @@ import java.awt.event.WindowListener;
  * @author franksuarez
  */
 public class TicTacToeApp extends Frame implements WindowListener, ActionListener {
-    
     private int width = 300;
     private int height = 300;
     private String title = "Tic-Tac-Toe";
     
-    
-    
     public static void main(String[] args) {
         TicTacToeApp app = new TicTacToeApp();
+        
         app.start();
     }
-    
-    
     
     @Override
     public void windowOpened(WindowEvent e) {
@@ -89,14 +85,10 @@ public class TicTacToeApp extends Frame implements WindowListener, ActionListene
     }
 
     private void populateComponents() {
-        this.add(new TicTacToeModelPanel());
+        TicTacToeModelPanel tttpanel = new TicTacToeModelPanel();
+        tttpanel.initialize();
         
+        this.add(tttpanel);
         
-        
-        
-        
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    
 }

@@ -37,6 +37,7 @@ public class TicTacToeApp extends Frame implements WindowListener, ActionListene
     
     @Override
     public void windowOpened(WindowEvent e) {
+        
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -104,7 +105,6 @@ public class TicTacToeApp extends Frame implements WindowListener, ActionListene
         
         TicTacToePanel tttpanel = new TicTacToePanel();
         tttpanel.initialize();
-        tttpanel.initializeGame();
         tttpanel.statusLabelRef = status;
         
         

@@ -66,12 +66,9 @@ public class TicTacToePanel extends Panel implements ActionListener{
     }
 
     
-    
-    public void initializeGame() {
-        this.board.initialize(' ');
-    }
 
     public void initialize() {
+        this.board.initialize(' ');
         configure();
         createButtons();
         populate();

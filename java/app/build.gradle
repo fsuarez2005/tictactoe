@@ -35,7 +35,7 @@ java {
 application {
     // Define the main class for the application.
     //mainClass = 'com.franksuarez.tictactoe.ui.TicTacToeApp'
-    mainClass = 'com.franksuarez.tictactoe.ui.TicTacToeSplitFrame'
+    mainClass = 'com.franksuarez.tictactoe.ui.TicTacToeGridBagFrame'
 }
 
 tasks.named('test') {

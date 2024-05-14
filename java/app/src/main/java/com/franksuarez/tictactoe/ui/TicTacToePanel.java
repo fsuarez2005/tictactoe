@@ -125,6 +125,8 @@ public class TicTacToePanel extends Panel implements ActionListener{
             
             statusLabelRef.setText(String.format("Winner: %c", winningPlayerToken));
             
+            
+            
             // Disable all buttons
             for (Integer b: this.buttons.keySet()) {
                 this.buttons.get(b).setEnabled(false);

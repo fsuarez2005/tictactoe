@@ -5,13 +5,9 @@ Tic-Tac-Toe in various programming languages.
 
 * [Java](java/README.md)
 
-## Common Concepts
+## Screenshots
 
-## Problems
-
-## 
-
-
+![Java AWT Version](java/doc/tictactoe-java-1.png)
 
 
 

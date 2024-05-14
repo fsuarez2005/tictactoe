@@ -22,6 +22,7 @@ package com.franksuarez.tictactoe.ui;
 import com.franksuarez.tictactoe.misc.PairingFunction;
 import com.franksuarez.tictactoe.model.TicTacToeBoard;
 import java.awt.Button;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
@@ -53,7 +54,10 @@ public class TicTacToePanel extends Panel implements ActionListener{
     public void createButtons() {
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-                Button b = new Button(String.format("(%d,%d)",x,y));
+                String defaultButtonText = "";
+                Button b = new Button(defaultButtonText);
+                b.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,32));
+                
                 String btnActionCommand = String.format("button(%d,%d)",x,y);
                 b.setActionCommand(btnActionCommand);
                 b.addActionListener(this);
@@ -130,8 +134,6 @@ public class TicTacToePanel extends Panel implements ActionListener{
         System.out.println(this.board.toString());
         
         
-        statusLabelRef.setText(actionCommand);
-        
         // check for winner
         this.board.checkForWinner();
         if (this.board.isThereAWinner()) {
@@ -142,9 +144,16 @@ public class TicTacToePanel extends Panel implements ActionListener{
             
             statusLabelRef.setText(String.format("Winner: %c", winningPlayerToken));
             
-            // update status information about winner
-        
-            //status.setText(String.format("Player %c has won!",winningPlayerToken));
+            // Disable all buttons
+            for (Integer b: this.buttons.keySet()) {
+                this.buttons.get(b).setEnabled(false);
+            }
+
+
+
+            // Offer game reset
+            
+            
         }
         
         this.board.switchPlayer();

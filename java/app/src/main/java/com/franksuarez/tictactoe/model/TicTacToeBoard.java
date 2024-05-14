@@ -36,16 +36,19 @@ public class TicTacToeBoard extends GameBoard<Character> {
      * importWinnerArray(int[][][])
      */
     public final int[][][] winnerData = new int[][][]{
-        {{0, 0}, {0, 0}, {0, 0}},
-        {{1, 0}, {1, 1}, {1, 2}},
-        {{2, 0}, {2, 1}, {2, 2}},
+        // horizontal
         {{0, 0}, {1, 0}, {2, 0}},
         {{0, 1}, {1, 1}, {2, 1}},
         {{0, 2}, {1, 2}, {2, 2}},
+        // vertical
+        {{0, 0}, {0, 1}, {0, 2}},
+        {{1, 0}, {1, 1}, {1, 2}},
+        {{2, 0}, {2, 1}, {2, 2}},
+        // diagonal
         {{0, 0}, {1, 1}, {2, 2}},
         {{2, 0}, {1, 1}, {0, 2}}
     };
-
+    
     public TicTacToeBoard() {
         super.setHeight(3);
         super.setWidth(3);
@@ -211,6 +214,8 @@ public class TicTacToeBoard extends GameBoard<Character> {
                 if (foundWinner) {
                     this.winnerExists = true;
                     this.winningPlayer = p;
+                    
+                    System.out.printf("Winning Move for player %d: %s%n",p,wm.toString());
                     return;
                 }
             }

@@ -6,7 +6,6 @@ package com.franksuarez.tictactoe.model;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,20 +51,6 @@ public class TicTacToeBoardTest {
 
 
 
-
-    /**
-     * Test of checkForWinner method, of class TicTacToeBoard.
-     */
-    @Test
-    public void testCheckForWinner() {
-        System.out.println("checkForWinner");
-        TicTacToeBoard instance = new TicTacToeBoard();
-        char expResult = ' ';
-        char result = instance.checkForWinner();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of switchPlayer method, of class TicTacToeBoard.

@@ -76,7 +76,7 @@ public class TicTacToeApp extends Frame implements WindowListener, ActionListene
     }
 
     private void configure() {
-        setResizable(false);
+        //setResizable(false);
         addWindowListener(this);
         setSize(width,height);
         setTitle(title);
@@ -88,7 +88,7 @@ public class TicTacToeApp extends Frame implements WindowListener, ActionListene
     }
 
     private void populateComponents() {
-        Label status = new Label("hello");
+        Label status = new Label("Tic-Tac-Toe",Label.CENTER);
         
         add(status);
         

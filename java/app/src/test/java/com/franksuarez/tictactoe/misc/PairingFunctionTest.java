@@ -60,13 +60,15 @@ public class PairingFunctionTest {
     @Test
     public void testHopcroftUllmanPairing() {
         System.out.println("hopcroftUllmanPairing");
-        int i = 0;
-        int j = 0;
-        int expResult = 0;
+        int i = 1;
+        int j = 2;
+        int expResult = 8;
         int result = PairingFunction.hopcroftUllmanPairing(i, j);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+
+// TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
     }
 
     /**

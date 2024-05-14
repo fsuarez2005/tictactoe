@@ -51,7 +51,9 @@ public class PairingFunction {
      */
     @DoNotCall
     public static int hopcroftUllmanPairing(int i, int j) {
-        return triangularNumber((int) (i + j - 2)) + 1;
+        double output = (1.0/2.0)*(((double) i) + ((double) j) - 2.0)*(((double) i) + ((double) j) - 1.0)+((double) i);
+        
+        return Double.valueOf(output).intValue();
     }
 
     @DoNotCall

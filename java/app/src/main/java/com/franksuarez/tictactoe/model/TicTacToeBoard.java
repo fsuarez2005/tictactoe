@@ -21,7 +21,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
     private int fontSize = 72;
     private char currentPlayer = player1;
 
-    public List<WinningMove> winners = new ArrayList<>();
+    private List<WinningMove> winners = new ArrayList<>();
     
     class WinningMove {
         public Coordinates<Integer> xy1;
@@ -34,6 +34,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
             this.xy3 = xy3;
         }
         
+        @Override
         public String toString() {
             return String.format("(%d,%d),(%d,%d),(%d,%d)",
                     xy1.getX(),
@@ -141,7 +142,8 @@ public class TicTacToeBoard extends GameBoard<Character> {
      * @return 
      */
     public boolean doesWinningMoveExist(WinningMove w) {
-        return false;
+        throw new UnsupportedOperationException();
+        //return false;
     }
     
     

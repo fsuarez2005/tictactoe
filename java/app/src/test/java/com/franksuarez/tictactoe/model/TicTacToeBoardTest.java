@@ -46,9 +46,7 @@ public class TicTacToeBoardTest {
         TicTacToeBoard t = new TicTacToeBoard();
         t.importWinnerArray(t.winnerData);
         
-        for (TicTacToeBoard.WinningMove w: t.winners) {
-            System.out.printf("%s\n",w);
-        }
+        
     }
 
     /**

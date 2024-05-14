@@ -1,6 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/** Tic-Tac-Toe.
+ * In Java AWT.
+ * 
+ * TODO: Add reset button.
+ * TODO: Add AI player.
+ * TODO: Add menu.
+ * TODO: Convert hard-coded strings to resources.
+ *
+ * PROBLEMS:
+ * - [ ] Components are not the correct sizes.
+ *
  */
 package com.franksuarez.tictactoe.ui;
 

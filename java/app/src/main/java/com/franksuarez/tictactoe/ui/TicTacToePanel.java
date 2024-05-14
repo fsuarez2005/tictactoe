@@ -1,21 +1,5 @@
-/** Tic-Tac-Toe.
- * In Java AWT.
- *
- *
- * TASKS:
- *
- * - [x] Create basic window.
- * - [x] Decide between AWT, Swing, JavaFX ...
- * - [ ] Add reset button.
- * - [ ] Add AI player.
- * - [ ] Add menu.
- * - [ ] Convert hard-coded strings to resources.
- * - [x] Prevent user from using used cell.
- *
- * PROBLEMS:
- * - [x] Delay when clicking button (switched to ActionListener)
- * - [ ] Components are not the correct sizes.
- *
+/** Tic-Tac-Toe Panel.
+ * 
  */
 package com.franksuarez.tictactoe.ui;
 

@@ -1,5 +1,7 @@
 /** Generic rectangular game board with cells occupied by tokens.
  *
+ * TODO: Generalize this class for any dimension.
+ * 
  * Classes:
  * * Board
  * * Token

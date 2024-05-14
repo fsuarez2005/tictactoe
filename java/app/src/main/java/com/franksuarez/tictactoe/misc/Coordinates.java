@@ -1,7 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/** Coordinates class.
+ * 
+ * TODO: Generalize this class for any dimension.
+ * 
  */
+
+
 package com.franksuarez.tictactoe.misc;
 
 import com.franksuarez.tictactoe.exceptions.InvalidCoordinateValue;

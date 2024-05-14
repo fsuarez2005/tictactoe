@@ -5,6 +5,8 @@
 package com.franksuarez.tictactoe.ui;
 
 import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -78,6 +80,7 @@ public class TicTacToeApp extends Frame implements WindowListener, ActionListene
         addWindowListener(this);
         setSize(width,height);
         setTitle(title);
+        setLayout(new GridLayout(2, 1));
         
         
         // setLayout
@@ -85,8 +88,17 @@ public class TicTacToeApp extends Frame implements WindowListener, ActionListene
     }
 
     private void populateComponents() {
-        TicTacToeModelPanel tttpanel = new TicTacToeModelPanel();
+        Label status = new Label("hello");
+        
+        add(status);
+        
+        
+        
+        TicTacToePanel tttpanel = new TicTacToePanel();
         tttpanel.initialize();
+        tttpanel.initializeGame();
+        tttpanel.statusLabelRef = status;
+        
         
         this.add(tttpanel);
         

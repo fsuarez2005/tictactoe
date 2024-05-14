@@ -19,208 +19,138 @@
  */
 package com.franksuarez.tictactoe.ui;
 
+import com.franksuarez.tictactoe.misc.PairingFunction;
+import com.franksuarez.tictactoe.model.TicTacToeBoard;
 import java.awt.Button;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-/** Tic-Tac-Toe AWT Frame
+/**
  *
  * @author franksuarez
  */
-public class TicTacToePanel extends Panel implements ActionListener {
-
-    private int height = 300;
-    private int width = 300;
+public class TicTacToePanel extends Panel implements ActionListener{
+    public Label statusLabelRef;
     
-    private char player1 = 'x';
-    private char player2 = 'o';
-    private int fontSize = 72;
-
-    public int[][] winnerArray = new int[][]{
-        {0, 1, 2},
-        {3, 4, 5},
-        {6, 7, 8},
-        {0, 3, 6},
-        {1, 4, 7},
-        {2, 5, 8},
-        {0, 4, 8},
-        {2, 4, 6}
-    };
-
-    // board grid
-    private List<Button> buttons;
-
-    private char currentPlayer = player1;
-
     
-    public TicTacToePanel() {
-        setSize(new Dimension(width,height));
-        setMaximumSize(new Dimension(width,height));
-        setBackground(Color.GREEN);
-    }
+    
+    private TicTacToeBoard board = new TicTacToeBoard();
+    
+    private Map<Integer,Button> buttons = new HashMap<>();
 
-    /** TODO: move to Utility
-     * Gets first char of String else returns elseChar.
-     *
-     * @param src
-     * @param elseChar
-     * @return
-     */
-    private char getFirstOrElse(String src, char elseChar) {
-        if (src.length() > 0) {
-            return src.charAt(0);
-        } else {
-            return elseChar;
-        }
-    }
-
-    /** TODO: move to TicTacToeBoard
-     * Checks each cell to see if they have matching player indicators.
-     *
-     * Problem: * If Button label is empty, there is no first char so an index
-     * exception will occur.
-     *
-     * @param a first cell
-     * @param b second cell
-     * @param c third cell
-     * @param player
-     * @return
-     */
-    public boolean checkLocationForWinner(int a, int b, int c, char player) {
-        char aChar = getFirstOrElse(this.buttons.get(a).getLabel(), ' ');
-        char bChar = getFirstOrElse(this.buttons.get(b).getLabel(), ' ');
-        char cChar = getFirstOrElse(this.buttons.get(c).getLabel(), ' ');
-
-        return (aChar == player && bChar == player && cChar == player);
-
-    }
-
-    /** TODO: move to TicTacToeBoard
-     * Check for cell combinations to determine winner.
-     *
-     * @return
-     */
-    public char checkForWinner() {
-        char winner = ' ';
-
-        for (int[] i : winnerArray) {
-            boolean player1won = checkLocationForWinner(i[0], i[1], i[2], player1);
-            boolean player2won = checkLocationForWinner(i[0], i[1], i[2], player2);
-            if (player1won) {
-                winner = player1;
-                break;
-            } else if (player2won) {
-                winner = player2;
-                break;
-            }
-
-        }
-        return winner;
-
-    }
-
-    /** TODO: move to TicTacToeBoard
-     * Switches between player 1 and player 2
-     *
-     */
-    public void switchPlayer() {
-        if (currentPlayer == player1) {
-            currentPlayer = player2;
-        } else {
-            currentPlayer = player1;
-        }
-
-    }
-
-    /**
-     * Creates Buttons so they can be referenced later.
-     *
-     */
-    public void initializeButtonList() {
-
-        if (this.buttons == null) {
-            this.buttons = new ArrayList<>();
-        } else {
-            // Buttons may be referenced by Frame so they may leak
-            this.buttons.clear();
-        }
-
-        for (int n = 0; n < 9; n++) {
-            Button b = new Button();
-            b.addActionListener(this);
-            b.setActionCommand("button");
-            b.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
-
-            this.buttons.add(b);
-        }
-
-    }
-
-    /**
-     * Adds widgets to Frame.
-     *
-     */
-    public void addComponents() {
-
-        // clear table
-        this.removeAll();
-
-        for (int n = 0; n < 9; n++) {
-            this.add(this.buttons.get(n));
-        }
-
-    }
-
-    /**
-     * Configures Window.
-     *
-     */
     public void configure() {
-        setSize(width, height);
-
-        
-        
         setLayout(new GridLayout(3, 3));
     }
-
-    /**
-     * Starts the App.
-     */
-    public void start() {
-        configure();
-
-        initializeButtonList();
-        addComponents();
-
-        //setVisible(true);
-    }
     
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("[EVEN] actionPerformed");
-        String actionCommand = e.getActionCommand();
-        System.out.printf("actionCommand = %s\n", actionCommand);
-        if (actionCommand.equals("button")) {
-            Button btn = (Button) e.getSource();
-            System.out.printf("Button = %s\n", btn.toString());
-            btn.setLabel(String.valueOf(currentPlayer));
-            btn.setEnabled(false);
-
-            char winner = checkForWinner();
-            if (winner != ' ') {
-                System.out.printf("%c has won!\n", winner);
+    // TODO: create identifier for each button so we can refer to it
+    public void createButtons() {
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                Button b = new Button(String.format("(%d,%d)",x,y));
+                String btnActionCommand = String.format("button(%d,%d)",x,y);
+                b.setActionCommand(btnActionCommand);
+                b.addActionListener(this);
+                
+                this.buttons.put(PairingFunction.szudzikPairingFunction(x, y), b);
             }
-
-            switchPlayer();
         }
     }
+
+    private void populate() {
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(0,2)));
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(1,2)));
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(2,2)));
+
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(0,1)));
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(1,1)));
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(2,1)));
+        
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(0,0)));
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(1,0)));
+        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(2,0)));
+    }
+
+    
+    
+    public void initializeGame() {
+        this.board.initialize(' ');
+    }
+
+    public void initialize() {
+        configure();
+        createButtons();
+        populate();
+    }
+    
+    
+    
+    public TicTacToePanel() {
+        super();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String actionCommand = e.getActionCommand();
+        
+        int x = 0;
+        int y = 0;
+        
+        Pattern buttonXYpattern = Pattern.compile("button\\((\\d+),(\\d+)\\)");
+        
+        Matcher m = buttonXYpattern.matcher(actionCommand);
+        
+        
+        if (m.find()) {
+            x = Integer.parseInt(m.group(1));
+            y = Integer.parseInt(m.group(2));
+        } else {
+            System.out.println("No Match!");
+            // throw exception about button
+            return;
+        }
+        
+        this.board.makeMove(x, y);
+        
+        
+        // get current player
+        char currentPlayerToken = this.board.getCurrentPlayerToken();
+        
+        // this panel only consists of Buttons so this should be okay
+        Button btn = (Button) e.getSource();
+        btn.setLabel(String.valueOf(currentPlayerToken));
+        btn.setEnabled(false);
+        
+        System.out.println(this.board.toString());
+        
+        
+        statusLabelRef.setText(actionCommand);
+        
+        // check for winner
+        this.board.checkForWinner();
+        if (this.board.isThereAWinner()) {
+            System.out.println("Winner found!");
+            int winningPlayer = this.board.getWinningPlayer();
+            
+            char winningPlayerToken = this.board.getPlayerToken(winningPlayer);
+            
+            statusLabelRef.setText(String.format("Winner: %c", winningPlayerToken));
+            
+            // update status information about winner
+        
+            //status.setText(String.format("Player %c has won!",winningPlayerToken));
+        }
+        
+        this.board.switchPlayer();
+
+        
+    }
+
 
 }

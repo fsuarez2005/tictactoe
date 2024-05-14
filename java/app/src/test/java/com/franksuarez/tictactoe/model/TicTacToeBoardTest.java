@@ -51,24 +51,6 @@ public class TicTacToeBoardTest {
 
 
 
-    /**
-     * Test of checkLocationForWinner method, of class TicTacToeBoard.
-     */
-    @Test
-    public void testCheckLocationForWinner() {
-        System.out.println("checkLocationForWinner");
-        int a = 0;
-        int b = 0;
-        int c = 0;
-        char player = ' ';
-        TicTacToeBoard instance = new TicTacToeBoard();
-        boolean expResult = false;
-        boolean result = instance.checkLocationForWinner(a, b, c, player);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
 
 
     /**

@@ -134,6 +134,14 @@ public class GameBoard<T> {
         return this;
     }
 
+    public T getToken(Coordinates<Integer> coords) {
+        return getToken(coords.getX(), coords.getY());
+    }
+    
+    public GameBoard<T> setToken(Coordinates<Integer> coords,T token) {
+        return setToken(coords.getX(), coords.getY(), token);
+    }
+    
     /**
      *
      * @param x
@@ -166,9 +174,6 @@ public class GameBoard<T> {
     }
     
     
-    
-    
-    // TODO: setCell(Coordinates)
     public GameBoard<T> setCell(Coordinates<Integer> coords, Cell<T> c) {
         int key = calculateKey(coords.getX(), coords.getY());
         this.cells.put(key, c);

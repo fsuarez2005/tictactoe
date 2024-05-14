@@ -85,8 +85,6 @@ public class Coordinates<T extends Number> {
         // fixes issue with unchecked cast
         Coordinates coord = this.getClass().cast(o);
 
-        // TODO: unchecked cast
-        //Coordinates<T> coord = (Coordinates<T>) o;
         return Objects.equals(x, coord.x)
                 && Objects.equals(y, coord.y);
     }

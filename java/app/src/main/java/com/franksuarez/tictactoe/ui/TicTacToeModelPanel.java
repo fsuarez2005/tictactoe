@@ -32,7 +32,8 @@ public class TicTacToeModelPanel extends Panel implements ActionListener{
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 Button b = new Button(String.format("(%d,%d)",x,y));
-                b.setActionCommand("button");
+                String btnActionCommand = String.format("button(%d,%d)",x,y);
+                b.setActionCommand(btnActionCommand);
                 b.addActionListener(this);
                 
                 this.buttons.put(PairingFunction.szudzikPairingFunction(x, y), b);
@@ -74,7 +75,62 @@ public class TicTacToeModelPanel extends Panel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String actionCommand = e.getActionCommand();
+        
+        int x = 0;
+        int y = 0;
+        
+        // determine button pressed
+        switch (actionCommand) {
+            case "button(0,0)" -> {
+                System.out.println("Button 0,0 pressed.");
+                x = 0;
+                y = 0;
+            }
+            default -> {
+                System.out.println("Unknown action command.");
+            }
+        }
+        
+        
+        // get current player
+        char currentPlayerToken = this.board.getCurrentPlayerToken();
+        
+        // this panel only consists of Buttons so this should be okay
+        Button btn = (Button) e.getSource();
+        btn.setLabel(String.valueOf(currentPlayerToken));
+        btn.setEnabled(false);
+        
+        
+        // check for winner
+        
+        
+        /*
+        this.board.checkForWinner();
+        if (this.board.isThereAWinner()) {
+            char winningPlayerNumber = this.board.getWinningPlayerNumber();
+            
+            char winningPlayerToken = this.board.getPlayerToken(winningPlayerNumber);
+            // update status information about winner
+        
+            status.setText(String.format("Player %c has won!",winningPlayerToken));
+        
+        
+        }
+        
+        
+        
+        
+        
+        */
+        
+        
+        
+        this.board.switchPlayer();
+        
+        
+        
+        
     }
 
 

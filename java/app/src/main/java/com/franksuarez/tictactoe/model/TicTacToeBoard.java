@@ -16,12 +16,32 @@ import java.util.logging.Logger;
  * @author franksuarez
  */
 public class TicTacToeBoard extends GameBoard<Character> {
-    private char player1 = 'x';
-    private char player2 = 'o';
+    private char player1Token = 'x';
+    private char player2Token = 'o';
+    
+    private boolean winnerExists = false;
+    private int winningPlayerNumber = 0;
+    
+    
+    // TODO: have player tokens rely on the current player number
+    private char[] playerTokens = new char[] {
+        'x',
+        'o'
+    };
+    
     private int fontSize = 72;
-    private char currentPlayer = player1;
+    private int currentPlayer = 1;
+    private char currentPlayerToken = player1Token;
 
-    private List<WinningMove> winners = new ArrayList<>();
+    private List<WinningMove> winningMoves = new ArrayList<>();
+
+    public int getCurrentPlayer() {
+        return this.currentPlayer;        
+    }
+    
+    public char getCurrentPlayerToken() {
+        return this.currentPlayerToken;
+    }
     
     class WinningMove {
         public Coordinates<Integer> xy1;
@@ -45,10 +65,11 @@ public class TicTacToeBoard extends GameBoard<Character> {
                     xy3.getY()
             );
         }
-        
-        
     }
 
+    /**
+     *
+     */
     public int[][][] winnerData = new int[][][]{
         {{0,0},{0,0},{0,0}},
         {{1,0},{1,1},{1,2}},
@@ -62,7 +83,10 @@ public class TicTacToeBoard extends GameBoard<Character> {
         {{2,0},{1,1},{0,2}}
     };
     
-    
+    /**
+     *
+     * @param winnerArray
+     */
     public void importWinnerArray(int[][][] winnerArray) {
         // winnerArray is an array of triple of coordinate pairs
         
@@ -80,7 +104,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
                         new Coordinates<Integer>(triple[2][0],triple[2][1])
                 );
                 
-                this.winners.add(move);
+                this.winningMoves.add(move);
                 
             } catch (InvalidCoordinateValue ex) {
                 Logger.getLogger(TicTacToeBoard.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,34 +112,6 @@ public class TicTacToeBoard extends GameBoard<Character> {
         }
     }
     
-    
-    public void initializeWinningMoves() {
-        this.winners = new ArrayList<>();
-        
-        try {
-            this.winners.add(new WinningMove(new Coordinates<>(0,0),new Coordinates<>(0,1),new Coordinates<>(0,2)));
-            
-        } catch (InvalidCoordinateValue ex) {
-            Logger.getLogger(TicTacToeBoard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    /**
-     * Gets first char of String else returns elseChar.
-     *
-     * Utility function
-     * @param src
-     * @param elseChar
-     * @return
-     */
-    private char getFirstOrElse(String src, char elseChar) {
-        if (src.length() > 0) {
-            return src.charAt(0);
-        } else {
-            return elseChar;
-        }
-    }
 
     /** TODO: checkLocationForWinner stub
      * Checks each cell to see if they have matching player indicators.
@@ -134,18 +130,14 @@ public class TicTacToeBoard extends GameBoard<Character> {
         return false;
 
     }
-
     
-    /** Checks the board to see if WinningMove is exists
-     * 
-     * @param w
-     * @return 
+    /**
+     *
+     * @return
      */
-    public boolean doesWinningMoveExist(WinningMove w) {
-        throw new UnsupportedOperationException();
-        //return false;
+    public boolean isThereAWinner() {
+        return false;
     }
-    
     
     /** TODO: rewrite with winner List
      * Check for cell combinations to determine winner.
@@ -155,8 +147,10 @@ public class TicTacToeBoard extends GameBoard<Character> {
     public char checkForWinner() {
         char winner = ' ';
 
-        
-        
+        // loop through winners
+        for (WinningMove wm: winningMoves) {
+            
+        }
         
         /*for (int[] i : winnerArray) {
             boolean player1won = checkLocationForWinner(i[0], i[1], i[2], player1);
@@ -174,22 +168,22 @@ public class TicTacToeBoard extends GameBoard<Character> {
 
     }
 
-    /**
-     * Switches between player 1 and player 2
-     *
+    /** Switches between player 1 and player 2.
      */
     public void switchPlayer() {
-        if (currentPlayer == player1) {
-            currentPlayer = player2;
+        if (currentPlayer == 1) {
+            currentPlayer = 2;
+            currentPlayerToken = player2Token;
         } else {
-            currentPlayer = player1;
+            currentPlayer = 1;
+            currentPlayerToken = player1Token;
         }
-
     }
 
 
     public TicTacToeBoard() {
-        super(3,3);
+        super.setHeight(3);
+        super.setWidth(3);
     }
 
    

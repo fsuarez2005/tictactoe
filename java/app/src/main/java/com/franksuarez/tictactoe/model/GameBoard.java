@@ -28,13 +28,12 @@ import java.util.function.BiFunction;
  * @param <T> Game token type
  */
 public class GameBoard<T> {
-
-    private int height;     // Y-axis
-    private int width;      // X-axis
+    private int height = 0;     // Y-axis
+    private int width = 0;      // X-axis
 
     private Map<Integer, Cell<T>> cells; // maps Hopcroft Ullman Pairing value to Cell
 
-    private BiFunction<Integer, Integer, Integer> pairingFunction; // need to experiment with other pairing functions
+    private BiFunction<Integer, Integer, Integer> pairingFunction = (t, u) -> PairingFunction.szudzikPairingFunction(t, u); // need to experiment with other pairing functions
 
     public GameBoard(int height, int width) {
         this();
@@ -42,9 +41,7 @@ public class GameBoard<T> {
         this.width = width;
     }
 
-    public GameBoard() {
-        this.pairingFunction = (t, u) -> PairingFunction.szudzikPairingFunction(t, u);
-    }
+    public GameBoard() {}
 
     public final int getHeight() {
         return height;
@@ -88,7 +85,7 @@ public class GameBoard<T> {
      *
      * @param defaultValue
      */
-    public final void initialize(T defaultValue) {
+    public void initialize(T defaultValue) {
         System.out.println("initialize()");
         this.cells = new HashMap<>();
 
@@ -124,7 +121,7 @@ public class GameBoard<T> {
         return token;
     }
 
-    public final void setToken(int x, int y, T token) throws NullPointerException {
+    public final GameBoard<T> setToken(int x, int y, T token) throws NullPointerException {
         int key = calculateKey(x, y);
 
         var currentCell = this.cells.get(key);
@@ -134,6 +131,7 @@ public class GameBoard<T> {
         }
 
         currentCell.setToken(token);
+        return this;
     }
 
     /**
@@ -142,7 +140,7 @@ public class GameBoard<T> {
      * @param y
      * @return
      */
-    public final Cell<T> getCell(int x, int y) {
+    public Cell<T> getCell(int x, int y) {
         int key = calculateKey(x, y);
         return this.cells.get(key);
     }
@@ -152,7 +150,6 @@ public class GameBoard<T> {
         int key = calculateKey(coords.getX(), coords.getY());
 
         return this.cells.get(key);
-
     }
 
     /**
@@ -160,20 +157,34 @@ public class GameBoard<T> {
      * @param x
      * @param y
      * @param c
+     * @return 
      */
-    public final void setCell(int x, int y, Cell<T> c) {
+    public GameBoard<T> setCell(int x, int y, Cell<T> c) {
         int key = calculateKey(x, y);
         this.cells.put(key, c);
+        return this;
     }
     
     
+    
+    
     // TODO: setCell(Coordinates)
-
+    public GameBoard<T> setCell(Coordinates<Integer> coords, Cell<T> c) {
+        int key = calculateKey(coords.getX(), coords.getY());
+        this.cells.put(key, c);
+        return this;
+    }
+    
+    
+    
+    
+    
+    
     /**
      *
      * @param <U>
      */
-    public final class Cell<U> {
+    public class Cell<U> {
 
         private U token;
 

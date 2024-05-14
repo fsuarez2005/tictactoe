@@ -49,17 +49,7 @@ public class TicTacToeBoardTest {
         
     }
 
-    /**
-     * Test of initializeWinningMoves method, of class TicTacToeBoard.
-     */
-    @Test
-    public void testInitializeWinningMoves() {
-        System.out.println("initializeWinningMoves");
-        TicTacToeBoard instance = new TicTacToeBoard();
-        instance.initializeWinningMoves();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
 
     /**
      * Test of checkLocationForWinner method, of class TicTacToeBoard.
@@ -79,20 +69,7 @@ public class TicTacToeBoardTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of doesWinningMoveExist method, of class TicTacToeBoard.
-     */
-    @Test
-    public void testDoesWinningMoveExist() {
-        System.out.println("doesWinningMoveExist");
-        TicTacToeBoard.WinningMove w = null;
-        TicTacToeBoard instance = new TicTacToeBoard();
-        boolean expResult = false;
-        boolean result = instance.doesWinningMoveExist(w);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
 
     /**
      * Test of checkForWinner method, of class TicTacToeBoard.

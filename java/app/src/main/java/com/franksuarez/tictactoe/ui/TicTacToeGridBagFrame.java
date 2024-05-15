@@ -192,7 +192,7 @@ public class TicTacToeGridBagFrame extends Frame implements WindowListener, Comp
 
         switch (actionCommand) {
             case "reset" -> {
-                this.tttPanel.resetGame();
+                this.tttPanel.reset();
                 this.statusLabel.setText(defaultStatusText);
 
             }

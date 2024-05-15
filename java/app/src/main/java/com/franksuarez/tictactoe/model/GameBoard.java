@@ -32,18 +32,32 @@ import java.util.function.BiFunction;
 public class GameBoard<T> {
     private int height = 0;     // Y-axis
     private int width = 0;      // X-axis
+    private T defaultValue;
 
+    
+    
+    
     private Map<Integer, Cell<T>> cells; // maps Hopcroft Ullman Pairing value to Cell
 
     private BiFunction<Integer, Integer, Integer> pairingFunction = (t, u) -> PairingFunction.szudzikPairingFunction(t, u); // need to experiment with other pairing functions
 
-    public GameBoard(int height, int width) {
+    
+    
+    public GameBoard(int height, int width, T defaultValue) {
         this();
         this.height = height;
         this.width = width;
+        this.defaultValue = defaultValue;
+        
     }
 
     public GameBoard() {}
+    public T getDefaultValue() {
+        return defaultValue;
+    }
+    public void setDefaultValue(T defaultValue) {
+        this.defaultValue = defaultValue;
+    }
 
     public final int getHeight() {
         return height;
@@ -85,9 +99,8 @@ public class GameBoard<T> {
      *
      *
      *
-     * @param defaultValue
      */
-    public void initialize(T defaultValue) {
+    public void initialize() {
         System.out.println("initialize()");
         this.cells = new HashMap<>();
 
@@ -101,6 +114,17 @@ public class GameBoard<T> {
                 this.cells.put(key, new Cell<T>(defaultValue));
             }
         }
+    }
+    
+    public void reset() {
+        resetCells();
+    }
+    
+    
+    public void resetCells() {
+        this.cells.forEach((i,c) -> {
+            c.setToken(defaultValue);
+        });
     }
 
     /**

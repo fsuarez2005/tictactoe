@@ -6,8 +6,10 @@ package com.franksuarez.tictactoe.ui;
 import com.franksuarez.tictactoe.misc.PairingFunction;
 import com.franksuarez.tictactoe.model.TicTacToeBoard;
 import java.awt.Button;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -23,70 +25,79 @@ import java.util.regex.Pattern;
  */
 public class TicTacToePanel extends Panel implements ActionListener{
     public Label statusLabelRef;
-    
-    
+    private final String defaultButtonText = "";
+    private final Font buttonFont = new Font(Font.SANS_SERIF,Font.PLAIN,32);
     
     private TicTacToeBoard board = new TicTacToeBoard();
+    
+    private Map<String,Button> buttonNameMap = new HashMap<>();
+    
+    
     
     private Map<Integer,Button> buttons = new HashMap<>();
 
     public void configure() {
-        setLayout(new GridLayout(3, 3));
+        setLayout(new GridBagLayout());
+        
+        
+        //setLayout(new GridLayout(3, 3));
     }
     
     // TODO: create identifier for each button so we can refer to it
     public void createButtons() {
+        GridBagConstraints gbc = new GridBagConstraints();
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-                String defaultButtonText = "";
-                Button b = new Button(defaultButtonText);
-                b.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,32));
+                // create and configure button
+                Button b = new Button();
+                b.setLabel(defaultButtonText);
+                b.setFont(buttonFont);
+                Dimension btnSize = new Dimension(100,100);
+                b.setMinimumSize(btnSize);
+                b.setPreferredSize(btnSize);
                 
-                String btnActionCommand = String.format("button(%d,%d)",x,y);
-                b.setActionCommand(btnActionCommand);
+                String btnIdentifier = String.format("button(%d,%d)",x,y);
+                b.setName(btnIdentifier);
+                b.setActionCommand(btnIdentifier);
                 b.addActionListener(this);
                 
+                this.buttonNameMap.put(btnIdentifier, b);
                 this.buttons.put(PairingFunction.szudzikPairingFunction(x, y), b);
+                gbc.gridx = x;
+                gbc.gridy = y;
+                gbc.fill = GridBagConstraints.BOTH;
+                this.add(b, gbc);
             }
         }
     }
 
-    private void populate() {
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(0,2)));
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(1,2)));
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(2,2)));
-
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(0,1)));
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(1,1)));
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(2,1)));
-        
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(0,0)));
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(1,0)));
-        this.add(this.buttons.get(PairingFunction.szudzikPairingFunction(2,0)));
-    }
-
-    
-
     public void initialize() {
-        this.board.initialize(' ');
+        this.board.initialize();
         configure();
         createButtons();
-        populate();
     }
     
     // TODO: BROKEN verify game is fully reset
-    public void resetGame() {
-        this.board.initialize(' ');
+    public void reset() {
+        this.board.reset();
+        //this.board.initialize();
+        
+        for (Button b: this.buttonNameMap.values()) {
+            b.setLabel(defaultButtonText);
+            b.setEnabled(true);
+        }
+        
+        
         
         // clear buttons
         // enable buttons
-        for (Integer key: this.buttons.keySet()) {
-            Button b = this.buttons.get(key);
-
-            b.setLabel("");
-            b.setEnabled(true);
-            
-        }
+//        for (Integer key: this.buttons.keySet()) {
+//            Button b = this.buttons.get(key);
+//
+//            b.setLabel("");
+//            b.setEnabled(true);
+//            
+//        }
         
         
     }
@@ -133,7 +144,7 @@ public class TicTacToePanel extends Panel implements ActionListener{
         
         // check for winner
         this.board.checkForWinner();
-        if (this.board.isThereAWinner()) {
+        if (this.board.getWinnerExists()) {
             System.out.println("Winner found!");
             int winningPlayer = this.board.getWinningPlayer();
             

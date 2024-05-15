@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * @author franksuarez
  */
 public class TicTacToeBoard extends GameBoard<Character> {
+
     private int noPlayer = 0;
     private int player1 = 1;
     private int player2 = 2;
@@ -24,10 +25,11 @@ public class TicTacToeBoard extends GameBoard<Character> {
     private char player2Token = 'o';
     private char noPlayerToken = ' ';
     private boolean winnerExists = false;
-    private int winningPlayer = 0;
-    private int currentPlayer = 1;
+    private int winningPlayer = noPlayer;
+    private int currentPlayer = player1;
     //private char currentPlayerToken = player1Token;
-    private List<WinningMove> winningMoves = new ArrayList<>();
+
+    private final List<WinningMove> winningMoves = new ArrayList<>();
 
     /**
      * Coordinates of winning moves.
@@ -48,14 +50,33 @@ public class TicTacToeBoard extends GameBoard<Character> {
         {{0, 0}, {1, 1}, {2, 2}},
         {{2, 0}, {1, 1}, {0, 2}}
     };
-    
+
     public TicTacToeBoard() {
         super.setHeight(3);
         super.setWidth(3);
-        
+        super.setDefaultValue(' ');
         importWinnerArray(winnerData);
     }
 
+    @Override
+    public void initialize() {
+        super.initialize();
+        
+        // should only need initialization at beginning
+        // these should be correct already
+//        this.winnerExists = false;
+//        this.winningPlayer = noPlayer;
+//        this.currentPlayer = player1;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.winnerExists = false;
+        this.winningPlayer = noPlayer;
+        this.currentPlayer = player1;
+    }
+    
     /**
      *
      * @return
@@ -107,34 +128,33 @@ public class TicTacToeBoard extends GameBoard<Character> {
     }
 
     public void setWinningPlayer(int player) {
-        // TODO: guard clause
+        if (player != noPlayer && player != player1 && player != player2) {
+            throw new IllegalArgumentException();
+        }
 
         this.winningPlayer = player;
     }
 
     /**
      * TODO: remove hard-coded values for players
+     *
      * @param player
      * @return
      */
     public char getPlayerToken(int player) {
         char output = noPlayerToken;
 
-        switch (player) {
-            case 0 -> {
-                output = noPlayerToken;
-            }
-            case 1 -> {
-                output = player1Token;
-            }
-            case 2 -> {
-                output = player2Token;
-            }
-            default -> {
-                output = noPlayerToken;
-            }
+        if (player == noPlayer) {
+            output = noPlayerToken;
+        } else if (player == player1) {
+            output = player1Token;
+        } else if (player == player2) {
+            output = player2Token;
+        } else {
+            output = noPlayerToken;
+            throw new IllegalArgumentException();
         }
-        
+
         return output;
     }
 
@@ -174,7 +194,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
      * @param player
      * @return
      */
-    public boolean checkLocationForWinner(WinningMove move, int player) {
+    private boolean checkLocationForWinner(WinningMove move, int player) {
         // check each Coordinate of WinningMove for player
         // if all three cells == player, then winner
         // cell1 == player && cell2 == player && cell3 == player
@@ -191,31 +211,35 @@ public class TicTacToeBoard extends GameBoard<Character> {
      *
      * @return
      */
-    public boolean isThereAWinner() {
+    public boolean getWinnerExists() {
         return this.winnerExists;
+    }
+
+    public void setWinnerExists(boolean winnerExists) {
+        this.winnerExists = winnerExists;
     }
 
     /**
      * TODO: rewrite with winner List Check for cell combinations to determine
      * winner.
      *
-     * @return
      */
     public void checkForWinner() {
         // iterate through each player
         for (int p : new int[]{1, 2}) {
-            System.out.printf("Winner checking for player %d%n",p);
+            System.out.printf("Winner checking for player %d%n", p);
             // loop through winners
             for (WinningMove wm : winningMoves) {
-                System.out.printf("Checking move %s%n",wm.toString());
-                
-                
+                System.out.printf("Checking move %s%n", wm.toString());
+
                 boolean foundWinner = checkLocationForWinner(wm, p);
                 if (foundWinner) {
-                    this.winnerExists = true;
-                    this.winningPlayer = p;
-                    
-                    System.out.printf("Winning Move for player %d: %s%n",p,wm.toString());
+
+                    setWinnerExists(true);
+
+                    setWinningPlayer(p);
+
+                    System.out.printf("Winning Move for player %d: %s%n", p, wm.toString());
                     return;
                 }
             }
@@ -236,11 +260,9 @@ public class TicTacToeBoard extends GameBoard<Character> {
     public void makeMove(int x, int y) {
         //check Cell for move
         char existingMove = this.getToken(x, y);
-        
-        
-        
+
         if (existingMove == getPlayerToken(noPlayer)) {
-            System.out.printf("Player %d moved at (%d,%d)%n",getCurrentPlayer(),x,y);
+            System.out.printf("Player %d moved at (%d,%d)%n", getCurrentPlayer(), x, y);
             this.setToken(x, y, this.getCurrentPlayerToken());
 
         } else {
@@ -257,16 +279,15 @@ public class TicTacToeBoard extends GameBoard<Character> {
                 "%c | %c | %c%n"
                 + "%c | %c | %c%n"
                 + "%c | %c | %c%n",
-                
                 getToken(0, 2),
-                getToken(1,2),
-                getToken(2,2),
-                getToken(0,1),
-                getToken(1,1),
-                getToken(2,1),
-                getToken(0,0),
-                getToken(1,0),
-                getToken(2,0));
+                getToken(1, 2),
+                getToken(2, 2),
+                getToken(0, 1),
+                getToken(1, 1),
+                getToken(2, 1),
+                getToken(0, 0),
+                getToken(1, 0),
+                getToken(2, 0));
     }
 
     class WinningMove {

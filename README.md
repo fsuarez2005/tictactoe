@@ -1,13 +1,14 @@
 # Tic-Tac-Toe
 Tic-Tac-Toe in various programming languages.
 
-## Sub-Projects
+### Java
 
-* [Java](java/README.md)
+* [Readme](java/README.md)
+
+This project was built using NetBeans and Gradle. 
 
 ## Screenshots
 
-![Java AWT Version](java/doc/images/tictactoe-java-2.png)
-<img src="java/doc/images/tictactoe-java-2.png" width="100"/>
+<img src="java/doc/images/tictactoe-java-2.png" width="300"/>
 
 

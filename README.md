@@ -8,6 +8,6 @@ Tic-Tac-Toe in various programming languages.
 ## Screenshots
 
 ![Java AWT Version](java/doc/images/tictactoe-java-2.png)
-
+<img src="java/doc/images/tictactoe-java-2.png" width="100"/>
 
 

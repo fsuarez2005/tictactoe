@@ -7,7 +7,7 @@ Tic-Tac-Toe in various programming languages.
 
 ## Screenshots
 
-![Java AWT Version](java/doc/tictactoe-java-1.png)
+![Java AWT Version](java/doc/images/tictactoe-java-2.png)
 
 
 

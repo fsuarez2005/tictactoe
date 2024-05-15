@@ -74,6 +74,22 @@ public class TicTacToePanel extends Panel implements ActionListener{
         populate();
     }
     
+    // TODO: BROKEN verify game is fully reset
+    public void resetGame() {
+        this.board.initialize(' ');
+        
+        // clear buttons
+        // enable buttons
+        for (Integer key: this.buttons.keySet()) {
+            Button b = this.buttons.get(key);
+
+            b.setLabel("");
+            b.setEnabled(true);
+            
+        }
+        
+        
+    }
     
     
     public TicTacToePanel() {
@@ -144,5 +160,10 @@ public class TicTacToePanel extends Panel implements ActionListener{
         
     }
 
+    
+    @Override
+    public String toString() {
+        return this.board.toString();
+    }
 
 }

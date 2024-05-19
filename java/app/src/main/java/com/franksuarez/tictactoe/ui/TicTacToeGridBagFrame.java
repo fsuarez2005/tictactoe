@@ -39,7 +39,6 @@ public class TicTacToeGridBagFrame extends Frame implements WindowListener, Comp
         addComponentListener(this);
         setLayout(new FlowLayout());
         setLayout(new GridBagLayout());
-
     }
 
     public void createComponents() {
@@ -93,7 +92,6 @@ public class TicTacToeGridBagFrame extends Frame implements WindowListener, Comp
         statusPanel.setMinimumSize(new Dimension(200, 100));
         statusPanel.setPreferredSize(new Dimension(200, 100));
         add(statusPanel);
-        ComponentInfo.generalInfo(statusPanel);
         tttPanel = new TicTacToePanel();
 
         Dimension tttSize = new Dimension(300, 300);
@@ -124,15 +122,14 @@ public class TicTacToeGridBagFrame extends Frame implements WindowListener, Comp
 
     @Override
     public void windowOpened(WindowEvent e) {
-        System.out.println("windowOpened");
-        //System.out.println("WindowEvent");
-        ComponentInfo.generalInfo(this);
-
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
         System.out.println("windowClosing");
+        dispose();
+        System.exit(0);
+        
     }
 
     @Override

@@ -39,7 +39,6 @@ public class TicTacToeGridBagFrame extends Frame implements WindowListener, Comp
         addComponentListener(this);
         setLayout(new FlowLayout());
         setLayout(new GridBagLayout());
-
     }
 
     public void createComponents() {
@@ -133,6 +132,9 @@ public class TicTacToeGridBagFrame extends Frame implements WindowListener, Comp
     @Override
     public void windowClosing(WindowEvent e) {
         System.out.println("windowClosing");
+        dispose();
+        System.exit(0);
+        
     }
 
     @Override

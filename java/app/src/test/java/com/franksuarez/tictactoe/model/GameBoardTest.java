@@ -38,8 +38,8 @@ public class GameBoardTest {
     
     @Test
     public void testSetToken() {
-        GameBoard<Character> g = new GameBoard<>(3,3);
-        g.initialize(' ');
+        GameBoard<Character> g = new GameBoard<Character>(3,3,' ');
+        g.initialize();
         g.setToken(0, 0, 'x').setToken(1, 1,'o');
        
         System.out.printf("0,0: %c%n",g.getToken(0, 0));

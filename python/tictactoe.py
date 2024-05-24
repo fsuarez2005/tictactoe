@@ -1,6 +1,9 @@
 #!/usr/bin/env python3.11
 
 
+
+
+
 # uses tkinter 3.11 from homebrew
 
 from tkinter import *
@@ -13,6 +16,10 @@ class TicTacToeBoard:
     # cells
     # winningMoves
     
+    
+    class WinningMove:
+        pass
+    
     def initializeWinningMoves(self):
         
         # list of tuples of winning moves
@@ -20,11 +27,43 @@ class TicTacToeBoard:
             (0,0,0),
         ]
         
-    # STUB
+        
+    # TODO:
+    def reset(self):
+        raise Exception("unimplemented")
+        pass
+        
+    # TODO:
     def checkForWinner(self):
+        raise Exception("unimplemented")
         for move in self.winningMoves:
             print(move)
-         
+    
+    # TODO:
+    def checkLocationForWinner(self,locationTuple,player):
+        raise Exception("unimplemented")
+        pass
+    
+    # TODO:
+    def switchPlayer(self):
+        if (self.currentPlayer == self.player1):
+            self.currentPlayer = self.player2
+        else:
+            self.currentPlayer = self.player1
+        
+        
+    # TODO:
+    def getCurrentPlayer(self):
+        return self.currentPlayer
+    
+    # TODO:
+    def setCurrentPlayer(self,currentPlayer):
+        self.currentPlayer = currentPlayer
+        
+    # TODO:
+    def makeMove(self,location):
+        raise Exception("unimplemented")
+        pass
     
     def __init__(self):
         self.player1 = 'X'
@@ -47,7 +86,7 @@ class TicTacToeBoard:
 class TicTacToeApp:
     def __init__(self):
         self.tttBoard = TicTacToeBoard()
-        
+        self.statusLabel = None
         
         
         self.cells = {}
@@ -56,8 +95,8 @@ class TicTacToeApp:
 
     def buttonAction(self,btn,x,y):
         "Called when button is pressed."
-        btn['text'] = 'O'
-        
+        btn['text'] = self.tttBoard.getCurrentPlayer()
+        self.tttBoard.switchPlayer()
         
     
     
@@ -99,15 +138,19 @@ class TicTacToeApp:
         frm.grid()
         
         
-        statusLabel = Label(frm,text="hi")
-        statusLabel.grid(column=0,row=0)
+        self.statusLabel = Label(frm,text="")
+        self.statusLabel.grid(column=0,row=0)
         
         tttfrm = self.createTicTacToeFrame(frm)
         tttfrm.grid(column=0,row=1)
         
+        
+        self.setStatus("Let's go!")
+        
         self.rootWindow.mainloop()
 
-
+    def setStatus(self,s):
+        self.statusLabel['text'] = s
         
         
     def start(self):
@@ -120,6 +163,7 @@ def main():
     tttApp.start()
 
 if (__name__ == '__main__'):
+    pass
     main()
 
 

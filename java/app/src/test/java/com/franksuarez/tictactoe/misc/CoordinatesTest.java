@@ -5,15 +5,12 @@
 package com.franksuarez.tictactoe.misc;
 
 import com.franksuarez.tictactoe.exceptions.InvalidCoordinateValue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -40,14 +37,6 @@ public class CoordinatesTest {
     public void tearDown() {
     }
 
-    @Test
-    public void testConstructor1() {
-
-        
-        
-    }
-    
-    
     /**
      * Test of getY method, of class Coordinates.
      */
@@ -95,12 +84,15 @@ public class CoordinatesTest {
      * Test of setX method, of class Coordinates.
      */
     @Test
-    public void testSetX() throws InvalidCoordinateValue {
-        Coordinates<Integer> c;
-        c = new Coordinates<Integer>();
-        c.setX(1);
-        
-        
+    public void testSetX() throws Exception {
+        System.out.println("setX");
+        Number x = null;
+        Coordinates instance = new Coordinates();
+        Coordinates expResult = null;
+        Coordinates result = instance.setX(x);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -119,45 +111,47 @@ public class CoordinatesTest {
     }
 
     /**
-     * Test of hashCode method, of class Coordinates.
+     * Test of szudzikPairingFunction method, of class Coordinates.
      */
     @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
+    public void testSzudzikPairingFunction() {
+        System.out.println("szudzikPairingFunction");
         Coordinates instance = new Coordinates();
         int expResult = 0;
-        int result = instance.hashCode();
+        int result = instance.szudzikPairingFunction();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of szudzikPairingFunction method, of class Coordinates.
+     * Test of toString method, of class Coordinates.
      */
     @Test
-    public void testSzudzikPairingFunction() {
-        double sourceX = 3.0;
-        double sourceY = 2.0;
-        int expected = 14;
-        int results = -1;
+    public void testToString() {
+        System.out.println("toString");
+        Coordinates instance = new Coordinates();
+        String expResult = "";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+    
+    
+    @Test
+    public void testHashCode() throws InvalidCoordinateValue {
+        System.out.println("hashCode");
+        Coordinates c1 = new Coordinates<>(1,1);
+        Coordinates c2 = new Coordinates<>(1,1);
         
-        try {
-            Coordinates c = new Coordinates<Double>(sourceX,sourceY);
-            
-            results = c.szudzikPairingFunction();
-            
-            
-            
-        } catch (InvalidCoordinateValue ex) {
-            Logger.getLogger(CoordinatesTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.out.printf("c1.hashCode() = %d%n",c1.hashCode());
+        System.out.printf("c2.hashCode() = %d%n",c2.hashCode());
+        System.out.printf("%s%n", String.valueOf(c1.equals(c2)));
         
-        assertEquals(expected, results);
         
         
         
     }
-
     
 }

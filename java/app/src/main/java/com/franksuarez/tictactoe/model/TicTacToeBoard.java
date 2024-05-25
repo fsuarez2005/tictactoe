@@ -1,6 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * 
+ * 
+ * 
+ * 
  */
 package com.franksuarez.tictactoe.model;
 
@@ -17,12 +19,21 @@ import java.util.logging.Logger;
  */
 public class TicTacToeBoard extends GameBoard<Character> {
 
+    public enum Player {
+        NOPLAYER,
+        PLAYER1,
+        PLAYER2
+        
+    }
+    
+    
+    
     private int noPlayer = 0;
     private int player1 = 1;
     private int player2 = 2;
 
-    private char player1Token = 'x';
-    private char player2Token = 'o';
+    private char player1Token = 'X';
+    private char player2Token = 'O';
     private char noPlayerToken = ' ';
     private boolean winnerExists = false;
     private int winningPlayer = noPlayer;

@@ -26,9 +26,7 @@ public class Coordinates<T extends Number> {
     // returns true if valid value for coordinate
     private Predicate<T> yGuard = (T y) -> true;
 
-    public Coordinates() {
-        
-    }
+    public Coordinates() {}
 
     public Coordinates(T x, T y) throws InvalidCoordinateValue {
         this();
@@ -93,13 +91,14 @@ public class Coordinates<T extends Number> {
     }
 
     // TODO: verify Coordinates.hashCode works
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.x);
-        hash = 83 * hash + Objects.hashCode(this.y);
-        return hash;
-    }
+//    @Override
+//    public int hashCode() {
+//        int hash = 3;
+//        hash = 83 * hash + Objects.hashCode(this.x);
+//        hash = 83 * hash + Objects.hashCode(this.y);
+//        return hash;
+//    }
+    
     
     /** Calculating the Szudzik Pairing Function number.
      * 

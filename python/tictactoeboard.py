@@ -4,6 +4,7 @@ __all__ = [
 ]
 
 
+# TODO: 
 winningMoves = [
     (0,0),(1,0),(2,0),
     (0,1),(1,1),(2,1),
@@ -17,21 +18,51 @@ winningMoves = [
     (0,2),(1,1),(2,0)
 ]
 
+#
+# X:
+# * horizontal
+# * increases toward the right
+#
+# Y:
+# * vertical
+# * increases toward the top
+# 
+
+
+
+
+
+
+
 class TicTacToeBoard:
     # PROPERTIES
     # currentPlayer
     # cells
     # winningMoves
 
+    
+
     def __init__(self):
+        self.noPlayer = ' '
         self.player1 = 'X'
         self.player2 = 'O'
         
+        self.winningMoves = [
+            ((0,0),(1,0),(2,0),),
+            ((0,1),(1,1),(2,1),),
+            ((0,2),(1,2),(2,2),),
+            
+            ((0,0),(0,1),(0,2),),
+            ((1,0),(1,1),(1,2),),
+            ((2,0),(2,1),(2,2),),
+            
+            ((0,0),(1,1),(2,2),),
+            ((0,2),(1,1),(2,0),)
+        ]
+        
         self.currentPlayer = self.player1
         self.cells = {}
-        
-        
-        self.winningMoves = []
+        self.winningPlayer = self.noPlayer
     
     @classmethod
     def isValidLocation(cls,location):
@@ -42,43 +73,20 @@ class TicTacToeBoard:
         return output
     
     
-    class WinningMove:
-        def __init__(self,cell1,cell2,cell3):
-            self.cell1 = cell1
-            self.cell2 = cell2
-            self.cell3 = cell3
-    
-    def initializeWinningMoves(self):
-        # list of tuples of winning moves
-        self.winningMoves = [
-            WinningMove(0,0,0),
-        ]
-    
-    # TODO: 
-    def addWinningMove(self,cell1,cell2,cell3):
-        # guard: validate cell locations
-        # 0 <= x <= 2
-        # 0 <= y <= 2
-        
-        # append WinningMove to self.winningMoves
-        
-        
-        raise Exception("unimplemented")
-    
-    # TODO:
     def reset(self):
-        raise Exception("unimplemented")
+        self.currentPlayer = self.player1
+        self.cells = {}
+        self.winningPlayer = self.noPlayer
         
     # TODO:
     def checkForWinner(self):
-        raise Exception("unimplemented")
+        #raise Exception("unimplemented")
         for move in self.winningMoves:
             print(move)
     
     # TODO:
     def checkLocationForWinner(self,locationTuple,player):
         raise Exception("unimplemented")
-        pass
     
     def switchPlayer(self):
         if (self.currentPlayer == self.player1):
@@ -96,18 +104,21 @@ class TicTacToeBoard:
         
         self.currentPlayer = currentPlayer
         
-    # TODO:
     def makeMove(self,location):
         # guard: validate location
         # guard: is location occupied
-
-
-
-        raise Exception("unimplemented")
-        pass
-    
-    
         
+        # set cell at location to current player
+        
+        self.setCell(location,self.getCurrentPlayer())
+    
+    def hasWinner(self):
+        "Returns boolean"
+        return (self.winningPlayer != self.noPlayer)
+    
+    def getWinningPlayer(self):
+        "Returns either player1 or player2"
+        return self.winningPlayer
     
     def setCell(self,location,player):
         """Sets cell to player.
@@ -118,4 +129,7 @@ class TicTacToeBoard:
         self.cells[location] = player
     
     def getCell(self,location):
+        # if location is not in cells, assume it is not occupied, noplayer
+        if (location not in self.cells):
+            return self.noPlayer
         return self.cells[location]

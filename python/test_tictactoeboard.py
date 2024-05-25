@@ -26,13 +26,9 @@ class TestTicTacToeBoard(unittest.TestCase):
             self.instance.setCurrentPlayer('1')
     
     def test_isValidLocation(self):
-        o = TicTacToeBoard.isValidLocation((1,2,2))
-        print(o)
-        
+        o = TicTacToeBoard.isValidLocation((1,2))
+        self.assertEqual(o,True)
     
-    @unittest.skip("")
-    def test_constructor(self):
-        print(self.instance.cells)
     
     # switchPlayer
     def test_switchPlayer(self):

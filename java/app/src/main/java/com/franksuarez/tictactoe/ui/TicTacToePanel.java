@@ -86,20 +86,6 @@ public class TicTacToePanel extends Panel implements ActionListener{
             b.setLabel(defaultButtonText);
             b.setEnabled(true);
         }
-        
-        
-        
-        // clear buttons
-        // enable buttons
-//        for (Integer key: this.buttons.keySet()) {
-//            Button b = this.buttons.get(key);
-//
-//            b.setLabel("");
-//            b.setEnabled(true);
-//            
-//        }
-        
-        
     }
     
     
@@ -123,8 +109,6 @@ public class TicTacToePanel extends Panel implements ActionListener{
             x = Integer.parseInt(m.group(1));
             y = Integer.parseInt(m.group(2));
         } else {
-            System.out.println("No Match!");
-            // throw exception about button
             return;
         }
         
@@ -139,13 +123,9 @@ public class TicTacToePanel extends Panel implements ActionListener{
         btn.setLabel(String.valueOf(currentPlayerToken));
         btn.setEnabled(false);
         
-        System.out.println(this.board.toString());
-        
-        
         // check for winner
         this.board.checkForWinner();
         if (this.board.getWinnerExists()) {
-            System.out.println("Winner found!");
             TicTacToeBoard.Player winningPlayer = this.board.getWinningPlayer();
             
             char winningPlayerToken = this.board.getPlayerToken(winningPlayer);

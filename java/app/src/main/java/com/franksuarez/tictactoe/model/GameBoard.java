@@ -163,9 +163,7 @@ public class GameBoard<T> {
         try {
             cell = this.cells.get(x).get(y);
         } catch (Exception ex) {
-            System.out.printf("Tried to access (%d,%d).%n", x, y);
-
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException(String.format("Tried to access (%d,%d).%n", x, y));
         }
 
         return cell;

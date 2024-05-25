@@ -244,10 +244,10 @@ public class TicTacToeBoard extends GameBoard<Character> {
     public void checkForWinner() {
         // iterate through each player
         for (Player p : new Player[]{Player.PLAYER1, Player.PLAYER2}) {
-            System.out.printf("Winner checking for player %s%n", p.name());
+            
             // loop through winners
             for (WinningMove wm : winningMoves) {
-                System.out.printf("Checking move %s%n", wm.toString());
+            
 
                 boolean foundWinner = checkLocationForWinner(wm, p);
                 if (foundWinner) {
@@ -256,7 +256,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
 
                     setWinningPlayer(p);
 
-                    System.out.printf("Winning Move for player %s: %s%n", p.name(), wm.toString());
+                    
                     return;
                 }
             }
@@ -279,14 +279,10 @@ public class TicTacToeBoard extends GameBoard<Character> {
         char existingMove = this.getToken(x, y);
 
         if (existingMove == getPlayerToken(noPlayer)) {
-            System.out.printf("Player %s moved at (%d,%d)%n", getCurrentPlayer().name(), x, y);
+            
             this.setToken(x, y, this.getCurrentPlayerToken());
 
-        } else {
-            System.out.println("Move exists.");
-            // move exists
-            // throw Exception
-        }
+        } 
 
     }
 

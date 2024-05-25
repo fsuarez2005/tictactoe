@@ -4,11 +4,15 @@
  */
 package com.franksuarez.tictactoe.model;
 
-import org.junit.jupiter.api.AfterAll;
+import com.franksuarez.tictactoe.misc.Coordinates;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import java.lang.Integer;
+
 
 /**
  *
@@ -36,15 +40,13 @@ public class GameBoardTest {
     }
 
     
-    @Test
-    public void testSetToken() {
-        GameBoard<Character> g = new GameBoard<Character>(3,3,' ');
-        g.initialize();
-        g.setToken(0, 0, 'x').setToken(1, 1,'o');
-       
-        System.out.printf("0,0: %c%n",g.getToken(0, 0));
-    }
     
-
+    @Test
+    public void testFactory() {
+        //var g = new GameBoard<Integer>.Factory().create();
+        
+        
+        
+    }
     
 }

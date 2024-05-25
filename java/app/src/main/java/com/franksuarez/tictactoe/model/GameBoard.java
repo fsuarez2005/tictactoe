@@ -10,10 +10,8 @@ package com.franksuarez.tictactoe.model;
 import com.franksuarez.tictactoe.misc.Coordinates;
 import com.franksuarez.tictactoe.misc.PairingFunction;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BiFunction;
 
 /**
@@ -27,6 +25,9 @@ import java.util.function.BiFunction;
  */
 public class GameBoard<T> {
 
+    
+    
+    
     private int height = 0;     // Y-axis
     private int width = 0;      // X-axis
     private T defaultValue;
@@ -45,11 +46,9 @@ public class GameBoard<T> {
         this.height = height;
         this.width = width;
         this.defaultValue = defaultValue;
-
     }
 
-    public GameBoard() {
-    }
+    public GameBoard() {}
 
     // DONE
     public T getDefaultValue() {
@@ -80,21 +79,6 @@ public class GameBoard<T> {
     public final void setWidth(int width) {
         this.width = width;
     }
-//
-//    // TODO: remove 
-//    public final BiFunction<Integer, Integer, Integer> getPairingFunction() {
-//        return pairingFunction;
-//    }
-//
-//    // TODO: remove
-//    public final void setPairingFunction(BiFunction<Integer, Integer, Integer> pairingFunction) {
-//        this.pairingFunction = pairingFunction;
-//    }
-//
-//    // TODO: remove
-//    public final int calculateKey(int x, int y) {
-//        return this.pairingFunction.apply(x, y);
-//    }
 
     // TODO: update
     public final void listCells() {
@@ -110,21 +94,6 @@ public class GameBoard<T> {
      *
      *
      */
-    // TODO: update
-//    public void initialize_old() {
-//        this.cells = new HashMap<>();
-//
-//        for (int h = 0; h < height; h++) {
-//            for (int w = 0; w < width; w++) {
-//                int key = calculateKey(h, w);
-//                if (this.cells.containsKey(key)) {
-//                    throw new RuntimeException("Duplicate key!!");
-//                }
-//
-//                this.cells.put(key, new Cell<T>(defaultValue));
-//            }
-//        }
-//    }
     // TODO: test
     public void initialize() {
         this.cellsList = new ArrayList<>();
@@ -160,25 +129,10 @@ public class GameBoard<T> {
      * @return
      */
     // TODO: remove
-//    public final T getToken(int x, int y) throws NullPointerException {
-//        int key = calculateKey(x, y);
-//
-//        var currentCell = this.cells.get(key);
-//        if (currentCell == null) {
-//            listCells();
-//            throw new NullPointerException();
-//        }
-//
-//        var token = currentCell.getToken();
-//
-//        return token;
-//    }
     public T getToken(int x, int y) {
         return this.getCell(x, y).getToken();
     }
-    
-    
-    
+
     /**
      *
      * @param x
@@ -188,21 +142,6 @@ public class GameBoard<T> {
      * @throws NullPointerException
      */
     // TODO: remove
-//    public final GameBoard<T> setToken(int x, int y, T token) throws NullPointerException {
-//        int key = calculateKey(x, y);
-//
-//        var currentCell = this.cells.get(key);
-//        if (currentCell == null) {
-//            listCells();
-//            throw new NullPointerException();
-//        }
-//
-//        currentCell.setToken(token);
-//        
-//        
-//        return this;
-//    }
-    
     public void setToken(int x, int y, T token) {
         var currentCell = this.getCell(x, y);
         if (currentCell == null) {
@@ -210,8 +149,6 @@ public class GameBoard<T> {
         }
         currentCell.setToken(token);
     }
-    
-    
 
     // DONE
     public T getToken(Coordinates<Integer> coords) {
@@ -230,17 +167,11 @@ public class GameBoard<T> {
      * @return
      */
     // TODO: update
-//    public Cell<T> getCell(int x, int y) {
-//        int key = calculateKey(x, y);
-//        return this.cells.get(key);
-//    }
-    
     public Cell<T> getCell(int x, int y) {
         // throw except if index out of bounds
-        
+
         return this.cellsList.get(x).get(y);
     }
-    
 
     /**
      *
@@ -248,17 +179,10 @@ public class GameBoard<T> {
      * @return
      */
     // TODO: remove
-//    public Cell<T> getCell(Coordinates<Integer> coords) {
-//        int key = calculateKey(coords.getX(), coords.getY());
-//
-//        return this.cells.get(key);
-//    }
-
     public Cell<T> getCell(Coordinates<Integer> coords) {
         return this.getCell(coords.getX(), coords.getY());
     }
-    
-    
+
     /**
      *
      * @param x
@@ -267,21 +191,13 @@ public class GameBoard<T> {
      * @return
      */
     // TODO: remove
-//    public GameBoard<T> setCell(int x, int y, Cell<T> c) {
-//        int key = calculateKey(x, y);
-//        this.cells.put(key, c);
-//        return this;
-//    }
-    
     // TODO: test
     public void setCell(int x, int y, Cell<T> c) {
         // guard 
-        
+
         this.cellsList.get(x).remove(y);
-        this.cellsList.get(x).add(y,c);
+        this.cellsList.get(x).add(y, c);
     }
-    
-    
 
     /**
      *
@@ -290,17 +206,10 @@ public class GameBoard<T> {
      * @return
      */
     // TODO: update
-//    public GameBoard<T> setCell(Coordinates<Integer> coords, Cell<T> c) {
-//        int key = calculateKey(coords.getX(), coords.getY());
-//        this.cells.put(key, c);
-//        return this;
-//    }
-
     public void setCell(Coordinates<Integer> coords, Cell<T> c) {
         this.setCell(coords.getX(), coords.getY(), c);
     }
-    
-    
+
     /**
      *
      * @param <U>

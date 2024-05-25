@@ -47,10 +47,9 @@ public class GameBoard<T> {
     private T defaultValue;
 
     // TODO: change key to Coordinate
-    private Map<Integer, Cell<T>> cells; // maps pairing value to Cell
-
+    //private Map<Integer, Cell<T>> cells; // maps pairing value to Cell
     // NEW
-    private List<List<Cell<T>>> cellsList;
+    private List<List<Cell<T>>> cells;
 
     // TODO: remove
     private BiFunction<Integer, Integer, Integer> pairingFunction = (t, u) -> PairingFunction.szudzikPairingFunction(t, u); // need to experiment with other pairing functions
@@ -89,14 +88,6 @@ public class GameBoard<T> {
         this.width = width;
     }
 
-    // TODO: update
-    public final void listCells() {
-        System.out.println("Cell List:");
-        for (var c : this.cells.keySet()) {
-            System.out.printf("%d: %s\n", c, this.cells.get(c));
-        }
-    }
-
     /**
      * Initialize cells for board.
      *
@@ -105,28 +96,21 @@ public class GameBoard<T> {
      */
     // TODO: test
     public void initialize() {
-        this.cellsList = new ArrayList<>();
+        this.cells = new ArrayList<>();
 
         for (int x = 0; x < this.width; x++) {
-            List yList = new ArrayList<T>();
+            List<Cell<T>> yList = new ArrayList<>();
             for (int y = 0; y < this.height; y++) {
-                // TODO: unchecked
-                yList.add(new Cell<T>());
+                yList.add(new Cell<T>(defaultValue));
             }
 
-            this.cellsList.add(new ArrayList<>());
+            this.cells.add(yList);
         }
 
     }
 
     public void reset() {
-        resetCells();
-    }
-
-    public void resetCells() {
-        this.cells.forEach((i, c) -> {
-            c.setToken(defaultValue);
-        });
+        initialize();
     }
 
     /**
@@ -175,7 +159,16 @@ public class GameBoard<T> {
     public Cell<T> getCell(int x, int y) {
         // throw except if index out of bounds
 
-        return this.cellsList.get(x).get(y);
+        Cell<T> cell = null;
+        try {
+            cell = this.cells.get(x).get(y);
+        } catch (Exception ex) {
+            System.out.printf("Tried to access (%d,%d).%n", x, y);
+
+            throw new IndexOutOfBoundsException();
+        }
+
+        return cell;
     }
 
     /**
@@ -200,8 +193,8 @@ public class GameBoard<T> {
     public void setCell(int x, int y, Cell<T> c) {
         // guard
 
-        this.cellsList.get(x).remove(y);
-        this.cellsList.get(x).add(y, c);
+        this.cells.get(x).remove(y);
+        this.cells.get(x).add(y, c);
     }
 
     /**

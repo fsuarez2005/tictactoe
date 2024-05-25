@@ -27,17 +27,23 @@ public class TicTacToeBoard extends GameBoard<Character> {
     }
     
     
+    // TODO: change to enum
+//    private int noPlayer = 0;
+//    private int player1 = 1;
+//    private int player2 = 2;
     
-    private int noPlayer = 0;
-    private int player1 = 1;
-    private int player2 = 2;
+    private Player noPlayer = Player.NOPLAYER;
+    private Player player1 = Player.PLAYER1;
+    private Player player2 = Player.PLAYER2;
+    
+    
 
     private char player1Token = 'X';
     private char player2Token = 'O';
     private char noPlayerToken = ' ';
     private boolean winnerExists = false;
-    private int winningPlayer = noPlayer;
-    private int currentPlayer = player1;
+    private Player winningPlayer = noPlayer;
+    private Player currentPlayer = player1;
     //private char currentPlayerToken = player1Token;
 
     private final List<WinningMove> winningMoves = new ArrayList<>();
@@ -92,7 +98,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
      *
      * @return
      */
-    public int getCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return this.currentPlayer;
     }
 
@@ -103,8 +109,8 @@ public class TicTacToeBoard extends GameBoard<Character> {
      *
      * @param currentPlayer
      */
-    public void setCurrentPlayer(int currentPlayer) {
-        if (currentPlayer != 0 || currentPlayer != 1 || currentPlayer != 2) {
+    public void setCurrentPlayer(Player currentPlayer) {
+        if (currentPlayer != Player.NOPLAYER || currentPlayer != Player.PLAYER1 || currentPlayer != Player.PLAYER2) {
             // should throw InvalidPlayer
 
             throw new IllegalArgumentException("Player should be 0, 1, or 2.");
@@ -129,16 +135,16 @@ public class TicTacToeBoard extends GameBoard<Character> {
      *
      * @return
      */
-    public int getWinningPlayer() {
+    public Player getWinningPlayer() {
         if (!this.winnerExists) {
             // need to tell caller there is no winner
-            return 0;
+            return Player.NOPLAYER;
         }
 
         return this.winningPlayer;
     }
 
-    public void setWinningPlayer(int player) {
+    public void setWinningPlayer(Player player) {
         if (player != noPlayer && player != player1 && player != player2) {
             throw new IllegalArgumentException();
         }
@@ -152,7 +158,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
      * @param player
      * @return
      */
-    public char getPlayerToken(int player) {
+    public char getPlayerToken(Player player) {
         char output = noPlayerToken;
 
         if (player == noPlayer) {
@@ -205,7 +211,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
      * @param player
      * @return
      */
-    private boolean checkLocationForWinner(WinningMove move, int player) {
+    private boolean checkLocationForWinner(WinningMove move, Player player) {
         // check each Coordinate of WinningMove for player
         // if all three cells == player, then winner
         // cell1 == player && cell2 == player && cell3 == player
@@ -237,8 +243,8 @@ public class TicTacToeBoard extends GameBoard<Character> {
      */
     public void checkForWinner() {
         // iterate through each player
-        for (int p : new int[]{1, 2}) {
-            System.out.printf("Winner checking for player %d%n", p);
+        for (Player p : new Player[]{Player.PLAYER1, Player.PLAYER2}) {
+            System.out.printf("Winner checking for player %s%n", p.name());
             // loop through winners
             for (WinningMove wm : winningMoves) {
                 System.out.printf("Checking move %s%n", wm.toString());
@@ -250,7 +256,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
 
                     setWinningPlayer(p);
 
-                    System.out.printf("Winning Move for player %d: %s%n", p, wm.toString());
+                    System.out.printf("Winning Move for player %s: %s%n", p.name(), wm.toString());
                     return;
                 }
             }
@@ -273,7 +279,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
         char existingMove = this.getToken(x, y);
 
         if (existingMove == getPlayerToken(noPlayer)) {
-            System.out.printf("Player %d moved at (%d,%d)%n", getCurrentPlayer(), x, y);
+            System.out.printf("Player %s moved at (%d,%d)%n", getCurrentPlayer().name(), x, y);
             this.setToken(x, y, this.getCurrentPlayerToken());
 
         } else {

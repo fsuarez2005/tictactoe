@@ -146,7 +146,7 @@ public class TicTacToePanel extends Panel implements ActionListener{
         this.board.checkForWinner();
         if (this.board.getWinnerExists()) {
             System.out.println("Winner found!");
-            int winningPlayer = this.board.getWinningPlayer();
+            TicTacToeBoard.Player winningPlayer = this.board.getWinningPlayer();
             
             char winningPlayerToken = this.board.getPlayerToken(winningPlayer);
             

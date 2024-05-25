@@ -1,18 +1,38 @@
-#!/usr/bin/env python3.12
+#!/usr/bin/env python
 
-from util.versiontest import *
+# Copyright (c) 2024 Frank Suarez
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this
+# software and associated documentation files (the "Software"), to deal in the Software
+# without restriction, including without limitation the rights to use, copy, modify,
+# merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to the following
+# conditions:
+#
+# The above copyright notice and this permission notice shall be included in all copies
+# or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-# uses tkinter 3.11 from homebrew
+#
+# TicTacToeApp
+# Tk Window for Tic-Tac-Toe app
+#
+# 
+# TODO: clean up
+#
+
 
 from tkinter import *
-from tkinter import ttk
 
+from versiontest import *
 from tictactoeboard import *
-
-
-
-
 
 class TicTacToeApp:
     def __init__(self):
@@ -90,7 +110,7 @@ class TicTacToeApp:
                 
                 # define callback command separately so we can refer to this button
                 b['command'] = callBackFactory(b,x,y)
-                b['text'] = f"({x},{y})\n({self.xMap[x]},{self.yMap[y]})"
+                #b['text'] = f"({x},{y})\n({self.xMap[x]},{self.yMap[y]})"
         return frm
     
     def reset(self):

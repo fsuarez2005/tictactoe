@@ -1,46 +1,51 @@
+# Copyright (c) 2024 Frank Suarez
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this
+# software and associated documentation files (the "Software"), to deal in the Software
+# without restriction, including without limitation the rights to use, copy, modify,
+# merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to the following
+# conditions:
+#
+# The above copyright notice and this permission notice shall be included in all copies
+# or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+# PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+# CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+#
+# TicTacToeBoard 
+#
+#
+# TODO: clean up
+# TODO: add docstrings
+
+
 
 __all__ = [
     'TicTacToeBoard'
 ]
 
 
-# TODO: 
-winningMoves = [
-    (0,0),(1,0),(2,0),
-    (0,1),(1,1),(2,1),
-    (0,2),(1,2),(2,2),
-    
-    (0,0),(0,1),(0,2),
-    (1,0),(1,1),(1,2),
-    (2,0),(2,1),(2,2),
-    
-    (0,0),(1,1),(2,2),
-    (0,2),(1,1),(2,0)
-]
-
-#
-# X:
-# * horizontal
-# * increases toward the right
-#
-# Y:
-# * vertical
-# * increases toward the top
-# 
-
-
-
-
-
-
-
 class TicTacToeBoard:
-    # PROPERTIES
-    # currentPlayer
-    # cells
-    # winningMoves
-
+    # TODO
+    ""
     
+    #
+    # X:
+    # * horizontal
+    # * increases toward the right
+    #
+    # Y:
+    # * vertical
+    # * increases toward the top
+    #
+
+
 
     def __init__(self):
         self.noPlayer = ' '
@@ -64,6 +69,7 @@ class TicTacToeBoard:
         self.cells = {}
         self.winningPlayer = self.noPlayer
     
+    # TODO: not used
     @classmethod
     def isValidLocation(cls,location):
         output = isinstance(location,tuple) and \
@@ -74,19 +80,23 @@ class TicTacToeBoard:
     
     
     def reset(self):
+        # TODO
+        ""
+        
         self.currentPlayer = self.player1
         self.cells = {}
         self.winningPlayer = self.noPlayer
         
-    # TODO:
     def checkPlayerForWinner(self,player):
-        #raise Exception("unimplemented")
+        # TODO
+        ""
+        
         for move in self.winningMoves:
             self.checkLocationForWinner(move,player)
     
-    # TODO:
     def checkLocationForWinner(self,location,player):
-        #raise Exception("unimplemented")
+        # TODO
+        ""
         
         if (location[0] in self.cells and \
             location[1] in self.cells and \
@@ -100,15 +110,24 @@ class TicTacToeBoard:
         
     
     def switchPlayer(self):
+        # TODO
+        ""
+        
         if (self.currentPlayer == self.player1):
             self.currentPlayer = self.player2
         else:
             self.currentPlayer = self.player1
     
     def getCurrentPlayer(self):
+        #TODO
+        ""
+        
         return self.currentPlayer
     
     def setCurrentPlayer(self,currentPlayer):
+        # TODO
+        ""
+        
         # guard: currentPlayer must be player1 || player2
         if (currentPlayer != self.player1 and currentPlayer != self.player2):
             raise Exception("Bad argument")
@@ -116,6 +135,9 @@ class TicTacToeBoard:
         self.currentPlayer = currentPlayer
         
     def makeMove(self,location):
+        # TODO
+        ""
+        
         # guard: validate location
         # guard: is location occupied
         
@@ -124,10 +146,13 @@ class TicTacToeBoard:
         self.setCell(location,self.getCurrentPlayer())
     
     def hasWinner(self):
+        # TODO
         "Returns boolean"
         return (self.winningPlayer != self.noPlayer)
     
     def getWinningPlayer(self):
+        # TODO
+        
         "Returns either player1 or player2"
         return self.winningPlayer
     
@@ -140,6 +165,9 @@ class TicTacToeBoard:
         self.cells[location] = player
     
     def getCell(self,location):
+        # TODO
+        ""
+        
         # if location is not in cells, assume it is not occupied, noplayer
         if (location not in self.cells):
             return self.noPlayer

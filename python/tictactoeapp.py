@@ -121,14 +121,34 @@ class TicTacToeApp:
             
         # reset game board model
         self.tttBoard.reset()
+    
+    
+    def createMenuBar(self,parent=None):
+        root = Menu(parent)
         
+        gamemenu = Menu(root)
+        gamemenu.add_command(label="Reset",command=self.reset)
+        
+        
+        helpmenu = Menu(root)
+        
+        root.add_cascade(label="Game",menu=gamemenu)
+        root.add_cascade(label="Help",menu=helpmenu)
+        
+        
+        return root
+    
     def createComponents(self):
         self.rootWindow = Tk()
         self.rootWindow.title('Tic-Tac-Toe')
         
+        m = self.createMenuBar(self.rootWindow)
+        self.rootWindow.config(menu=m)
+        
         frm = Frame(self.rootWindow)
         frm.grid()
         
+
         
         resetBtn = Button(frm,text="Reset",command=self.reset)
         resetBtn.grid(column=0,row=0)

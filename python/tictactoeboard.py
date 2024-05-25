@@ -48,16 +48,16 @@ class TicTacToeBoard:
         self.player2 = 'O'
         
         self.winningMoves = [
-            ((0,0),(1,0),(2,0),),
-            ((0,1),(1,1),(2,1),),
-            ((0,2),(1,2),(2,2),),
+            ((0,0),(1,0),(2,0)),
+            ((0,1),(1,1),(2,1)),
+            ((0,2),(1,2),(2,2)),
             
-            ((0,0),(0,1),(0,2),),
-            ((1,0),(1,1),(1,2),),
-            ((2,0),(2,1),(2,2),),
+            ((0,0),(0,1),(0,2)),
+            ((1,0),(1,1),(1,2)),
+            ((2,0),(2,1),(2,2)),
             
-            ((0,0),(1,1),(2,2),),
-            ((0,2),(1,1),(2,0),)
+            ((0,0),(1,1),(2,2)),
+            ((0,2),(1,1),(2,0))
         ]
         
         self.currentPlayer = self.player1
@@ -79,14 +79,25 @@ class TicTacToeBoard:
         self.winningPlayer = self.noPlayer
         
     # TODO:
-    def checkForWinner(self):
+    def checkPlayerForWinner(self,player):
         #raise Exception("unimplemented")
         for move in self.winningMoves:
-            print(move)
+            self.checkLocationForWinner(move,player)
     
     # TODO:
-    def checkLocationForWinner(self,locationTuple,player):
-        raise Exception("unimplemented")
+    def checkLocationForWinner(self,location,player):
+        #raise Exception("unimplemented")
+        
+        if (location[0] in self.cells and \
+            location[1] in self.cells and \
+            location[2] in self.cells):
+            # prevent Index errors
+            # locations occupied
+            if (self.cells[location[0]] == player and \
+                self.cells[location[1]] == player and \
+                self.cells[location[2]] == player):
+                self.winningPlayer = player
+        
     
     def switchPlayer(self):
         if (self.currentPlayer == self.player1):

@@ -44,8 +44,21 @@ class TicTacToeApp:
         btn['state'] = 'disabled'
         self.tttBoard.makeMove((self.xMap[x],self.yMap[y]))
         
-        self.tttBoard.checkForWinner()
-        self.setStatus(f"({x},{y})")
+        self.tttBoard.checkPlayerForWinner(self.tttBoard.getCurrentPlayer())
+        if (self.tttBoard.hasWinner()):
+            winningPlayer = self.tttBoard.getWinningPlayer()
+            if (winningPlayer == self.tttBoard.player1):
+                playerName = 'Player 1'
+            elif (winningPlayer == self.tttBoard.player2):
+                playerName = 'Player 2'
+            else:
+                raise Exception("Winning Player not set correctly.")
+            
+            self.setStatus(f"{playerName} has won.")
+            # player won, lock all buttons
+            for b in self.cells:
+                self.cells[b]['state'] = 'disabled'
+            
         
         self.tttBoard.switchPlayer()
     

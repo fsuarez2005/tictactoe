@@ -89,6 +89,7 @@ public class PairingFunction {
      * @param y
      * @return
      */
+    @DoNotCall
     public static int szudzikPairingFunction(int x, int y) {
         if (x != max(x, y)) { // if x != max(
             return (y * y + x);
@@ -97,6 +98,7 @@ public class PairingFunction {
         }
     }
 
+    @DoNotCall
     public static Coordinates<Integer> inverseSzudzikPairingFunction(int z) {
         Coordinates<Integer> coords = new Coordinates<>();
 

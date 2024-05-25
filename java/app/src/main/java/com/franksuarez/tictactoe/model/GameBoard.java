@@ -9,6 +9,7 @@ package com.franksuarez.tictactoe.model;
 
 import com.franksuarez.tictactoe.misc.Coordinates;
 import com.franksuarez.tictactoe.misc.PairingFunction;
+import com.google.errorprone.annotations.DoNotCall;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +26,22 @@ import java.util.function.BiFunction;
  */
 public class GameBoard<T> {
 
-    
-    
-    
+    // TODO: builder
+    public static class Builder<U> {
+
+        private GameBoard<U> instance = new GameBoard<>();
+
+        public GameBoard<U> setHeight(int height) {
+            instance.height = height;
+            return instance;
+        }
+
+        public GameBoard<U> setWidth(int width) {
+            instance.width = width;
+            return instance;
+        }
+    }
+
     private int height = 0;     // Y-axis
     private int width = 0;      // X-axis
     private T defaultValue;
@@ -48,34 +62,29 @@ public class GameBoard<T> {
         this.defaultValue = defaultValue;
     }
 
-    public GameBoard() {}
+    public GameBoard() {
+    }
 
-    // DONE
     public T getDefaultValue() {
         return defaultValue;
     }
 
-    // DONE
     public void setDefaultValue(T defaultValue) {
         this.defaultValue = defaultValue;
     }
 
-    // DONE
     public final int getHeight() {
         return height;
     }
 
-    // DONE
     public final void setHeight(int height) {
         this.height = height;
     }
 
-    // DONE
     public final int getWidth() {
         return width;
     }
 
-    // DONE
     public final void setWidth(int width) {
         this.width = width;
     }
@@ -110,12 +119,10 @@ public class GameBoard<T> {
 
     }
 
-    // DONE
     public void reset() {
         resetCells();
     }
 
-    // DONE
     public void resetCells() {
         this.cells.forEach((i, c) -> {
             c.setToken(defaultValue);
@@ -150,12 +157,10 @@ public class GameBoard<T> {
         currentCell.setToken(token);
     }
 
-    // DONE
     public T getToken(Coordinates<Integer> coords) {
         return getToken(coords.getX(), coords.getY());
     }
 
-    // DONE
     public void setToken(Coordinates<Integer> coords, T token) {
         setToken(coords.getX(), coords.getY(), token);
     }
@@ -193,7 +198,7 @@ public class GameBoard<T> {
     // TODO: remove
     // TODO: test
     public void setCell(int x, int y, Cell<T> c) {
-        // guard 
+        // guard
 
         this.cellsList.get(x).remove(y);
         this.cellsList.get(x).add(y, c);

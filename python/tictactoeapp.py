@@ -31,8 +31,8 @@
 
 from tkinter import *
 
-from versiontest import *
-from tictactoeboard import *
+from tictactoe.versiontest import *
+from tictactoe.tictactoeboard import *
 
 class TicTacToeApp:
     def __init__(self):

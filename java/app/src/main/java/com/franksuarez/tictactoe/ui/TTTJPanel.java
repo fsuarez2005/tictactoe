@@ -5,6 +5,7 @@
 package com.franksuarez.tictactoe.ui;
 
 import com.franksuarez.tictactoe.model.TicTacToeBoard;
+import javax.swing.JLabel;
 
 /**
  *
@@ -12,6 +13,51 @@ import com.franksuarez.tictactoe.model.TicTacToeBoard;
  */
 public class TTTJPanel extends javax.swing.JPanel {
     private TicTacToeBoard board;
+    public JLabel statusLabel;
+    
+    
+    
+    private void makeMove(javax.swing.JButton src, int x, int y) {
+   
+
+        this.board.makeMove(x, y);
+
+        // get current player
+        char currentPlayerToken = this.board.getCurrentPlayerToken();
+
+        src.setText(String.valueOf(currentPlayerToken));
+        src.setEnabled(false);
+
+        // check for winner
+        this.board.checkForWinner();
+        if (this.board.getWinnerExists()) {
+            System.out.println("winner exists");
+            
+            TicTacToeBoard.Player winningPlayer = this.board.getWinningPlayer();
+            
+            char winningPlayerToken = this.board.getPlayerToken(winningPlayer);
+
+            statusLabel.setText(String.format("Winner: %c", winningPlayerToken));
+   
+            // Disable all buttons
+            for (javax.swing.JButton b: new javax.swing.JButton[] {
+                this.jButton1,
+                this.jButton2,
+                this.jButton3,
+                this.jButton4,
+                this.jButton5,
+                this.jButton6,
+                this.jButton7,
+                this.jButton8,
+                this.jButton9
+            }
+            ) {
+                b.setEnabled(false);
+            }
+        }
+        this.board.switchPlayer();
+    }
+        
     
     
     /**
@@ -45,9 +91,11 @@ public class TTTJPanel extends javax.swing.JPanel {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
 
+        jButtonTemplate.setFont(new java.awt.Font("Helvetica Neue", 0, 72)); // NOI18N
         jButtonTemplate.setText("jButton12");
         jButtonTemplate.setPreferredSize(new java.awt.Dimension(100, 100));
 
+        jButton1.setFont(jButtonTemplate.getFont());
         jButton1.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton1.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton1.setPreferredSize(jButtonTemplate.getPreferredSize());
@@ -57,6 +105,7 @@ public class TTTJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(jButtonTemplate.getFont());
         jButton2.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton2.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton2.setPreferredSize(jButtonTemplate.getPreferredSize());
@@ -66,39 +115,75 @@ public class TTTJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setFont(jButtonTemplate.getFont());
         jButton3.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton3.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton3.setPreferredSize(jButtonTemplate.getPreferredSize());
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setActionCommand("");
+        jButton4.setFont(jButtonTemplate.getFont());
         jButton4.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton4.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton4.setPreferredSize(jButtonTemplate.getPreferredSize());
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jButton5.setActionCommand("");
+        jButton5.setFont(jButtonTemplate.getFont());
         jButton5.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton5.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton5.setPreferredSize(jButtonTemplate.getPreferredSize());
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jButton6.setActionCommand("");
+        jButton6.setFont(jButtonTemplate.getFont());
         jButton6.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton6.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton6.setPreferredSize(jButtonTemplate.getPreferredSize());
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        jButton7.setActionCommand("");
+        jButton7.setFont(jButtonTemplate.getFont());
         jButton7.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton7.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton7.setPreferredSize(jButtonTemplate.getPreferredSize());
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
-        jButton8.setActionCommand("");
+        jButton8.setFont(jButtonTemplate.getFont());
         jButton8.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton8.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton8.setPreferredSize(jButtonTemplate.getPreferredSize());
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
-        jButton9.setActionCommand("");
+        jButton9.setFont(jButtonTemplate.getFont());
         jButton9.setMaximumSize(jButtonTemplate.getMaximumSize());
         jButton9.setMinimumSize(jButtonTemplate.getMinimumSize());
         jButton9.setPreferredSize(jButtonTemplate.getPreferredSize());
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -151,16 +236,48 @@ public class TTTJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        
-        
-        
+        this.makeMove(this.jButton1, 0, 2);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        this.makeMove(this.jButton2, 1, 2);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.makeMove(this.jButton3, 2, 2);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.makeMove(this.jButton4, 0, 1);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.makeMove(this.jButton5, 1, 1);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        this.makeMove(this.jButton6,2,1);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        this.makeMove(this.jButton7,0,0);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        this.makeMove(this.jButton8,1,0);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        this.makeMove(this.jButton9,2,0);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

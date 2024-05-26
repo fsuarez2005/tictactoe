@@ -9,14 +9,54 @@ package com.franksuarez.tictactoe.ui;
  * @author franksuarez
  */
 public class TTTJFrame extends javax.swing.JFrame {
-
+    private javax.swing.ImageIcon gokuImage;
+    
+    
+    
     /**
      * Creates new form TTTJFrame
      */
     public TTTJFrame() {
-        initComponents();   
+        initComponents();
         
         
+        
+        String path = "goku.jpg";
+        
+        java.net.URL imgURL = getClass().getClassLoader().getResource(path);
+        System.out.printf("%s%n",imgURL.toString());
+        if (imgURL != null) {
+            
+            this.gokuImage = new javax.swing.ImageIcon(imgURL, "");
+            
+            String imageStatus = "";
+            switch (this.gokuImage.getImageLoadStatus()) {
+                case java.awt.MediaTracker.ABORTED -> {
+                    imageStatus = "Aborted";
+                }
+                case java.awt.MediaTracker.COMPLETE -> {
+                    imageStatus = "Complete";
+                }
+                case java.awt.MediaTracker.ERRORED -> {
+                    imageStatus = "Error";
+                }
+                case java.awt.MediaTracker.LOADING -> {
+                    imageStatus = "Loading";
+                
+                }
+                default -> {
+                    
+                }
+                    
+                
+            }
+            
+            System.out.printf("Image Loader Status = %s%n",imageStatus);
+            
+            
+        } else {
+            System.err.println("Couldn't find file: " + path);
+        }
         
     }
     
@@ -43,6 +83,10 @@ public class TTTJFrame extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         tTTJPanel = new com.franksuarez.tictactoe.ui.TTTJPanel();
         jPanelInfo = new javax.swing.JPanel();
+        jLabelStatus = new javax.swing.JLabel();
+        tTTJPanel.statusLabel=jLabelStatus;
+        jLabelTitle = new javax.swing.JLabel();
+        jLabelImage = new javax.swing.JLabel(this.gokuImage);
 
         gameMenu.setText("Game");
 
@@ -66,15 +110,35 @@ public class TTTJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabelStatus.setText("Let's Play");
+
+        jLabelTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTitle.setText("Tic-Tac-Toe");
+
+        jLabelImage.setText("jLabel1");
+
         javax.swing.GroupLayout jPanelInfoLayout = new javax.swing.GroupLayout(jPanelInfo);
         jPanelInfo.setLayout(jPanelInfoLayout);
         jPanelInfoLayout.setHorizontalGroup(
             jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 349, Short.MAX_VALUE)
+            .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelInfoLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanelInfoLayout.setVerticalGroup(
             jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanelInfoLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabelTitle)
+                .addGap(29, 29, 29)
+                .addComponent(jLabelStatus)
+                .addGap(45, 45, 45)
+                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -93,7 +157,7 @@ public class TTTJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tTTJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tTTJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
                     .addComponent(jPanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -145,6 +209,9 @@ public class TTTJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu gameMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabelImage;
+    private javax.swing.JLabel jLabelStatus;
+    private javax.swing.JLabel jLabelTitle;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanelInfo;

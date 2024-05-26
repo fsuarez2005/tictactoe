@@ -9,6 +9,9 @@ package com.franksuarez.tictactoe.ui;
  * @author franksuarez
  */
 public class TTTJFrame extends javax.swing.JFrame {
+    private String defaultText = "Let's Go!";
+    
+    
     private javax.swing.ImageIcon gokuImage;
     
     
@@ -18,45 +21,6 @@ public class TTTJFrame extends javax.swing.JFrame {
      */
     public TTTJFrame() {
         initComponents();
-        
-        
-        
-        String path = "goku.jpg";
-        
-        java.net.URL imgURL = getClass().getClassLoader().getResource(path);
-        System.out.printf("%s%n",imgURL.toString());
-        if (imgURL != null) {
-            
-            this.gokuImage = new javax.swing.ImageIcon(imgURL, "");
-            
-            String imageStatus = "";
-            switch (this.gokuImage.getImageLoadStatus()) {
-                case java.awt.MediaTracker.ABORTED -> {
-                    imageStatus = "Aborted";
-                }
-                case java.awt.MediaTracker.COMPLETE -> {
-                    imageStatus = "Complete";
-                }
-                case java.awt.MediaTracker.ERRORED -> {
-                    imageStatus = "Error";
-                }
-                case java.awt.MediaTracker.LOADING -> {
-                    imageStatus = "Loading";
-                
-                }
-                default -> {
-                    
-                }
-                    
-                
-            }
-            
-            System.out.printf("Image Loader Status = %s%n",imageStatus);
-            
-            
-        } else {
-            System.err.println("Couldn't find file: " + path);
-        }
         
     }
     
@@ -86,11 +50,15 @@ public class TTTJFrame extends javax.swing.JFrame {
         jLabelStatus = new javax.swing.JLabel();
         tTTJPanel.statusLabel=jLabelStatus;
         jLabelTitle = new javax.swing.JLabel();
-        jLabelImage = new javax.swing.JLabel(this.gokuImage);
 
         gameMenu.setText("Game");
 
         jMenuItem1.setText("New");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         gameMenu.add(jMenuItem1);
 
         rootJMenuBar.add(gameMenu);
@@ -110,24 +78,19 @@ public class TTTJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabelStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelStatus.setText("Let's Play");
 
         jLabelTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitle.setText("Tic-Tac-Toe");
 
-        jLabelImage.setText("jLabel1");
-
         javax.swing.GroupLayout jPanelInfoLayout = new javax.swing.GroupLayout(jPanelInfo);
         jPanelInfo.setLayout(jPanelInfoLayout);
         jPanelInfoLayout.setHorizontalGroup(
             jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanelInfoLayout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+            .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
         );
         jPanelInfoLayout.setVerticalGroup(
             jPanelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,8 +99,6 @@ public class TTTJFrame extends javax.swing.JFrame {
                 .addComponent(jLabelTitle)
                 .addGap(29, 29, 29)
                 .addComponent(jLabelStatus)
-                .addGap(45, 45, 45)
-                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -157,19 +118,26 @@ public class TTTJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tTTJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
-                    .addComponent(jPanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(tTTJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
         
+        // move menubar to very top
         System.setProperty("apple.laf.useScreenMenuBar", "true");
     }//GEN-LAST:event_formWindowOpened
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        this.tTTJPanel.reset();
+        this.jLabelStatus.setText(defaultText);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,7 +177,6 @@ public class TTTJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu gameMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JLabel jLabelImage;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JMenuItem jMenuItem1;

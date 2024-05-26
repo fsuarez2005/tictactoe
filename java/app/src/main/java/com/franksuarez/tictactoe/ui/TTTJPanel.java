@@ -1,24 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+/**
+ * 
+*/
 package com.franksuarez.tictactoe.ui;
 
 import com.franksuarez.tictactoe.model.TicTacToeBoard;
-import javax.swing.JLabel;
 
 /**
  *
  * @author franksuarez
  */
 public class TTTJPanel extends javax.swing.JPanel {
+
     private TicTacToeBoard board;
-    public JLabel statusLabel;
-    
-    
-    
+    public javax.swing.JLabel statusLabel;
+
     private void makeMove(javax.swing.JButton src, int x, int y) {
-   
 
         this.board.makeMove(x, y);
 
@@ -32,15 +28,15 @@ public class TTTJPanel extends javax.swing.JPanel {
         this.board.checkForWinner();
         if (this.board.getWinnerExists()) {
             System.out.println("winner exists");
-            
+
             TicTacToeBoard.Player winningPlayer = this.board.getWinningPlayer();
-            
+
             char winningPlayerToken = this.board.getPlayerToken(winningPlayer);
 
             statusLabel.setText(String.format("Winner: %c", winningPlayerToken));
-   
+
             // Disable all buttons
-            for (javax.swing.JButton b: new javax.swing.JButton[] {
+            for (javax.swing.JButton b : new javax.swing.JButton[]{
                 this.jButton1,
                 this.jButton2,
                 this.jButton3,
@@ -50,25 +46,43 @@ public class TTTJPanel extends javax.swing.JPanel {
                 this.jButton7,
                 this.jButton8,
                 this.jButton9
-            }
-            ) {
+            }) {
                 b.setEnabled(false);
             }
         }
         this.board.switchPlayer();
     }
-        
-    
-    
+
+    // TODO:
+    public void reset() {
+
+        for (javax.swing.JButton b : new javax.swing.JButton[]{
+            this.jButton1,
+            this.jButton2,
+            this.jButton3,
+            this.jButton4,
+            this.jButton5,
+            this.jButton6,
+            this.jButton7,
+            this.jButton8,
+            this.jButton9
+        }) {
+            b.setEnabled(true);
+            b.setText("");
+        }
+
+        this.board.reset();
+    }
+
     /**
      * Creates new form TTTJPanel
      */
     public TTTJPanel() {
         initComponents();
-        
+
         this.board = new TicTacToeBoard();
         this.board.initialize();
-        
+
     }
 
     /**
@@ -261,22 +275,22 @@ public class TTTJPanel extends javax.swing.JPanel {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        this.makeMove(this.jButton6,2,1);
+        this.makeMove(this.jButton6, 2, 1);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        this.makeMove(this.jButton7,0,0);
+        this.makeMove(this.jButton7, 0, 0);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        this.makeMove(this.jButton8,1,0);
+        this.makeMove(this.jButton8, 1, 0);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        this.makeMove(this.jButton9,2,0);
+        this.makeMove(this.jButton9, 2, 0);
     }//GEN-LAST:event_jButton9ActionPerformed
 
 

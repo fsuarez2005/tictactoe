@@ -14,8 +14,17 @@ public class TTTJPanel extends javax.swing.JPanel {
     private TicTacToeBoard board;
     public javax.swing.JLabel statusLabel;
 
+    public javax.swing.JLabel getStatusLabel() {
+        return this.statusLabel;
+    }
+    
+    public void setStatusLabel(javax.swing.JLabel statusLabel) {
+        javax.swing.JLabel oldStatusLabel = this.statusLabel;
+        firePropertyChange("statusLabel", oldStatusLabel, statusLabel);
+        this.statusLabel = statusLabel;
+    }
+    
     private void makeMove(javax.swing.JButton src, int x, int y) {
-
         this.board.makeMove(x, y);
 
         // get current player

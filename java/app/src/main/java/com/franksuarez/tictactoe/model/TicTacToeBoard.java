@@ -1,8 +1,8 @@
 /**
- * 
- * 
- * 
- * 
+ * TODO: convert to JavaBean
+ *
+ *
+ *
  */
 package com.franksuarez.tictactoe.model;
 
@@ -20,31 +20,20 @@ import java.util.logging.Logger;
 public class TicTacToeBoard extends GameBoard<Character> {
 
     public enum Player {
-        NOPLAYER,
-        PLAYER1,
-        PLAYER2
-        
-    }
-    
-    
-    // TODO: change to enum
-//    private int noPlayer = 0;
-//    private int player1 = 1;
-//    private int player2 = 2;
-    
-    private Player noPlayer = Player.NOPLAYER;
-    private Player player1 = Player.PLAYER1;
-    private Player player2 = Player.PLAYER2;
-    
-    
+        NOPLAYER(' '),
+        PLAYER1('X'),
+        PLAYER2('O');
 
-    private char player1Token = 'X';
-    private char player2Token = 'O';
-    private char noPlayerToken = ' ';
+        final char token;
+
+        Player(char token) {
+            this.token = token;
+        }
+    }
+
     private boolean winnerExists = false;
-    private Player winningPlayer = noPlayer;
-    private Player currentPlayer = player1;
-    //private char currentPlayerToken = player1Token;
+    private Player winningPlayer = Player.NOPLAYER;
+    private Player currentPlayer = Player.PLAYER1;
 
     private final List<WinningMove> winningMoves = new ArrayList<>();
 
@@ -69,31 +58,27 @@ public class TicTacToeBoard extends GameBoard<Character> {
     };
 
     public TicTacToeBoard() {
-        super.setHeight(3);
-        super.setWidth(3);
-        super.setDefaultValue(' ');
+        super(3, 3, ' ');
+
         importWinnerArray(winnerData);
+
     }
 
     @Override
     public void initialize() {
         super.initialize();
-        
-        // should only need initialization at beginning
-        // these should be correct already
-//        this.winnerExists = false;
-//        this.winningPlayer = noPlayer;
-//        this.currentPlayer = player1;
+
+
     }
 
     @Override
     public void reset() {
         super.reset();
         this.winnerExists = false;
-        this.winningPlayer = noPlayer;
-        this.currentPlayer = player1;
+        this.winningPlayer = Player.NOPLAYER;
+        this.currentPlayer = Player.PLAYER1;
     }
-    
+
     /**
      *
      * @return
@@ -109,8 +94,8 @@ public class TicTacToeBoard extends GameBoard<Character> {
      *
      * @param currentPlayer
      */
-    public void setCurrentPlayer(Player currentPlayer) {
-        if (currentPlayer != Player.NOPLAYER || currentPlayer != Player.PLAYER1 || currentPlayer != Player.PLAYER2) {
+    protected void setCurrentPlayer(Player currentPlayer) {
+        if (currentPlayer != Player.NOPLAYER && currentPlayer != Player.PLAYER1 && currentPlayer != Player.PLAYER2) {
             // should throw InvalidPlayer
 
             throw new IllegalArgumentException("Player should be 0, 1, or 2.");
@@ -144,8 +129,8 @@ public class TicTacToeBoard extends GameBoard<Character> {
         return this.winningPlayer;
     }
 
-    public void setWinningPlayer(Player player) {
-        if (player != noPlayer && player != player1 && player != player2) {
+    protected void setWinningPlayer(Player player) {
+        if (player != Player.NOPLAYER && player != Player.PLAYER1 && player != Player.PLAYER2) {
             throw new IllegalArgumentException();
         }
 
@@ -159,20 +144,8 @@ public class TicTacToeBoard extends GameBoard<Character> {
      * @return
      */
     public char getPlayerToken(Player player) {
-        char output = noPlayerToken;
 
-        if (player == noPlayer) {
-            output = noPlayerToken;
-        } else if (player == player1) {
-            output = player1Token;
-        } else if (player == player2) {
-            output = player2Token;
-        } else {
-            output = noPlayerToken;
-            throw new IllegalArgumentException();
-        }
-
-        return output;
+        return player.token;
     }
 
     /**
@@ -232,7 +205,7 @@ public class TicTacToeBoard extends GameBoard<Character> {
         return this.winnerExists;
     }
 
-    public void setWinnerExists(boolean winnerExists) {
+    protected void setWinnerExists(boolean winnerExists) {
         this.winnerExists = winnerExists;
     }
 
@@ -244,10 +217,9 @@ public class TicTacToeBoard extends GameBoard<Character> {
     public void checkForWinner() {
         // iterate through each player
         for (Player p : new Player[]{Player.PLAYER1, Player.PLAYER2}) {
-            
+
             // loop through winners
             for (WinningMove wm : winningMoves) {
-            
 
                 boolean foundWinner = checkLocationForWinner(wm, p);
                 if (foundWinner) {
@@ -256,7 +228,6 @@ public class TicTacToeBoard extends GameBoard<Character> {
 
                     setWinningPlayer(p);
 
-                    
                     return;
                 }
             }
@@ -267,10 +238,10 @@ public class TicTacToeBoard extends GameBoard<Character> {
      * Switches between player 1 and player 2.
      */
     public void switchPlayer() {
-        if (currentPlayer == player1) {
-            currentPlayer = player2;
+        if (currentPlayer == Player.PLAYER1) {
+            currentPlayer = Player.PLAYER2;
         } else {
-            currentPlayer = player1;
+            currentPlayer = Player.PLAYER1;
         }
     }
 
@@ -278,11 +249,11 @@ public class TicTacToeBoard extends GameBoard<Character> {
         //check Cell for move
         char existingMove = this.getToken(x, y);
 
-        if (existingMove == getPlayerToken(noPlayer)) {
-            
+        if (existingMove == getPlayerToken(Player.NOPLAYER)) {
+
             this.setToken(x, y, this.getCurrentPlayerToken());
 
-        } 
+        }
 
     }
 

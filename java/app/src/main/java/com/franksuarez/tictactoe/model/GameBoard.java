@@ -42,17 +42,11 @@ public class GameBoard<T> {
         }
     }
 
-    private int height = 0;     // Y-axis
-    private int width = 0;      // X-axis
-    private T defaultValue;
+    protected int height = 0;     // Y-axis
+    protected int width = 0;      // X-axis
+    protected T defaultValue;
 
-    // TODO: change key to Coordinate
-    //private Map<Integer, Cell<T>> cells; // maps pairing value to Cell
-    // NEW
     private List<List<Cell<T>>> cells;
-
-    // TODO: remove
-    private BiFunction<Integer, Integer, Integer> pairingFunction = (t, u) -> PairingFunction.szudzikPairingFunction(t, u); // need to experiment with other pairing functions
 
     public GameBoard(int height, int width, T defaultValue) {
         this();
@@ -68,25 +62,25 @@ public class GameBoard<T> {
         return defaultValue;
     }
 
-    public void setDefaultValue(T defaultValue) {
+    protected void setDefaultValue(T defaultValue) {
         this.defaultValue = defaultValue;
     }
 
-    public final int getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public final void setHeight(int height) {
-        this.height = height;
-    }
+//    public void setHeight(int height) {
+//        this.height = height;
+//    }
 
-    public final int getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public final void setWidth(int width) {
-        this.width = width;
-    }
+//    public void setWidth(int width) {
+//        this.width = width;
+//    }
 
     /**
      * Initialize cells for board.

@@ -13,6 +13,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.franksuarez.tictactoe.ui.theme.TicTacToeTheme
 
 class TicTacToeApp : ComponentActivity() {
+    companion object {
+        var description = "app"
+        var count = 0
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

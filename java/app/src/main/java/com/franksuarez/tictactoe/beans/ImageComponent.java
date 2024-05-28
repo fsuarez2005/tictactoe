@@ -33,8 +33,6 @@ public class ImageComponent extends Component {
     private BufferedImage bufImg; // TODO: BufferedImage does not store alpha
 
     public ImageComponent() {
-        System.out.printf("%s%n", this);
-
         addPropertyChangeListener((PropertyChangeEvent pce) -> {
             String propertyName = pce.getPropertyName();
 
@@ -58,13 +56,11 @@ public class ImageComponent extends Component {
                 }
 
                 case "imageCentered" -> {
-                    System.out.println("Image Centered");
                     ImageComponent.this.repaint();
 
                 }
 
                 default -> {
-                    System.out.printf("Uncaught property: %s%n", propertyName);
                 }
             }
         });
@@ -136,7 +132,6 @@ public class ImageComponent extends Component {
     }
 
     public void setOffsetX(int offsetX) {
-        System.out.println("setOffsetX()");
         int oldOffsetx = this.offsetX;
         this.offsetX = offsetX;
         firePropertyChange("offsetX", oldOffsetx, offsetX);
@@ -187,9 +182,6 @@ public class ImageComponent extends Component {
             localOffsetY = this.getCenterOffsetY();
         }
 
-        System.out.println("paint()");
-        System.out.printf("bounds: %s%n", this.getBounds());
-
         Rectangle bounds = this.getBounds();
 
         Graphics2D g2d = (Graphics2D) g;
@@ -203,21 +195,8 @@ public class ImageComponent extends Component {
         }
 
         if (this.ready) {
-            System.out.println("Painting image.");
             g2d.drawImage(this.bufImg, null, 0 + localOffsetX, 0 + localOffsetY);
         }
-    }
-
-    @Override
-    public void invalidate() {
-        super.invalidate(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-        System.out.println("Invalidate()");
-    }
-
-    @Override
-    public void validate() {
-        super.validate(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-        System.out.println("Validate()");
     }
 
     private void loadImage() {
@@ -227,7 +206,6 @@ public class ImageComponent extends Component {
 
         URL resource = getClass().getClassLoader().getResource(filePath);
         if (resource == null) {
-            System.out.printf("Could not find: %s%n", filePath);
             this.ready = false;
             return;
         }

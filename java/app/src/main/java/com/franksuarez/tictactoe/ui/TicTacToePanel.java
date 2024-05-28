@@ -56,12 +56,23 @@ public class TicTacToePanel extends javax.swing.JPanel {
 
             TicTacToeBoard.Player winningPlayer = this.board.getWinningPlayer();
 
-            //System.out.printf("Winner: %s%n",winningPlayer.name());
+            
             if (this.statusLabel != null) {
+                String playerName = "";
+                switch (winningPlayer) {
+                    case PLAYER1 -> {
+                        playerName = "Player 1";
+                    }
+                    case PLAYER2 -> {
+                        playerName = "Player 2";
+                    }
+                    default -> {
+                        
+                    }
+                }
+                
                 this.statusLabel.setText(
-                        String.format(
-                                "The winner is %s", winningPlayer.name()
-                        )
+                        String.format("%s has won!",playerName)
                 );
             }
 
@@ -150,12 +161,10 @@ public class TicTacToePanel extends javax.swing.JPanel {
         setLayout(null);
 
         imageComponent1.setImageCentered(true);
-        imageComponent1.setOffsetX(10);
-        imageComponent1.setOffsetY(2);
         imageComponent1.setPaintBackground(false);
         imageComponent1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent1MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent1MousePressed(evt);
             }
         });
         add(imageComponent1);
@@ -164,8 +173,8 @@ public class TicTacToePanel extends javax.swing.JPanel {
         imageComponent2.setImageCentered(true);
         imageComponent2.setPaintBackground(false);
         imageComponent2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent2MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent2MousePressed(evt);
             }
         });
         add(imageComponent2);
@@ -174,8 +183,8 @@ public class TicTacToePanel extends javax.swing.JPanel {
         imageComponent3.setImageCentered(true);
         imageComponent3.setPaintBackground(false);
         imageComponent3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent3MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent3MousePressed(evt);
             }
         });
         add(imageComponent3);
@@ -184,8 +193,8 @@ public class TicTacToePanel extends javax.swing.JPanel {
         imageComponent4.setImageCentered(true);
         imageComponent4.setPaintBackground(false);
         imageComponent4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent4MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent4MousePressed(evt);
             }
         });
         add(imageComponent4);
@@ -194,8 +203,8 @@ public class TicTacToePanel extends javax.swing.JPanel {
         imageComponent5.setImageCentered(true);
         imageComponent5.setPaintBackground(false);
         imageComponent5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent5MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent5MousePressed(evt);
             }
         });
         add(imageComponent5);
@@ -204,8 +213,8 @@ public class TicTacToePanel extends javax.swing.JPanel {
         imageComponent6.setImageCentered(true);
         imageComponent6.setPaintBackground(false);
         imageComponent6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent6MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent6MousePressed(evt);
             }
         });
         add(imageComponent6);
@@ -214,8 +223,8 @@ public class TicTacToePanel extends javax.swing.JPanel {
         imageComponent7.setImageCentered(true);
         imageComponent7.setPaintBackground(false);
         imageComponent7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent7MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent7MousePressed(evt);
             }
         });
         add(imageComponent7);
@@ -224,8 +233,8 @@ public class TicTacToePanel extends javax.swing.JPanel {
         imageComponent8.setImageCentered(true);
         imageComponent8.setPaintBackground(false);
         imageComponent8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent8MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent8MousePressed(evt);
             }
         });
         add(imageComponent8);
@@ -234,8 +243,8 @@ public class TicTacToePanel extends javax.swing.JPanel {
         imageComponent9.setImageCentered(true);
         imageComponent9.setPaintBackground(false);
         imageComponent9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imageComponent9MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                imageComponent9MousePressed(evt);
             }
         });
         add(imageComponent9);
@@ -246,45 +255,50 @@ public class TicTacToePanel extends javax.swing.JPanel {
         boardImage.setBounds(0, 0, 512, 512);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void imageComponent1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent1MouseClicked
-        this.buttonClick((ImageComponent) evt.getSource(), 0, 2, "xleft.png", "oleft.png");
-    }//GEN-LAST:event_imageComponent1MouseClicked
-
-    private void imageComponent2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent2MouseClicked
-        this.buttonClick((ImageComponent) evt.getSource(), 1, 2, "xmid.png", "omid.png");
-    }//GEN-LAST:event_imageComponent2MouseClicked
-
-    private void imageComponent3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent3MouseClicked
-        this.buttonClick((ImageComponent) evt.getSource(), 2, 2, "xright.png", "oright.png");
-    }//GEN-LAST:event_imageComponent3MouseClicked
-
-    private void imageComponent4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent4MouseClicked
-        this.buttonClick((ImageComponent) evt.getSource(), 0, 1, "xleft.png", "oleft.png");
-    }//GEN-LAST:event_imageComponent4MouseClicked
-
-    private void imageComponent5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent5MouseClicked
-        this.buttonClick((ImageComponent) evt.getSource(), 1, 1, "xmid.png", "omid.png");
-    }//GEN-LAST:event_imageComponent5MouseClicked
-
-    private void imageComponent6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent6MouseClicked
+    private void imageComponent1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent1MousePressed
         // TODO add your handling code here:
-        this.buttonClick((ImageComponent) evt.getSource(), 2, 1, "xright.png", "oright.png");
-    }//GEN-LAST:event_imageComponent6MouseClicked
+        this.buttonClick((ImageComponent) evt.getSource(), 0, 2, "xleft.png", "oleft.png");
+    }//GEN-LAST:event_imageComponent1MousePressed
 
-    private void imageComponent7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent7MouseClicked
+    private void imageComponent2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent2MousePressed
+        // TODO add your handling code here:
+        this.buttonClick((ImageComponent) evt.getSource(), 1, 2, "xmid.png", "omid.png");
+    }//GEN-LAST:event_imageComponent2MousePressed
+
+    private void imageComponent3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent3MousePressed
+        // TODO add your handling code here:
+        this.buttonClick((ImageComponent) evt.getSource(), 2, 2, "xright.png", "oright.png");
+    }//GEN-LAST:event_imageComponent3MousePressed
+
+    private void imageComponent4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent4MousePressed
+        // TODO add your handling code here:
+        this.buttonClick((ImageComponent) evt.getSource(), 0, 1, "xleft.png", "oleft.png");
+    }//GEN-LAST:event_imageComponent4MousePressed
+
+    private void imageComponent5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent5MousePressed
+        // TODO add your handling code here:
+        this.buttonClick((ImageComponent) evt.getSource(), 1, 1, "xmid.png", "omid.png");
+    }//GEN-LAST:event_imageComponent5MousePressed
+
+    private void imageComponent7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent7MousePressed
         // TODO add your handling code here:
         this.buttonClick((ImageComponent) evt.getSource(), 0, 0, "xleft.png", "oleft.png");
-    }//GEN-LAST:event_imageComponent7MouseClicked
+    }//GEN-LAST:event_imageComponent7MousePressed
 
-    private void imageComponent8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent8MouseClicked
+    private void imageComponent8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent8MousePressed
         // TODO add your handling code here:
         this.buttonClick((ImageComponent) evt.getSource(), 1, 0, "xmid.png", "omid.png");
-    }//GEN-LAST:event_imageComponent8MouseClicked
+    }//GEN-LAST:event_imageComponent8MousePressed
 
-    private void imageComponent9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent9MouseClicked
+    private void imageComponent9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent9MousePressed
         // TODO add your handling code here:
         this.buttonClick((ImageComponent) evt.getSource(), 2, 0, "xright.png", "oright.png");
-    }//GEN-LAST:event_imageComponent9MouseClicked
+    }//GEN-LAST:event_imageComponent9MousePressed
+
+    private void imageComponent6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageComponent6MousePressed
+        // TODO add your handling code here:
+        this.buttonClick((ImageComponent) evt.getSource(), 2, 1, "xright.png", "oright.png");
+    }//GEN-LAST:event_imageComponent6MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

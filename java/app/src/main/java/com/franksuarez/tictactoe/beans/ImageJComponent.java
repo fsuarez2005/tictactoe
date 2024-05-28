@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
@@ -22,43 +23,19 @@ import javax.swing.JComponent;
  */
 public class ImageJComponent extends JComponent {
 
-    class ImagePropertyChangeListener implements PropertyChangeListener {
-
-        @Override
-        public void propertyChange(PropertyChangeEvent pce) {
-            System.out.printf("Property Changed: %s%n", pce.getPropertyName());
-            switch (pce.getPropertyName()) {
-                case "imagePath" -> {
-                    try {
-                        loadImage();
-                    } catch (IOException ex) {
-                        Logger.getLogger(ImageJComponent.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                default -> {
-
-                }
-            }
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-    }
-
-    
-    
-    
-    
-    
     private BufferedImage bufImg;
     private String imagePath = "";
 
     public ImageJComponent() {
         addPropertyChangeListener(new ImagePropertyChangeListener());
-        
-        
-        
     }
 
+
+    
+    
+    
+    
+    
     public String getImagePath() {
         return imagePath;
     }
@@ -85,15 +62,35 @@ public class ImageJComponent extends JComponent {
 
     private void loadImage() throws IOException {
         System.out.printf("loadImage()%n");
-        System.out.printf("imagePath = %s%n",this.imagePath);
-        
+        System.out.printf("imagePath = %s%n", this.imagePath);
+
         URL resource = getClass().getClassLoader().getResource(this.getImagePath());
 
         if (resource != null) {
             this.bufImg = ImageIO.read(resource);
-            System.out.printf("bufImg = %s%n",this.bufImg.toString());
+            System.out.printf("bufImg = %s%n", this.bufImg.toString());
         } else {
             throw new NullPointerException();
+        }
+    }
+
+    class ImagePropertyChangeListener implements PropertyChangeListener {
+
+        @Override
+        public void propertyChange(PropertyChangeEvent pce) {
+            System.out.printf("Property Changed: %s%n", pce.getPropertyName());
+            switch (pce.getPropertyName()) {
+                case "imagePath" -> {
+                    try {
+                        loadImage();
+                    } catch (IOException ex) {
+                        Logger.getLogger(ImageJComponent.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                default -> {
+
+                }
+            }
         }
     }
 }

@@ -88,10 +88,22 @@ public class ImageTTTFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public static void listLookAndFeel() {
+        System.out.println("Installed Look and Feels:");
+        for (javax.swing.UIManager.LookAndFeelInfo info: javax.swing.UIManager.getInstalledLookAndFeels() ){
+            System.out.printf("%s%n",info.getName());
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        ImageTTTFrame.listLookAndFeel();
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -99,7 +111,7 @@ public class ImageTTTFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Mac OS X".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

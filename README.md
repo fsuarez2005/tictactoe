@@ -8,8 +8,6 @@ Tic-Tac-Toe in various programming languages.
 
 ## Screenshots
 
-<img src="java/doc/images/tictactoe-java-swing-1.png" width="300"/>
-
-<img src="python/doc/images/tictactoe-python-1.png" width="300"/>
+<img src="java/doc/images/tictactoe-java-swing-1.png" width="300"/> <img src="python/doc/images/tictactoe-python-1.png" width="300"/>
 
 

@@ -18,7 +18,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="newGameMenuItem">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+                <Property name="text" type="java.lang.String" value="New"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newGameMenuItemActionPerformed"/>
@@ -80,7 +80,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.franksuarez.tictactoe.ui.TTTImageJPanel" name="tTTImageJPanel1">
+    <Component class="com.franksuarez.tictactoe.ui.TicTacToePanel" name="tTTImageJPanel1">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[512, 512]"/>

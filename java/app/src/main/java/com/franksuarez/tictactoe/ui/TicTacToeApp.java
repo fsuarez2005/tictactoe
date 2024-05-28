@@ -4,19 +4,16 @@
  */
 package com.franksuarez.tictactoe.ui;
 
-import com.franksuarez.tictactoe.beans.ImageComponent;
-import java.awt.Component;
-
 /**
  *
  * @author franksuarez
  */
-public class TTTImageJFrame extends javax.swing.JFrame {
+public class TicTacToeApp extends javax.swing.JFrame {
 
     /**
      * Creates new form TTTImageJFrame
      */
-    public TTTImageJFrame() {
+    public TicTacToeApp() {
         initComponents();
     }
     
@@ -40,12 +37,12 @@ public class TTTImageJFrame extends javax.swing.JFrame {
         gameMenu = new javax.swing.JMenu();
         newGameMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        tTTImageJPanel1 = new com.franksuarez.tictactoe.ui.TTTImageJPanel();
+        tTTImageJPanel1 = new com.franksuarez.tictactoe.ui.TicTacToePanel();
         jLblStatus = new javax.swing.JLabel();
 
         gameMenu.setText("Game");
 
-        newGameMenuItem.setText("jMenuItem1");
+        newGameMenuItem.setText("New");
         newGameMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newGameMenuItemActionPerformed(evt);
@@ -114,20 +111,21 @@ public class TTTImageJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TTTImageJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicTacToeApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TTTImageJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicTacToeApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TTTImageJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicTacToeApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TTTImageJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicTacToeApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TTTImageJFrame().setVisible(true);
+                new TicTacToeApp().setVisible(true);
             }
         });
     }
@@ -138,6 +136,6 @@ public class TTTImageJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLblStatus;
     private javax.swing.JMenuItem newGameMenuItem;
     private javax.swing.JMenuBar rootJMenuBar;
-    private com.franksuarez.tictactoe.ui.TTTImageJPanel tTTImageJPanel1;
+    private com.franksuarez.tictactoe.ui.TicTacToePanel tTTImageJPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,7 +12,7 @@ import java.util.function.Consumer;
  *
  * @author franksuarez
  */
-public class TTTImageJPanel extends javax.swing.JPanel {
+public class TicTacToePanel extends javax.swing.JPanel {
 
     private String defaultText = "Tic-Tac-Toe";
     
@@ -30,7 +30,7 @@ public class TTTImageJPanel extends javax.swing.JPanel {
     /**
      * Creates new form TTTImageJPanel
      */
-    public TTTImageJPanel() {
+    public TicTacToePanel() {
         initComponents();
         this.board.initialize();
     }

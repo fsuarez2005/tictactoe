@@ -27,7 +27,10 @@ public class ImageComponent extends Component {
     private int offsetX = 0;
     private int offsetY = 0;
     private String filePath = "";
-    private BufferedImage bufImg;
+    private boolean paintBackground = true;
+    private boolean imageCentered = false;
+    private boolean resizeToPreferredSize = true;
+    private BufferedImage bufImg; // TODO: BufferedImage does not store alpha
 
     public ImageComponent() {
         System.out.printf("%s%n", this);
@@ -37,9 +40,12 @@ public class ImageComponent extends Component {
 
             switch (propertyName) {
                 case "filePath" -> {
+
+                    this.bufImg = null;
+
                     ImageComponent.this.loadImage();
 
-                    //
+
                 }
                 case "offsetX" -> {
                     ImageComponent.this.repaint();
@@ -51,12 +57,62 @@ public class ImageComponent extends Component {
                     ImageComponent.this.repaint();
                 }
 
+                case "imageCentered" -> {
+                    System.out.println("Image Centered");
+                    ImageComponent.this.repaint();
+
+                }
+
                 default -> {
                     System.out.printf("Uncaught property: %s%n", propertyName);
                 }
             }
         });
 
+    }
+
+    public boolean isImageCentered() {
+        return imageCentered;
+    }
+
+    public void setImageCentered(boolean imageCentered) {
+        boolean oldImageCentered = this.imageCentered;
+        this.imageCentered = imageCentered;
+        firePropertyChange("imageCentered", oldImageCentered, imageCentered);
+    }
+
+    public int getCenterOffsetX() {
+        if (this.bufImg != null) {
+            return (this.getWidth() / 2 - this.bufImg.getWidth() / 2);
+        } else {
+            return 0;
+        }
+    }
+
+    public int getCenterOffsetY() {
+        if (this.bufImg != null) {
+            return (this.getHeight() / 2 - this.bufImg.getHeight() / 2);
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean isResizeToPreferredSize() {
+        return resizeToPreferredSize;
+    }
+
+    // TODO: fire property change event
+    public void setResizeToPreferredSize(boolean resizeToPreferredSize) {
+        this.resizeToPreferredSize = resizeToPreferredSize;
+    }
+
+    public boolean isPaintBackground() {
+        return paintBackground;
+    }
+
+    // TODO: fire property change event
+    public void setPaintBackground(boolean paintBackground) {
+        this.paintBackground = paintBackground;
     }
 
     public int getImageWidth() {
@@ -122,21 +178,33 @@ public class ImageComponent extends Component {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+
+        int localOffsetX = this.getOffsetX();
+        int localOffsetY = this.getOffsetY();
+
+        if (this.isImageCentered()) {
+            localOffsetX = this.getCenterOffsetX();
+            localOffsetY = this.getCenterOffsetY();
+        }
+
         System.out.println("paint()");
         System.out.printf("bounds: %s%n", this.getBounds());
 
         Rectangle bounds = this.getBounds();
+
         Graphics2D g2d = (Graphics2D) g;
 
-        Color background = this.getBackground();
-        if (background != null) {
-            g2d.setBackground(this.getBackground());
-            g2d.clearRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        if (this.isPaintBackground()) {
+            Color background = this.getBackground();
+            if (background != null) {
+                g2d.setBackground(this.getBackground());
+                g2d.clearRect(bounds.x, bounds.y, bounds.width, bounds.height);
+            }
         }
-        
+
         if (this.ready) {
             System.out.println("Painting image.");
-            g2d.drawImage(this.bufImg, null, 0 + this.offsetX, 0 + this.offsetY);
+            g2d.drawImage(this.bufImg, null, 0 + localOffsetX, 0 + localOffsetY);
         }
     }
 
@@ -153,7 +221,9 @@ public class ImageComponent extends Component {
     }
 
     private void loadImage() {
-        // find image
+        if (filePath == null) {
+            return;
+        }
 
         URL resource = getClass().getClassLoader().getResource(filePath);
         if (resource == null) {
@@ -171,5 +241,13 @@ public class ImageComponent extends Component {
         }
 
         this.ready = true;
+
     }
+
+    public void clear() {
+        Rectangle bounds = this.getBounds();
+        Graphics g = this.getGraphics();
+        g.clearRect(0, 0, bounds.width, bounds.height);
+    }
+
 }

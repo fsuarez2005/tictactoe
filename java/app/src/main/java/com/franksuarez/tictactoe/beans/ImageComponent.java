@@ -6,15 +6,11 @@ package com.franksuarez.tictactoe.beans;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Paint;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -30,11 +26,39 @@ public class ImageComponent extends Component {
     private boolean ready = false;
     private int offsetX = 0;
     private int offsetY = 0;
-
     private String filePath = "";
     private BufferedImage bufImg;
 
-    //private int imageWidth = 0;
+    public ImageComponent() {
+        System.out.printf("%s%n", this);
+
+        addPropertyChangeListener((PropertyChangeEvent pce) -> {
+            String propertyName = pce.getPropertyName();
+
+            switch (propertyName) {
+                case "filePath" -> {
+                    ImageComponent.this.loadImage();
+
+                    //
+                }
+                case "offsetX" -> {
+                    ImageComponent.this.repaint();
+                }
+                case "offsetY" -> {
+                    ImageComponent.this.repaint();
+                }
+                case "background" -> {
+                    ImageComponent.this.repaint();
+                }
+
+                default -> {
+                    System.out.printf("Uncaught property: %s%n", propertyName);
+                }
+            }
+        });
+
+    }
+
     public int getImageWidth() {
         int output = 0;
         if (this.bufImg != null) {
@@ -49,44 +73,6 @@ public class ImageComponent extends Component {
             output = this.bufImg.getHeight();
         }
         return output;
-    }
-
-    
-    
-    
-    
-    
-    public ImageComponent() {
-        System.out.printf("%s%n", this);
-
-        addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent pce) {
-                String propertyName = pce.getPropertyName();
-
-                switch (propertyName) {
-                    case "filePath" -> {
-                        ImageComponent.this.loadImage();
-
-                        // 
-                    }
-                    case "offsetX" -> {
-                        ImageComponent.this.repaint();
-                    }
-                    case "offsetY" -> {
-                        ImageComponent.this.repaint();
-                    }
-                    case "background" -> {
-                        ImageComponent.this.repaint();
-                    }
-                    
-                    default -> {
-                        System.out.printf("Uncaught property: %s%n", propertyName);
-                    }
-                }
-            }
-        });
-
     }
 
     public int getOffsetX() {
@@ -133,9 +119,6 @@ public class ImageComponent extends Component {
         super.setBackground(c); // sets this.background but does listen for property changes
     }
 
-    
-    
-
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -144,38 +127,18 @@ public class ImageComponent extends Component {
 
         Rectangle bounds = this.getBounds();
         Graphics2D g2d = (Graphics2D) g;
-        
-        
-        // if background != null
-        //g2d.setBackground(this.getBackground());
-        //g2d.clearRect(bounds.x, bounds.y, bounds.width, bounds.height);
 
+        Color background = this.getBackground();
+        if (background != null) {
+            g2d.setBackground(this.getBackground());
+            g2d.clearRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        }
+        
         if (this.ready) {
             System.out.println("Painting image.");
-
-            //g2d.drawImage(this.bufImg, null, bounds.x + this.offsetX, bounds.y + this.offsetY);
-            g2d.drawImage(this.bufImg, null, 0+this.offsetX, 0+this.offsetY);
+            g2d.drawImage(this.bufImg, null, 0 + this.offsetX, 0 + this.offsetY);
         }
-
     }
-    
-    
-    /** Resizes component to size of image.
-     * 
-     */
-    public void wrapContent() {
-        if (this.bufImg == null) {
-            // image not loaded
-            return;
-        }
-        
-        Dimension newSize = new Dimension(this.bufImg.getWidth(),this.bufImg.getHeight());
-        
-        
-        
-        
-    }
-    
 
     @Override
     public void invalidate() {
@@ -208,7 +171,5 @@ public class ImageComponent extends Component {
         }
 
         this.ready = true;
-
     }
-
 }

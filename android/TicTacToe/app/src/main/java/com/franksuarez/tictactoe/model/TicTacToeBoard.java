@@ -17,14 +17,14 @@ import java.util.logging.Logger;
  *
  * @author franksuarez
  */
-public class TicTacToeBoard extends GameBoard<Character> {
+public class TicTacToeBoard extends GameBoard<TicTacToeBoard.Player> {
 
     public enum Player {
         NOPLAYER(' '),
         PLAYER1('X'),
         PLAYER2('O');
 
-        final char token;
+        public final char token;
 
         Player(char token) {
             this.token = token;
@@ -34,11 +34,9 @@ public class TicTacToeBoard extends GameBoard<Character> {
     private boolean winnerExists = false;
     private Player winningPlayer = Player.NOPLAYER;
     private Player currentPlayer = Player.PLAYER1;
-
     private final List<WinningMove> winningMoves = new ArrayList<>();
 
-    /**
-     * Coordinates of winning moves.
+    /** Coordinates of winning moves.
      *
      * Needs to be converted to Coordinate objects using
      * importWinnerArray(int[][][])
@@ -58,17 +56,14 @@ public class TicTacToeBoard extends GameBoard<Character> {
     };
 
     public TicTacToeBoard() {
-        super(3, 3, ' ');
+        super(3, 3, Player.NOPLAYER);
 
         importWinnerArray(winnerData);
-
     }
 
     @Override
     public void initialize() {
         super.initialize();
-
-
     }
 
     @Override
@@ -113,12 +108,9 @@ public class TicTacToeBoard extends GameBoard<Character> {
         return getPlayerToken(currentPlayer);
     }
 
-    /**
-     * Returns the current winning player.
+    /** Returns the current winning player.
      *
-     * Need to
-     *
-     * @return
+     * @return Player winning player
      */
     public Player getWinningPlayer() {
         if (!this.winnerExists) {
@@ -133,18 +125,16 @@ public class TicTacToeBoard extends GameBoard<Character> {
         if (player != Player.NOPLAYER && player != Player.PLAYER1 && player != Player.PLAYER2) {
             throw new IllegalArgumentException();
         }
-
         this.winningPlayer = player;
     }
 
     /**
      * TODO: remove hard-coded values for players
-     *
+     * TODO: unused for image tokens
      * @param player
      * @return
      */
     public char getPlayerToken(Player player) {
-
         return player.token;
     }
 
@@ -189,12 +179,10 @@ public class TicTacToeBoard extends GameBoard<Character> {
         // if all three cells == player, then winner
         // cell1 == player && cell2 == player && cell3 == player
 
-        char playerToken = getPlayerToken(player);
-
         // TODO: could inline
-        return getToken(move.xy1) == playerToken
-                && getToken(move.xy2) == playerToken
-                && getToken(move.xy3) == playerToken; // winner
+        return getToken(move.xy1) == player
+                && getToken(move.xy2) == player
+                && getToken(move.xy3) == player;
     }
 
     /**
@@ -247,14 +235,11 @@ public class TicTacToeBoard extends GameBoard<Character> {
 
     public void makeMove(int x, int y) {
         //check Cell for move
-        char existingMove = this.getToken(x, y);
 
-        if (existingMove == getPlayerToken(Player.NOPLAYER)) {
-
-            this.setToken(x, y, this.getCurrentPlayerToken());
-
+        Player existingMove = this.getToken(x,y);
+        if (existingMove == Player.NOPLAYER) {
+            this.setToken(x, y, currentPlayer);
         }
-
     }
 
     @Override
@@ -275,7 +260,6 @@ public class TicTacToeBoard extends GameBoard<Character> {
     }
 
     class WinningMove {
-
         public Coordinates<Integer> xy1;
         public Coordinates<Integer> xy2;
         public Coordinates<Integer> xy3;
@@ -298,5 +282,4 @@ public class TicTacToeBoard extends GameBoard<Character> {
             );
         }
     }
-
 }

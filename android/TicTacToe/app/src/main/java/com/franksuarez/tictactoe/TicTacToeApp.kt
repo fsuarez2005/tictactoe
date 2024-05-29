@@ -34,6 +34,12 @@ class TicTacToeApp : ComponentActivity() {
             }
         }
     }
+
+
+    companion object {
+        val TAG: String = "tictactoe"
+
+    }
 }
 
 
@@ -42,7 +48,10 @@ class TicTacToeApp : ComponentActivity() {
 fun MainApp(gameViewModel: TicTacToeViewModel = viewModel(), modifier: Modifier = Modifier) {
     val tttUiState by gameViewModel.uiState.collectAsState()
 
-    TicTacToePanel()
+    TicTacToePanel(gameViewModel,modifier)
+
+
+
 
 }
 

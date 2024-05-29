@@ -1,5 +1,6 @@
 package com.franksuarez.tictactoe
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,6 +11,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
@@ -17,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.franksuarez.tictactoe.model.TicTacToeBoard
 import com.franksuarez.tictactoe.ui.theme.TicTacToeTheme
 
 
@@ -29,8 +34,20 @@ import com.franksuarez.tictactoe.ui.theme.TicTacToeTheme
 @Composable
 fun TicTacToePanel(gameViewModel: TicTacToeViewModel = viewModel(), modifier: Modifier = Modifier) {
     val tttUiState by gameViewModel.uiState.collectAsState()
+
+    var player by remember {
+        mutableStateOf(TicTacToeBoard.Player.PLAYER1)
+    }
+
     Column {
-        BoardCell()
+        BoardCell(
+            imageRes = gameViewModel.getPlayerTokenImageRes(player),
+            onClick = {
+                Log.d(TicTacToeApp.TAG,"clicked")
+                tttUiState.board.switchPlayer()
+                player = tttUiState.board.currentPlayer
+            }
+            )
 
     }
 }
@@ -42,6 +59,9 @@ fun BoardCell(
     onClick: (() -> Unit)? = {},
     modifier: Modifier = Modifier,
 ) {
+
+
+
 
     Box(modifier) {
         if (imageRes != null) {

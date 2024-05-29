@@ -1,5 +1,6 @@
 package com.franksuarez.tictactoe
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.franksuarez.tictactoe.model.TicTacToeBoard
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +17,7 @@ class TicTacToeViewModel: ViewModel() {
 
     //private lateinit var currentPlayer: TicTacToeBoard.Player
     fun getPlayerTokenImageRes(player: TicTacToeBoard.Player): Int? {
+
         var output = when (player) {
             TicTacToeBoard.Player.NOPLAYER -> null
             TicTacToeBoard.Player.PLAYER1 -> R.drawable.xleft

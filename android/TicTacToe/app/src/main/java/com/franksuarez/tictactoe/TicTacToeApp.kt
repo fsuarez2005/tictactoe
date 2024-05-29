@@ -8,17 +8,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ComposeCompilerApi
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.franksuarez.tictactoe.ui.theme.TicTacToeTheme
+//import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 class TicTacToeApp : ComponentActivity() {
-    companion object {
-        var description = "app"
-        var count = 0
-    }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,25 +29,28 @@ class TicTacToeApp : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    MainApp()
                 }
             }
         }
     }
 }
 
+
+
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun MainApp(gameViewModel: TicTacToeViewModel = viewModel(), modifier: Modifier = Modifier) {
+    val tttUiState by gameViewModel.uiState.collectAsState()
+
+    TicTacToePanel()
+
 }
 
-@Preview(showBackground = true)
+
+@Preview
 @Composable
-fun GreetingPreview() {
+fun MainAppPreview() {
     TicTacToeTheme {
-        Greeting("Android")
+        MainApp()
     }
 }

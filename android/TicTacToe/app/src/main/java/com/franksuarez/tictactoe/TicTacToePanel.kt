@@ -1,12 +1,23 @@
 package com.franksuarez.tictactoe
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.franksuarez.tictactoe.ui.theme.TicTacToeTheme
 
 
 /**
@@ -16,39 +27,47 @@ import androidx.compose.ui.tooling.preview.Preview
  */
 
 @Composable
-fun TicTacToePanel(modifier: Modifier = Modifier,btnTextList: List<String> = listOf()) {
-
+fun TicTacToePanel(gameViewModel: TicTacToeViewModel = viewModel(), modifier: Modifier = Modifier) {
+    val tttUiState by gameViewModel.uiState.collectAsState()
     Column {
-        Row {
-            Button(onClick = {}) {
+        BoardCell()
 
-            }
-            Button(onClick = {}) {
-
+    }
+}
 
 
+@Composable
+fun BoardCell(
+    imageRes: Int? = R.drawable.xleft,
+    onClick: (() -> Unit)? = {},
+    modifier: Modifier = Modifier,
+) {
 
-            }
-            Button(onClick = {}) {}
+    Box(modifier) {
+        if (imageRes != null) {
+            Image(
+                painter = painterResource(id = imageRes),
+                contentDescription = "",
+                modifier.clickable { onClick?.invoke() })
+        } else {
+
+            Image(painter = painterResource(id = R.drawable.blank), contentDescription = "",modifier=modifier)
         }
-        Row {
-            Button(onClick = {}) {}
-            Button(onClick = {}) {}
-            Button(onClick = {}) {}
-        }
-        Row {
-            Button(onClick = {}) {}
-            Button(onClick = {}) {}
-            Button(onClick = {}) {}
-        }
+    }
+}
+
+
+@Preview
+@Composable
+fun BoardCellPreview() {
+    TicTacToeTheme {
+        BoardCell(imageRes = null, modifier = Modifier
+            .height(100.dp)
+            .width(100.dp))
     }
 }
 
 @Preview
 @Composable
 fun TicTacToePanelPreview() {
-    var btnText = listOf("button1","button2")
-
-
-    TicTacToePanel()
 }

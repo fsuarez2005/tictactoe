@@ -1,6 +1,7 @@
 package com.franksuarez.tictactoe
 
 import android.util.Log
+import androidx.collection.mutableFloatLongMapOf
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -48,7 +50,6 @@ fun TicTacToePanel(gameViewModel: TicTacToeViewModel = viewModel(), modifier: Mo
                 player = tttUiState.board.currentPlayer
             }
             )
-
     }
 }
 
@@ -57,8 +58,16 @@ fun TicTacToePanel(gameViewModel: TicTacToeViewModel = viewModel(), modifier: Mo
 fun BoardCell(
     imageRes: Int? = R.drawable.xleft,
     onClick: (() -> Unit)? = {},
+    enabled: Boolean = true,
     modifier: Modifier = Modifier,
 ) {
+
+    var onClickCallback: (() -> Unit)? = {}
+    if (enabled) {
+        onClickCallback = onClick
+    } else {
+        onClickCallback = null
+    }
 
 
 
@@ -68,7 +77,7 @@ fun BoardCell(
             Image(
                 painter = painterResource(id = imageRes),
                 contentDescription = "",
-                modifier.clickable { onClick?.invoke() })
+                modifier.clickable { onClickCallback?.invoke() })
         } else {
 
             Image(painter = painterResource(id = R.drawable.blank), contentDescription = "",modifier=modifier)

@@ -27,6 +27,14 @@ class TicTacToeViewModel: ViewModel() {
     }
 
 
+    fun isCellEnabled(x: Int, y: Int): Boolean {
+        var token = uiState.value.board.getToken(x,y)
 
+
+        
+
+
+        return true
+    }
 
 }

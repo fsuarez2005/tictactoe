@@ -27,14 +27,15 @@ class TicTacToeViewModel: ViewModel() {
     }
 
 
-    fun isCellEnabled(x: Int, y: Int): Boolean {
+    fun isCellOccupied(x: Int, y: Int): Boolean {
         var token = uiState.value.board.getToken(x,y)
+        var output: Boolean
+        when (token) {
+            TicTacToeBoard.Player.NOPLAYER -> output = false
+            TicTacToeBoard.Player.PLAYER1 -> output = true
+            TicTacToeBoard.Player.PLAYER2 -> output = true
+        }
 
-
-        
-
-
-        return true
+        return output
     }
-
 }

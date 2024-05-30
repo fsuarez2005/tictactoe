@@ -42,13 +42,21 @@ fun TicTacToePanel(gameViewModel: TicTacToeViewModel = viewModel(), modifier: Mo
     }
 
     Column {
+
+        var cellOccupied by remember {
+            mutableStateOf(false)
+        }
         BoardCell(
             imageRes = gameViewModel.getPlayerTokenImageRes(player),
             onClick = {
                 Log.d(TicTacToeApp.TAG,"clicked")
+                tttUiState.board.makeMove(0,0)
                 tttUiState.board.switchPlayer()
                 player = tttUiState.board.currentPlayer
-            }
+                cellOccupied = gameViewModel.isCellOccupied(0,0)
+            },
+            enabled = cellOccupied
+
             )
     }
 }

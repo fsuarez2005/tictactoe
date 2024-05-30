@@ -8,14 +8,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class TicTacToeViewModel: ViewModel() {
-    private val _uiState = MutableStateFlow(TicTacToeState({
-        var t: TicTacToeBoard = TicTacToeBoard()
-        t.initialize()
-        t
-    }()))
-    val uiState: StateFlow<TicTacToeState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(TicTacToeBoard().initialize())
+    val uiState: StateFlow<TicTacToeBoard> = _uiState.asStateFlow()
 
-    //private lateinit var currentPlayer: TicTacToeBoard.Player
+
     fun getPlayerTokenImageRes(player: TicTacToeBoard.Player): Int? {
 
         var output = when (player) {
@@ -28,14 +24,13 @@ class TicTacToeViewModel: ViewModel() {
 
 
     fun isCellOccupied(x: Int, y: Int): Boolean {
-        var token = uiState.value.board.getToken(x,y)
+        var token = uiState.value.getToken(x,y)
         var output: Boolean
         when (token) {
             TicTacToeBoard.Player.NOPLAYER -> output = false
             TicTacToeBoard.Player.PLAYER1 -> output = true
             TicTacToeBoard.Player.PLAYER2 -> output = true
         }
-
         return output
     }
 }

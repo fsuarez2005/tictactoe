@@ -6,6 +6,8 @@
  */
 package com.franksuarez.tictactoe.model;
 
+import android.util.Log;
+
 import com.franksuarez.tictactoe.exceptions.InvalidCoordinateValue;
 import com.franksuarez.tictactoe.misc.Coordinates;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ import java.util.logging.Logger;
  * @author franksuarez
  */
 public class TicTacToeBoard extends GameBoard<TicTacToeBoard.Player> {
+    private static final String TAG = "TicTacToeBoard";
+
 
     public enum Player {
         NOPLAYER(' '),
@@ -57,13 +61,14 @@ public class TicTacToeBoard extends GameBoard<TicTacToeBoard.Player> {
 
     public TicTacToeBoard() {
         super(3, 3, Player.NOPLAYER);
-
+        Log.d(TAG,"TicTacToeBoard()");
         importWinnerArray(winnerData);
     }
 
     @Override
-    public void initialize() {
+    public TicTacToeBoard initialize() {
         super.initialize();
+        return this;
     }
 
     @Override

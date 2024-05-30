@@ -8,11 +8,9 @@
 package com.franksuarez.tictactoe.model;
 
 import com.franksuarez.tictactoe.misc.Coordinates;
-import com.franksuarez.tictactoe.misc.PairingFunction;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
 
 /**
  * Generic Game board.
@@ -69,26 +67,18 @@ public class GameBoard<T> {
         return height;
     }
 
-//    public void setHeight(int height) {
-//        this.height = height;
-//    }
-
     public int getWidth() {
         return width;
     }
 
-//    public void setWidth(int width) {
-//        this.width = width;
-//    }
 
     /**
      * Initialize cells for board.
+     * TODO: move to constructor
      *
-     *
-     *
+     * @return
      */
-    // TODO: test
-    public void initialize() {
+    public GameBoard<T> initialize() {
         this.cells = new ArrayList<>();
 
         for (int x = 0; x < this.width; x++) {
@@ -99,6 +89,7 @@ public class GameBoard<T> {
 
             this.cells.add(yList);
         }
+        return this;
     }
 
 

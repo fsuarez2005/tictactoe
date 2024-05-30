@@ -14,7 +14,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.franksuarez.tictactoe.ui.theme.TicTacToeTheme
 
-//import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 class TicTacToeApp : ComponentActivity() {
@@ -43,10 +42,10 @@ class TicTacToeApp : ComponentActivity() {
 
 
 @Composable
-fun MainApp(gameViewModel: TicTacToeViewModel = viewModel(), modifier: Modifier = Modifier) {
-    val tttUiState by gameViewModel.uiState.collectAsState()
+fun MainApp( modifier: Modifier = Modifier) {
+    //val tttUiState by gameViewModel.uiState.collectAsState()
 
-    TicTacToePanel(gameViewModel, modifier)
+    TicTacToePanel(modifier = modifier)
 
 }
 

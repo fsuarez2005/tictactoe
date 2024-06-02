@@ -65,6 +65,9 @@ fun NewPanel(modifier: Modifier = Modifier) {
     var gameViewModel: TicTacToeViewModel = viewModel()
     val tttUiState by gameViewModel.uiState.collectAsState()
 
+    val maxX: Int = 2;
+    val maxY: Int = 2;
+
     val imageResList = remember {
         mutableStateListOf<Int?>(
             R.drawable.xleft,null,null,
@@ -80,20 +83,19 @@ fun NewPanel(modifier: Modifier = Modifier) {
 
 
     Column {
-        var count: Int = 0
+
         for (y in 0..2) {
             Row {
 
                 for (x in 0..2) {
 
                     Column {
-                        Text(String.format("c%d",count))
                         BoardCell(
                             imageRes = null,
                             enabled = true,
                             onClick = {
-                                val currentCount = count
-                                Log.d(TicTacToeApp.TAG,String.format("BoardCell(%d,%d) (count = %d) (newcount = %d) clicked",x,y,currentCount,y*3+x))
+
+                                //Log.d(TicTacToeApp.TAG,String.format("BoardCell(%d,%d) (newcount = %d) clicked",x,y,y*3+x))
                                 //gameViewModel.makeMove(x, y)
                                 //imageResList.set(count, gameViewModel.getImageResAtLocation(0, 0))
 
@@ -105,7 +107,6 @@ fun NewPanel(modifier: Modifier = Modifier) {
                         )
                     }
 
-                    count++
                 }
             }
         }

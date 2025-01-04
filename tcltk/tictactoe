@@ -34,7 +34,7 @@ proc main {} {
     window_main
 }
 
-main
+#main
 
 
 
